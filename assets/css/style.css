@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Poppins";
+    line-height: 1.6;
+}
+.content{
+    width: 200px;
+    height: 200px;
+}
+.bg-main{
+    background-color: rgb(53, 51, 51);
+}
+.container-hover:hover{
+    background-color: red;
+}
+.btn:hover{
+    background-color: red!important;
+}
