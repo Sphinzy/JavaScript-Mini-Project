@@ -14,9 +14,53 @@ body{
 .bg-main{
     background-color: rgb(53, 51, 51);
 }
-.container-hover:hover{
-    background-color: red;
+.bg-main {
+    background-color: rgb(53, 51, 51);
 }
-.btn:hover{
-    background-color: red!important;
+
+:root {
+    --bs-primary: #7645bf !important;
+    --bs-primary-rgb: 118, 69, 191 !important;
+    --bs-primary-hover: #6436a8 !important;
+    --bs-primary-active: #563095 !important;
+
+    --bs-secondary: #9756cd !important;
+    --bs-secondary-rgb: 151, 86, 205 !important;
+    --bs-secondary-hover: #8548b8 !important;
+    --bs-secondary-active: #743fa3 !important;
+}
+
+/* Button styles */
+.btn-main {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+    color: white !important;
+}
+
+.btn-main:hover {
+    background-color: var(--bs-primary-hover) !important;
+    border-color: var(--bs-primary-hover) !important;
+}
+
+.btn-main:active,
+.btn-main:focus {
+    background-color: var(--bs-primary-active) !important;
+    border-color: var(--bs-primary-active) !important;
+}
+
+.btn-sub-main {
+    background-color: var(--bs-secondary) !important;
+    border-color: var(--bs-secondary) !important;
+    color: white !important;
+}
+
+.btn-sub-main:hover {
+    background-color: var(--bs-secondary-hover) !important;
+    border-color: var(--bs-secondary-hover) !important;
+}
+
+.btn-sub-main:active,
+.btn-sub-main:focus {
+    background-color: var(--bs-secondary-active) !important;
+    border-color: var(--bs-secondary-active) !important;
 }
