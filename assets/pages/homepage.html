@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Articles</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../bootstrap-5.3.7/css/bootstrap.css">
+  <link rel="stylesheet" href="../css/stylehomepage.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="article"></div>
+  <div id="loader" class="loader">Loading more articles...</div>
+
+  <script src="assets/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+    const perPage = 5; 
+    let page = 1;
+    let loading = false;
+
+    const articleDiv = document.getElementById("article");
+    const loader = document.getElementById("loader");
+
+    async function loadArticles() {
+      if (loading) return;
+      loading = true;
+      loader.style.display = 'block';
+
+      try {
+        const res = await fetch(`${baseUrl}/articles?search=&_page=${page}&_per_page=${perPage}`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        });
+        const data = await res.json();
+        const articles = data.data.items;
+
+        if (articles.length === 0) {
+          loader.innerText = "No more articles";
+          window.removeEventListener('scroll', handleScroll);
+          return;
+        }
+
+        articles.forEach(article => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <img src="${article.thumbnail}" alt="${article.title}">
+            <div class="card-body">
+              <h5>${article.title}</h5>
+              <p>${article.description || 'No description available.'}</p>
+             <a href="ex.html?id=${article.id}" class="btn-read">Read More <i class="fas fa-arrow-right"></i></a>
+
+            </div>
+          `;
+          articleDiv.appendChild(card);
+        });
+
+        page++;
+        loading = false;
+        loader.style.display = 'none';
+      } catch (err) {
+        console.error(err);
+        loader.innerText = "Error loading articles";
+      }
+    }
+
+    function handleScroll() {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
+        loadArticles();
+      }
+    }
+
+    loadArticles();
+    window.addEventListener('scroll', handleScroll);
+    
+  </script>
+
+</body>
+</html>

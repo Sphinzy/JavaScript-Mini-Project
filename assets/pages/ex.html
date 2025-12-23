@@ -1,0 +1,148 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Articles</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+    #article {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card h3 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+    .card p {
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div id="article"></div>
+
+  <script>
+    const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+    const endpoint = "/articles?search=&_page=1&_per_page=100";
+
+    fetch(baseUrl + endpoint, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    })
+    .then(res => res.json())
+    .then(resData => {
+        console.log(resData)
+      const articles = resData.data.items;
+      const articleDiv = document.getElementById("article");
+
+      articles.forEach(article => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${article.thumbnail}" alt="${article.title}">
+          <div class="card-content">
+            <h3>${article.title}</h3>
+            <p>${article.description || 'No description available.'}</p>
+          </div>
+        `;
+        articleDiv.appendChild(card);
+      });
+    })
+    .catch(err => console.error(err));
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Detail</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="assets/bootstrap-5.3.7/css/bootstrap.css">
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/theme.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+</head>
+<body>
+
+  <div class="container mt-4">
+    <a href="homepage.html" class="btn btn-secondary mb-3"><i class="fas fa-arrow-left"></i> Back</a>
+    
+    <div id="article-detail" class="card">
+      <!-- Content will be inserted here dynamically -->
+    </div>
+  </div>
+
+  <script>
+    const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+    
+    // Get article ID from URL query, e.g., article.html?id=123
+    const params = new URLSearchParams(window.location.search);
+    const articleId = params.get("id");
+
+    const articleDiv = document.getElementById("article-detail");
+
+    if (!articleId) {
+      articleDiv.innerHTML = '<div class="card-body"><p>Article not found.</p></div>';
+    } else {
+      fetch(`${baseUrl}/articles/${articleId}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      .then(res => res.json())
+      .then(resData => {
+        const article = resData.data;
+
+        articleDiv.innerHTML = `
+          <img src="${article.thumbnail}" class="card-img-top" alt="${article.title}">
+          <div class="card-body">
+            <h2 class="card-title">${article.title}</h2>
+            <p class="text-muted mb-2">${article.created_at ? new Date(article.created_at).toLocaleDateString() : ''}</p>
+            <p class="card-text">${article.description || ''}</p>
+            <div>${article.content || ''}</div>
+          </div>
+        `;
+      })
+      .catch(err => {
+        console.error(err);
+        articleDiv.innerHTML = '<div class="card-body"><p>Failed to load article.</p></div>';
+      });
+    }
+  </script>
+
+</body>
+</html>
