@@ -49,7 +49,10 @@ body{
 }
 
 .btn-sub-main {
-    background-color: var(--bs-secondary) !important;
+    background-color:
+    
+    
+    var(--bs-secondary) !important;
     border-color: var(--bs-secondary) !important;
     color: white !important;
 }
