@@ -82,11 +82,12 @@ body {
 }
 
 .btn-sub-main {
-    background-color: var(--bs-sub-main) !important;
-    border-color: var(--bs-sub-main) !important;
-    color: var(--bs-color-dark) !important;
-    border-radius: var(--border-radius-main) !important;
-    transition: var(--transition-fast) !important;
+    background-color:
+    
+    
+    var(--bs-secondary) !important;
+    border-color: var(--bs-secondary) !important;
+    color: white !important;
 }
 
 .btn-sub-main:hover {
