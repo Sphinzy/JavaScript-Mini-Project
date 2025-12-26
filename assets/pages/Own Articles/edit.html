@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Article | Admin</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Quill -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: Inter, sans-serif;
+        }
+
+        .ql-container {
+            min-height: 250px;
+        }
+
+        .ql-editor.ql-blank::before {
+            color: #adb5bd;
+            font-size: 1.1rem;
+            font-style: normal;
+        }
+
+        .publish-btn:hover {
+            opacity: 0.85;
+            transition: opacity .2s ease-in-out;
+        }
+
+        .thumbnail-preview {
+            max-height: 120px;
+            border-radius: .5rem;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <header class="mb-4">
+                    <h1 class="fw-bold" style="color:#7645bf;">Edit Article</h1>
+                    <p class="text-muted">Update your article information.</p>
+                </header>
+
+                <main class="card shadow-sm border">
+                    <form id="articleForm" class="card-body p-4">
+
+                        <!-- Title -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Article Title *</label>
+                            <input type="text" name="title" class="form-control">
+                        </div>
+
+                        <div class="row g-3">
+                            <!-- Category -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Category *</label>
+                                <select id="category" class="form-select"></select>
+                            </div>
+
+                            <!-- Thumbnail -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Thumbnail Image</label>
+
+                                <div class="input-group mb-2">
+                                    <label class="btn btn-light mb-0">
+                                        Change
+                                        <input type="file" id="thumbnail" hidden>
+                                    </label>
+                                    <div id="fileName" class="form-control text-muted">
+                                        Keep existing thumbnail
+                                    </div>
+                                </div>
+
+                                <img id="thumbnailPreview" class="thumbnail-preview" />
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="mt-4">
+                            <label class="form-label fw-semibold">Content *</label>
+                            <div id="editor" class="border rounded"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4 pt-3 border-top">
+                            <a href="#" class="text-muted text-decoration-none">← Back</a>
+                            <button type="submit" class="btn px-4 text-light publish-btn"
+                                style="background-color:#7645bf;">
+                                Update Article
+                            </button>
+                        </div>
+
+                    </form>
+                </main>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <script>
+        const baseUrl = "https://your-api.com";
+
+        // Get article ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const articleId = params.get("id");
+
+        // Init Quill
+        const quill = new Quill('#editor', {
+            theme: 'snow',
+            placeholder: 'Edit content here...'
+        });
+
+        const titleInput = document.querySelector("[name='title']");
+        const categorySelect = document.getElementById("category");
+        const fileInput = document.getElementById("thumbnail");
+        const fileName = document.getElementById("fileName");
+        const preview = document.getElementById("thumbnailPreview");
+
+        let oldThumbnail = "";
+
+        // Load categories
+        const loadCategories = async (selectedId) => {
+            const res = await fetch(`${baseUrl}/categories`);
+            const data = await res.json();
+
+            categorySelect.innerHTML = "";
+
+            data.data.items.forEach(cat => {
+                const opt = document.createElement("option");
+                opt.value = cat.id;
+                opt.textContent = cat.name;
+                if (cat.id == selectedId) opt.selected = true;
+                categorySelect.appendChild(opt);
+            });
+        };
+
+        // Load article data
+        const loadArticle = async () => {
+            const res = await fetch(`${baseUrl}/articles/${articleId}`);
+            const data = await res.json();
+
+            const article = data.data;
+
+            titleInput.value = article.title;
+            quill.root.innerHTML = article.content;
+
+            oldThumbnail = article.thumbnail;
+            preview.src = article.thumbnail;
+            preview.style.display = "block";
+
+            await loadCategories(article.category_id);
+        };
+
+        // Thumbnail change
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files.length) {
+                fileName.textContent = fileInput.files[0].name;
+                preview.src = URL.createObjectURL(fileInput.files[0]);
+                preview.style.display = "block";
+            }
+        });
+
+        // Submit
+        document.getElementById("articleForm").addEventListener("submit", e => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append("title", titleInput.value);
+            formData.append("category_id", categorySelect.value);
+            formData.append("content", quill.root.innerHTML);
+
+            if (fileInput.files.length) {
+                formData.append("thumbnail", fileInput.files[0]);
+            }
+
+            fetch(`${baseUrl}/articles/${articleId}`, {
+                method: "PUT",
+                body: formData
+            }).then(() => {
+                alert("Article updated successfully!");
+            });
+        });
+
+        loadArticle();
+    </script>
+</body>
+
+</html>
