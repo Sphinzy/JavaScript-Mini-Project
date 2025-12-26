@@ -32,79 +32,85 @@
 
 </head>
 <style>
-    button{
-        width: 100%;
-        height: 50px;
-        background-color: red;
-        color: white;
-        border-radius: 20px;
+        form {
+      border: 2px color(rec2020 red green blue);
+      border-radius: 15px;
+
+      background-color: rgba(215, 211, 211, 0.282);
     }
+
 </style>
-<body>
+<body class="bg-main">
 
-
-    <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-header text-center   text-white">
-                    <h4 class="text-dark">Register</h4>
-                </div>
-                <div class="card-body">
-
-                    <form>
-                    
-                        <div class="mb-3">
-                            <label>First Name</label>
-                            <input type="text" id="fname" class="form-control " placeholder="Enter first name" >
-                            <span class="errfname"></span>
+    <section >
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6 mt-5">
+                             <img 
+                        style="width: 100%; height: 662px; object-fit: cover"
+                        src="https://www.kindpng.com/picc/m/273-2738804_php-login-and-authentication-login-hd-png-download.png"
+                        alt=""
+                      />
                         </div>
+                        <div class="col-6 mt-5 " style="width: 500px; height: 650px; border-radius: 10px;">
+                            <form >
+                              <h1 style="padding-left: 30px;"  >Register</h1>
+                              <p style="padding-left: 30px;"    >Create Your account. it's free and only takes a minute</p>
+                              <div class="row">
 
-                        
-                        <div class="mb-3">
-                            <label >Last Name</label>
-                            <input type="text"  id="lname" class="form-control" placeholder="Enter last name" >
-                            <span class="errlname"></span>
+                                <div class="col-6  " style="padding-left: 30px;" >
+                                    <input type="text"    class="ps-2" placeholder="First Name" id="fname"  style="width: 90%; height: 40px; border-radius: 10px; " >
+                                    <span id="errfname" style="margin-left: 10px"></span>
+                                </div>
+                                <div class="col-6  " style="padding-left: 30px;">
+                                    <input type="text" class="ps-2" placeholder="  Last Name" id="lname" style="width: 90%; height: 40px; border-radius: 10px; "  >
+                                    <span id="errlname" style="margin-left: 10px"></span>
+                                </div>
+
+                                <div class="col-12 mt-5 " style="padding-left: 30px;">
+                                    <input type="text" class="ps-2" placeholder="Email" id="email" style="width: 96%; height: 40px; border-radius: 10px;">
+                                    <span id="erremail" style="margin-left: 10px"></span> 
+                                </div>
+                                <div class="col-12 mt-5 position-relative" style="padding-left: 30px;">
+                                    <input class="ps-2" type="text" placeholder="Password" id="password" style="width: 96%; height: 40px; border-radius: 10px;"> 
+                                     <span class="  toggle-password position-absolute" style="top: 10px; left: 88%;"  onclick="togglepassword()">
+                            <i class="bi bi-eye"  style="color: black;" id="eyeIcon"></i>
+                           </span>
+                                    <span id="errpassword" style="margin-left: 10px"></span>
+                                </div>
+                                <div class="col-12 mt-5 position-relative" style="padding-left: 30px;">
+                                    <input type="text" class="ps-2" placeholder="Confirm Password" id="cpassword" style="width: 96%; height: 40px; border-radius: 10px;"> 
+                                                  <span class="  toggle-cpassword position-absolute" style="top: 10px; left: 88%; "  onclick="togglecpassword()">
+                            <i  class="bi bi-eye" style="color: black;"  id="eyeicon"></i>
+                           </span>
+                                    <span id="errcpassword" style="margin-left:10px"></span>
+                                </div>
+                                <div class="col-12 mt-4" style="padding-left: 30px;">
+                                   <div class="mb-3 form-check">
+                                     <input type="checkbox" class="form-check-input d-flex" id="check1" checked/>
+                                     <label class="form-check-label" for="check1" >I accept the <span style="color: black;">Terms of use </span>& <span style="color: black;">Privacy Policy</span> </label>
+                                   </div>
+                                </div>
+                                <div class="col-12" style="padding-left: 30px;">
+                                    <button type="button" onclick="signup()" class="btn btn-main"  style="width: 96%; height: 50px;">Register</button>
+                                </div>
+                              </div>
+                              <div class="text-center mt-3">
+                                Already have an account? <a style="color:black;" href="login.html">login</a>
+                              </div>
+                              
+                              </form>
                         </div>
-
-                        
-                        <div class="mb-3">
-                            <label >Email</label>
-                            <input type="text" id="email" class="form-control" placeholder="Enter email" >
-                            <span class="erremail"></span>
-                        </div>
-
-            
-                        <div class="mb-3">
-                            <label >Password</label>
-                            <input type="text" id="password" class="form-control" placeholder="Enter password" >
-                            <span class="errpassword"></span>
-                        </div>
-
-                    
-                        <div class="mb-3">
-                            <label>Confirm Password</label>
-                            <input type="text" id="cpassword" class="form-control" placeholder="Confirm password" >
-                            <span class="errcpassword"></span>
-                        </div>
-
-                        
-                        
-                            <button onclick="signup()" class="btn btn-main">
-                                Register
-                            </button>
-                    
-                    </form>
-
-                </div>
-                <div class="card-footer text-center">
-                    Already have an account? <a href="#">Login</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
+
+   
   
 </body>
  <script src="../../bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
@@ -115,9 +121,15 @@
      let email = document.getElementById('email');
      let password = document.getElementById('password');
      let cpassword = document.getElementById('cpassword');
+    let erremail = document.getElementById("erremail");
+    let errpassword = document.getElementById("errpassword");
+        let errfname = document.getElementById("errfname");
+      let errlname = document.getElementById("errlname");
+          let errcpassword = document.getElementById("errcpassword");
+  
       function signup(){
         event.preventDefault()
-        // alert("hello");
+    
         const baseUrl ="http://blogs.csm.linkpc.net/api/v1";
         fetch(baseUrl+"/auth/register",{
             method:"POST",
@@ -137,10 +149,45 @@
                 if(data.result){
                     alert("Register successfully");
                     return location.href ="login.html"
-                } else{
+                }  else if(data.result == false){
+              erremail.innerHTML = "please enter valid email";
+              erremail.style.color = "red";
+              errpassword.innerHTML = "please enter valid password";
+              errpassword.style.color = "red";
+                errfname.innerHTML = "please enter first name";
+                errfname.style.color = "red";
+                errlname.innerHTML = "please enter last name";
+                errlname.style.color = "red";
+                errcpassword.innerHTML = "password does not match";
+                errcpassword.style.color = "red";   
+                    
+
+                }
+                else{
                      location.href = "login.html"
                 }
             })  
       }
+       function togglepassword(){
+        if(password.type === "password"){
+          password.type ="text";
+          eyeIcon.classList.replace ("bi-eye-slash", "bi-eye");
+        
+      } else {
+        password.type ="password";
+        eyeIcon.classList.replace("bi-eye","bi-eye-slash");
+      }
+      }
+       function togglecpassword(){
+        if(cpassword.type === "cpassword"){
+          cpassword.type ="text";
+          eyeicon.classList.replace ("bi-eye-slash", "bi-eye");
+        
+      } else {
+        cpassword.type ="cpassword";
+        eyeicon.classList.replace("bi-eye","bi-eye-slash");
+      }
+      }
+
  </script>
 </html>
