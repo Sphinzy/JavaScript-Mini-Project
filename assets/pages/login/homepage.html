@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articles</title>
+    <title>Document</title>
     <!-- css  -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/theme.css">
     <!-- icon  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -21,15 +21,33 @@
         rel="stylesheet">
 
     <!-- boostrap  -->
-    <link rel="stylesheet" href="assets/bootstrap-5.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../bootstrap-5.3.7/css/bootstrap.css" >
 
 </head>
 <body>
 
-
-
-
-    <script src="assets/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+       <h1>homepage</h1>
+    <button id="btnLogout">logout</button>
+    <script>
+           let token = localStorage.getItem("token");
+            const baseUrl = "http://blogs.csm.linkpc.net/api/v1"
+    console.log(token);
+    document.getElementById("btnLogout").onclick =() =>{
+     fetch(baseUrl+"/auth/logout",{
+        method:"DELETE",
+        headers:{
+            "Authorization" : `Bearer ${token}`
+        }
+     })
+     .then(res =>res.json())
+     .then(res =>{
+        if(res.result){
+            localStorage.removeItem("token");
+            return location.href ="login.html"
+        }
+     })
+    }
+    </script>
+     <script src="../../bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
