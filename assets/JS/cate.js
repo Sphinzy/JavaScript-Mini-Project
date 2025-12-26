@@ -83,11 +83,13 @@ const renderTable = (items) => {
                 <td>${items[i].name}</td>
                 <td class="iconTable">
                     
-                    <button class="btn"  data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square text-primary pe-1 fs-5" onclick="btnEditCate(${items[i].id})"></i></button>
-                    <button class="btn"><i class="bi bi-trash text-danger ps-1 fs-5" onclick="btnDeleteCate(${items[i].id})"></i></button>
+                    <button class="btn"  data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square text-main pe-1 fs-5" onclick="btnEditCate(${items[i].id})"></i></button>
+                    <button class="btn"  data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash text-danger ps-1 fs-5"></i></button>
                 </td>
             </tr>
         `;
+        const delBtn = document.querySelector('#btnDeleteCate');
+        delBtn.onclick = () => btnDeleteCate(cateId);
     }
 };
 

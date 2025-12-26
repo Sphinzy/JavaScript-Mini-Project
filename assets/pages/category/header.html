@@ -28,28 +28,81 @@
 
 <body>
 
-    <header>
-        <nav class="bg-secondary-subtle">
+    <header class="sticky-top z-3">
+        <nav class="navbar fixed-top bg-secondary-subtle">
             <div class="container">
-                <div class="navbar">
-                    <div class="navbar-brand">
-                        <a href="" class="text-decoration-none fs-3 fw-bold text-main ">
-                            Blogify
-                        </a>
+                <a class="navbar-brand fs-5 fw-bold text-main" href="#">BlogFy</a>
+
+                <!-- menu icon  -->
+                <button class="navbar-toggler d-flex d-lg-none" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- side bar  -->
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title fs-5 fw-bold text-main" id="offcanvasNavbarLabel">BlogFy</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
-                    <div>
-                        <input type="text" class="form-control" style="width: 600px;" placeholder="search....">
-                    </div>
-                    <div class="navbar-profile">
-                        <a href="">
-                            <img src="https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg"
-                                class="rounded-circle" style="width: 50px;" alt="">
-                        </a>
+                    <div class="offcanvas-body">
+                        <form class="d-flex my-3" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button class="btn btn-outline-main" type="submit">Search</button>
+                        </form>
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item ps-3 rounded-2">
+                                <a href="" class="nav-link fs-5 p-2"><i class="bi bi-house-door pe-2"></i>Home</a>
+                            </li>
+                            <li class="nav-item ps-3">
+                                <a href="" class="nav-link fs-5 text-main p-2"><i
+                                        class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a>
+                            </li>
+                            <li class="nav-item ps-3">
+                                <a href="" class="nav-link fs-5 text-main p-2"><i
+                                        class="bi bi-person-circle pe-2"></i>Profile</a>
+                            </li>
+                            <li class="nav-item ps-3">
+                                <a href="" class="nav-link fs-5 text-main p-2"><i
+                                        class="bi bi-patch-plus pe-2"></i>Create</a>
+                            </li>
+                            <li class="nav-item ps-3">
+                                <a href="" class="nav-link active fs-5 text-main p-2"><i
+                                        class="bi bi-copy pe-2"></i>Category</a>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
+
+                <!-- input search  -->
+                <div class="d-none d-lg-flex">
+                    <input type="text" name="" id="" class="form-control" style="width: 500px;" placeholder="Search...">
+                </div>
+
+                <div class="dropdown d-none d-lg-flex">
+                    <a class="nav-link px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://i.pinimg.com/736x/3c/ae/07/3cae079ca0b9e55ec6bfc1b358c9b1e2.jpg"
+                            class="img-fluid rounded-circle object-fit-cover" style="width: 40px; height: 40px;" alt />
+                    </a>
+
+                    <ul class="dropdown-menu border-0 shadow-sm bg-body-theme">
+                        <li><a class='dropdown-item' href=''><i class="bi bi-person-circle me-2"></i>មើលប្រវត្តិរូប</a>
+                        </li>
+                        <li><a class='dropdown-item' href=''><i class="bi bi-gear me-2"></i>ការកំណត់</a>
+                        </li>
+                        <li><a class='dropdown-item' href=''><i class="bi bi-bookmark me-2"></i>រក្សាទុក</a>
+                        </li>
+                        <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logoutModal"><i
+                                    class="bi bi-box-arrow-right me-2"></i>ចាកចេញ</a></li>
+                    </ul>
+                </div>
+
             </div>
         </nav>
     </header>
+
 
     <main>
 
@@ -57,99 +110,49 @@
         <section class="mt-10">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 d-none d-lg-flex">
-                        <div class="w-100">
+
+                    <!-- Left Sidebar -->
+                    <div class="col-lg-3 d-none d-lg-block">
+                        <div class="position-sticky" style="top: 100px;">
                             <ul class="navbar-nav text-start">
-                                <li class="nav-item ps-3 rounded-2">
-                                    <a href="" class="nav-link active fs-5  p-2"><i
-                                            class="bi bi-house-door pe-2"></i>Home</a>
-                                </li>
-                                <li class="nav-item ps-3">
-                                    <a href="" class="nav-link fs-5 text-main p-2"><i
-                                            class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a>
-                                </li>
-                                <li class="nav-item ps-3">
-                                    <a href="" class="nav-link fs-5 text-main p-2"><i
-                                            class="bi bi-person-circle pe-2"></i>Profile</a>
-                                </li>
-                                <li class="nav-item ps-3">
-                                    <a href="" class="nav-link fs-5 text-main p-2"><i
-                                            class="bi bi-patch-plus pe-2"></i>Create</a>
-                                </li>
-                                <li class="nav-item ps-3">
-                                    <a href="" class="nav-link fs-5 text-main p-2"><i
-                                            class="bi bi-copy pe-2"></i>Category</a>
-                                </li>
-
+                                <li class="nav-item ps-3 rounded-2"> <a href="" class="nav-link active fs-5 p-2"><i
+                                            class="bi bi-house-door pe-2"></i>Home</a> </li>
+                                <li class="nav-item ps-3"> <a href="" class="nav-link fs-5 text-main p-2"><i
+                                            class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a> </li>
+                                <li class="nav-item ps-3"> <a href="" class="nav-link fs-5 text-main p-2"><i
+                                            class="bi bi-person-circle pe-2"></i>Profile</a> </li>
+                                <li class="nav-item ps-3"> <a href="" class="nav-link fs-5 text-main p-2"><i
+                                            class="bi bi-patch-plus pe-2"></i>Create</a> </li>
+                                <li class="nav-item ps-3"> <a href="" class="nav-link fs-5 text-main p-2"><i
+                                            class="bi bi-copy pe-2"></i>Category</a> </li>
                             </ul>
-
                         </div>
                     </div>
 
-                    <div class="col-md-12 col-lg-6">
-                        <div class="row card-insert">
-                            <div class="col-1 py-3">
-                                <img src="https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg"
-                                    style="width: 50px;" class="rounded-circle" alt="">
-                            </div>
-                            <div class="col-11 py-3">
-                                <div class="content w-100 h-100">
-                                    <div class="title">
-                                        <h5 class="ps-3">Chum Satsya</h5>
-                                        <p class="ps-3  " style="font-size: 12px;">15 minutes ago</p>
-                                    </div>
-                                    <div class="card border-0">
-                                        <div class="card-body">
-                                            <img src="https://i.pinimg.com/1200x/d1/35/56/d13556ec053cffc2410a682ee33436d6.jpg"
-                                                class="card-img card-img-top w-100 object-fit-cover"
-                                                style="height: 300px;" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-1 py-3">
-                                <img src="https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg"
-                                    style="width: 50px;" class="rounded-circle" alt="">
-                            </div>
-                            <div class="col-11 py-3">
-                                <div class="content w-100 h-100">
-                                    <div class="title">
-                                        <h5 class="ps-3">Chum Satsya</h5>
-                                        <p class="ps-3  " style="font-size: 12px;">15 minutes ago</p>
-                                    </div>
-                                    <div class="card border-0">
-                                        <div class="card-body">
-                                            <img src="https://i.pinimg.com/1200x/d1/35/56/d13556ec053cffc2410a682ee33436d6.jpg"
-                                                class="card-img card-img-top w-100 object-fit-cover"
-                                                style="height: 300px;" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                    <!-- Center Content -->
+                    <div class="col-12 col-lg-6">
+                        <div class="card-insert">
+                            <!-- Dynamic content here -->
                         </div>
                     </div>
 
-
-                    <div class="col-md-3 d-none d-lg-flex">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card border-0 shadow-sm">
-                                    <div class="card-body">
-                                        <h3>Popular Posts</h3>
-                                        <button class="btn btn-outline-main rounded-pill m-1">#HTML</button>
-                                        <button class="btn btn-outline-main rounded-pill m-1">#HTML</button>
-                                        <button class="btn btn-outline-main rounded-pill m-1">#HTML</button>
-                                        <button class="btn btn-outline-main rounded-pill m-1">#HTML</button>
-                                        <button class="btn btn-outline-main rounded-pill m-1">#HTML</button>
-                                    </div>
+                    <!-- Right Sidebar -->
+                    <div class="col-lg-3 d-none d-lg-block">
+                        <div class="position-sticky" style="top: 100px;">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h3>Popular Posts</h3>
+                                    <button class="btn btn-outline-main rounded-pill m-1">#HTML</button>
+                                    <button class="btn btn-outline-main rounded-pill m-1">#CSS</button>
+                                    <button class="btn btn-outline-main rounded-pill m-1">#JS</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
         </section>
 
 
@@ -158,8 +161,8 @@
     </main>
 
 
-    <script>
-        fetch('http://blogs.csm.linkpc.net/api/v1/articles?search=&_page=1&_per_page=100')
+    <script src="../../JS/homepage.js">
+        /*fetch('http://blogs.csm.linkpc.net/api/v1/articles?search=&_page=1&_per_page=100')
             .then(res => res.json())
             .then(resData => {
                 console.log(resData);
@@ -203,10 +206,10 @@
 
                 document.querySelector('.card-insert').innerHTML = html;
             })
-            .catch(err => console.error(err));
+            .catch(err => console.error(err));*/
 
     </script>
-    <script src="assets/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+    <script src="../../bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
