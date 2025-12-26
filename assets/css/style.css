@@ -1,12 +1,13 @@
 * {
-    margin: 0 ;
-    padding: 0 ;
-    box-sizing: border-box ;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Poppins', 'Kantumruy Pro' !important;
     line-height: 1.6 !important;
+    background-color: #eee !important;
 }
 
 .content {
@@ -15,11 +16,11 @@ body {
 }
 
 .bg-main {
-    background-color: rgb(53, 51, 51) !important;
+    background-color: #7645bf !important;
 }
 
 :root {
-    --bs-main: #7645bf !important;
+    --bs-main: #7645bf!important;
     --bs-main-rgb: 118, 69, 191 !important;
     --bs-main-hover: #8b5ad6 !important;
     --bs-main-active: #6a3bb0 !important;
@@ -46,6 +47,7 @@ body {
     color: var(--bs-color-light) !important;
     border-radius: var(--border-radius-main) !important;
     transition: var(--transition-fast) !important;
+    
 }
 
 .btn-main:hover {
@@ -81,11 +83,12 @@ body {
 }
 
 .btn-sub-main {
-    background-color: var(--bs-sub-main) !important;
-    border-color: var(--bs-sub-main) !important;
-    color: var(--bs-color-dark) !important;
-    border-radius: var(--border-radius-main) !important;
-    transition: var(--transition-fast) !important;
+    background-color:
+    
+    
+    var(--bs-secondary) !important;
+    border-color: var(--bs-secondary) !important;
+    color: white !important;
 }
 
 .btn-sub-main:hover {
@@ -96,6 +99,24 @@ body {
 .btn-sub-main:active {
     background-color: var(--bs-sub-main-active) !important;
     box-shadow: 0 0 0 0.2rem rgba(var(--bs-sub-main-rgb), 0.25) !important;
+}
+
+.nav-item .nav-link {
+    color: var(--bs-main) !important;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-item .nav-link:hover,
+.nav-link.active {
+    color: var(--bs-color-light) !important;
+    background-color: var(--bs-main) !important;
 }
 
 /* =========================
@@ -137,35 +158,16 @@ body {
 .clamp-5,
 .clamp-6,
 .clamp-7 {
-    display: -webkit-box !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
+    display: -webkit-box;           /* Needed */
+    -webkit-box-orient: vertical;   /* Needed */
+    overflow: hidden;               /* Needed */
+    text-overflow: ellipsis;        /* Optional: shows ... */
 }
 
-.clamp-1 {
-    -webkit-line-clamp: 1 !important;
-}
-
-.clamp-2 {
-    -webkit-line-clamp: 2 !important;
-}
-
-.clamp-3 {
-    -webkit-line-clamp: 3 !important;
-}
-
-.clamp-4 {
-    -webkit-line-clamp: 4 !important;
-}
-
-.clamp-5 {
-    -webkit-line-clamp: 5 !important;
-}
-
-.clamp-6 {
-    -webkit-line-clamp: 6 !important;
-}
-
-.clamp-7 {
-    -webkit-line-clamp: 7 !important;
-}
+.clamp-1 { -webkit-line-clamp: 1; }
+.clamp-2 { -webkit-line-clamp: 2; }
+.clamp-3 { -webkit-line-clamp: 3; }
+.clamp-4 { -webkit-line-clamp: 4; }
+.clamp-5 { -webkit-line-clamp: 5; }
+.clamp-6 { -webkit-line-clamp: 6; }
+.clamp-7 { -webkit-line-clamp: 7; }

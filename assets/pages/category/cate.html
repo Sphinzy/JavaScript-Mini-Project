@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- css  -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/theme.css">
     <!-- icon  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <!-- font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,16 +22,186 @@
         rel="stylesheet">
 
     <!-- boostrap  -->
-    <link rel="stylesheet" href="assets/bootstrap-5.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../bootstrap-5.3.7/css/bootstrap.css">
 
 </head>
-
+<style>
+    table, th {
+    border: 1px solid rgb(219, 219, 219);
+    border-collapse: collapse;
+    border-left: none;
+    border-right: none;
+    }
+    th,
+    td {
+        padding: 10px;
+    }
+    .iconTable{
+        text-align: end;
+    }
+    tr:nth-child(even) {
+        background-color: var(--bs-sub-main);
+    }
+</style>
 <body>
 
+    <header>
+        <nav class="bg-secondary-subtle">
+            <div class="container">
+                <div class="navbar">
+                    <div class="navbar-brand">
+                        <a href="" class="text-decoration-none fs-3 fw-bold text-main ">
+                            Blogify
+                        </a>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" style="width: 600px;" placeholder="search....">
+                    </div>
+                    <div class="navbar-profile">
+                        <a href="">
+                            <img src="https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg"
+                                class="rounded-circle" style="width: 50px;" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- modal  -->
+        <section class="modalSet">
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                    <div class="modal-content">
+                        <!-- <div class="modal-header">
+                            <h3 class="modal-title text-main" id="deleteModalLabel">Delete Category</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> -->
+                        <div class="modal-body">
+                            <h3 class="modal-title text-main" id="delModalLabel" >Do you want to delete</h3>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-evenly">
+                            <button type="button" class="btn btn-secondary" style="width:30%" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" style="width:30%" id="btnDeleteCate">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal-create -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title text-main" id="exampleModalLabel">Create Category</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Create a category</p>
+                            <input type="text" class="form-control" id="cateInp">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-main btnCreateCate w-100" onclick="btnCreateCate()">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal save  -->
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title text-main" id="editModalLabel">Edit Category</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Edit category</p>
+                            <input type="text" class="form-control" id="editInp">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-main w-100" id="btnSaveCate">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 d-none d-lg-flex">
+                        <div class="w-100">
+                            <ul class="navbar-nav text-start">
+                                <li class="nav-item ps-3 rounded-2">
+                                    <a href="" class="nav-link fs-5 p-2"><i class="bi bi-house-door pe-2"></i>Home</a>
+                                </li>
+                                <li class="nav-item ps-3">
+                                    <a href="" class="nav-link fs-5 text-main p-2"><i
+                                            class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a>
+                                </li>
+                                <li class="nav-item ps-3">
+                                    <a href="" class="nav-link fs-5 text-main p-2"><i
+                                            class="bi bi-person-circle pe-2"></i>Profile</a>
+                                </li>
+                                <li class="nav-item ps-3">
+                                    <a href="" class="nav-link fs-5 text-main p-2"><i class="bi bi-patch-plus pe-2"></i>Create</a>
+                                </li>
+                                <li class="nav-item ps-3">
+                                    <a href="" class="nav-link active fs-5 text-main p-2"><i class="bi bi-copy pe-2"></i>Category</a>
+                                </li>
+                    
+                            </ul>
+                    
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="mb-5">
+                            <input type="text" name="" id="pageSearch" class="border-1 p-1 shadow-lg rounded-2">
+                            <button class="btn btn-main"  data-bs-toggle="modal" data-bs-target="#exampleModal">Create</button>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="w-100">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between mt-5">
+                                    <span>Pages <span id="pages"></span></span>
+                                    <div id="pagination">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 
-    <script src="assets/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+
+    </main>
+
+
+    <script src="../../JS/cate.js"></script>
+    <script src="../../bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
+
 </body>
 
 </html>

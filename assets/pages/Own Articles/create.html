@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Article | Admin</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Quill -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: Inter, sans-serif;
+        }
+
+        .ql-toolbar {
+            border-top-left-radius: .5rem;
+            border-top-right-radius: .5rem;
+        }
+
+        .ql-container {
+            border-bottom-left-radius: .5rem;
+            border-bottom-right-radius: .5rem;
+            min-height: 250px;
+        }
+
+        /* Quill placeholder */
+        .ql-editor.ql-blank::before {
+            color: #adb5bd;
+            font-size: 1.1rem;
+            font-style: normal;
+        }
+
+        .publish-btn:hover {
+            opacity: 0.85;
+            transition: opacity 0.2s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <header class="mb-4">
+                    <h1 class="fw-bold" style="color: #7645bf;">Create Article</h1>
+                    <p class="text-muted">Fill in the details below to publish a new story.</p>
+                </header>
+
+                <main class="card shadow-sm border">
+                    <form id="articleForm" class="card-body p-4">
+
+                        <!-- Title -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Article Title *</label>
+                            <input type="text" name="title" class="form-control">
+                            <div id="titleError" class="text-danger small mt-1 d-none">
+                                Title cannot be empty
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+
+                            <!-- Category -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Category *</label>
+                                <select id="category" class="form-select text-muted">
+                                    <option value="" selected disabled>Select category</option>
+                                </select>
+                                <div id="categoryError" class="text-danger small mt-1 d-none">
+                                    Please select a category
+                                </div>
+                            </div>
+
+                            <!-- Thumbnail -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Thumbnail Image *</label>
+                                <div id="thumbnailContainer" class="input-group border rounded">
+                                    <label class="btn btn-light mb-0">
+                                        Choose file
+                                        <input type="file" id="thumbnail" hidden>
+                                    </label>
+                                    <div id="fileName" class="form-control text-muted">No file selected</div>
+                                </div>
+                                <div id="thumbnailError" class="text-danger small mt-1 d-none">
+                                    Thumbnail cannot be empty
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Content -->
+                        <div class="mt-4">
+                            <label class="form-label fw-semibold">Content *</label>
+                            <div id="editorContainer" class="border rounded">
+                                <div id="editor"></div>
+                            </div>
+                            <div id="contentError" class="text-danger small mt-1 d-none">
+                                Content cannot be empty
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                            <a href="#" class="text-muted text-decoration-none">← Back to Articles</a>
+                            <button type="submit" class="btn px-4 publish-btn text-light"
+                                style="background-color: #7645bf;">
+                                Publish Article
+                            </button>
+                        </div>
+
+                    </form>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        // Initialize Quill
+        const quill = new Quill('#editor', {
+            theme: 'snow',
+            placeholder: 'Write Content here ...'
+        });
+
+        // File input logic
+        const fileInput = document.getElementById("thumbnail");
+        const fileNameDisplay = document.getElementById("fileName");
+
+        fileInput.addEventListener("change", function () {
+            if (this.files.length > 0) {
+                fileNameDisplay.textContent = this.files[0].name;
+                fileNameDisplay.classList.remove("text-muted");
+            }
+        });
+
+        // Form validation
+        const form = document.getElementById("articleForm");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            let isValid = true;
+
+            const title = document.querySelector("[name='title']");
+            const category = document.getElementById("category");
+            const thumbnailContainer = document.getElementById("thumbnailContainer");
+            const editorContainer = document.getElementById("editorContainer");
+
+            const titleError = document.getElementById("titleError");
+            const categoryError = document.getElementById("categoryError");
+            const thumbnailError = document.getElementById("thumbnailError");
+            const contentError = document.getElementById("contentError");
+
+            // RESET
+            [title, category, thumbnailContainer, editorContainer].forEach(el => {
+                el.classList.remove("border-danger");
+                el.classList.add("border");
+            });
+
+            [titleError, categoryError, thumbnailError, contentError].forEach(el => el.classList.add("d-none"));
+
+            // VALIDATE
+            if (title.value.trim() === "") {
+                title.classList.add("border-danger");
+                titleError.classList.remove("d-none");
+                isValid = false;
+            }
+
+            if (!category.value) {
+                category.classList.add("border-danger");
+                categoryError.classList.remove("d-none");
+                isValid = false;
+            }
+
+            if (fileInput.files.length === 0) {
+                thumbnailContainer.classList.add("border-danger");
+                thumbnailError.classList.remove("d-none");
+                isValid = false;
+            }
+
+            if (quill.getLength() <= 1) { // quill is empty if length <= 1
+                editorContainer.classList.add("border-danger");
+                contentError.classList.remove("d-none");
+                isValid = false;
+            }
+
+            if (isValid) {
+                console.log("Form is valid!");
+                // You can submit data to API here
+            }
+        });
+
+        // Fetch categories from API
+        const baseUrl = "https://your-api.com";
+        const categorySelect = document.getElementById("category");
+        let pageNumUrl = 1;
+        let searchValue = "";
+
+        const getCategories = () => {
+            const searchParam = encodeURIComponent(searchValue);
+            fetch(`${baseUrl}/categories?_page=${pageNumUrl}&_per_page=50&sortBy=name&sortDir=ASC&search=${searchParam}`)
+                .then(res => res.json())
+                .then(resData => {
+                    // Clear existing options except placeholder
+                    categorySelect.innerHTML = `<option value="" selected disabled>Select category</option>`;
+                    if (resData.data?.items?.length) {
+                        resData.data.items.forEach(cat => {
+                            const option = document.createElement("option");
+                            option.value = cat.id; // or slug if needed
+                            option.textContent = cat.name;
+                            categorySelect.appendChild(option);
+                        });
+                    }
+                })
+                .catch(err => console.error("Error fetching categories:", err));
+        };
+
+        document.addEventListener("DOMContentLoaded", getCategories);
+    </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Articles</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bs-primary: #7645bf !important;
+        --bs-secondary: #9756cd !important;
+        --bs-primary-hover: #6436a8 !important;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f4f4f4;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .main-title {
+        color: #353333;
+        font-weight: 700;
+      }
+
+      .btn-main {
+        background-color: var(--bs-primary) !important;
+        border-color: var(--bs-primary) !important;
+        color: white !important;
+        font-weight: 500;
+        padding: 8px 20px;
+        border-radius: 8px;
+      }
+
+      .btn-main:hover {
+        background-color: var(--bs-primary-hover) !important;
+      }
+
+      .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      .table thead {
+        background-color: #f8f9fa;
+      }
+
+      .thumbnail-img {
+        width: 55px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+
+      .badge-category {
+        background-color: var(--bs-secondary);
+        color: white;
+        font-weight: 400;
+        padding: 5px 12px;
+        border-radius: 20px;
+      }
+
+      .action-icon {
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: 0.2s;
+      }
+
+      .icon-delete:hover {
+        color: #dc3545 !important;
+      }
+      .icon-edit:hover {
+        color: var(--bs-primary) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2 class="main-title mb-0">My Articles</h2>
+          <small class="text-muted">Manage your content and publications</small>
+        </div>
+        <button class="btn btn-main" onclick="location.href='tcreate.html'">
+          <i class="bi bi-plus-lg me-2"></i> Create Article
+        </button>
+      </div>
+
+      <div class="card p-4">
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead class="text-secondary small">
+              <tr>
+                <th>IMAGE</th>
+                <th>TITLE</th>
+                <th>CATEGORY</th>
+                <th>DATE</th>
+                <th class="text-center">ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="articleTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+      //const token = localStorage.getItem("token");
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwMTgsImlhdCI6MTc2NjYzMDAyOSwiZXhwIjoxNzY3MjM0ODI5fQ.hEyenaeG6GtYrhbLCvHjAAZFeA6WM7YpIw3mqU6zwyY'
+
+      function fetchMyArticles() {
+        fetch(baseUrl + "/articles/own?_page=1&_per_page=10", {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            let articles = result.data.items;
+            let list = "";
+
+            articles.forEach((art) => {
+              let thumb = art.thumbnail
+                ? art.thumbnail
+                : "https://via.placeholder.com/55x40?text=No+Img";
+
+              let catName = art.category ? art.category.name : "Uncategorized";
+
+              list += `
+            <tr>
+                <td><img src="${thumb}" class="thumbnail-img shadow-sm"></td>
+                <td class="fw-bold text-dark">${art.title}</td>
+                <td><span class="badge badge-category">${catName}</span></td>
+                <td class="text-muted small">${new Date(
+                  art.createdAt
+                ).toLocaleDateString()}</td>
+                <td class="text-center">
+                    <i class="bi bi-pencil-square text-muted action-icon icon-edit mx-2"></i>
+                    <i class="bi bi-trash text-muted action-icon icon-delete mx-2" onclick="deleteArticle(${
+                      art.id
+                    })"></i>
+                </td>
+            </tr>
+          `;
+            });
+
+            document.getElementById("articleTableBody").innerHTML = list;
+          })
+          .catch((err) => {
+            console.error("Error fetching data:", err);
+          });
+      }
+
+      function deleteArticle(id) {
+        if (confirm("Do you want to delete?")) {
+          fetch(baseUrl + "/articles/" + id, {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }).then((res) => {
+            if (res.ok) {
+              alert("Deleted!");
+              fetchMyArticles();
+            }
+          });
+        }
+      }
+
+      fetchMyArticles();
+    </script>
+  </body>
+</html>
