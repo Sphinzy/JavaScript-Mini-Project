@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Account</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #eef2f7, #cfd9df);
+        min-height: 100vh;
+      }
+
+      .account-card {
+        max-width: 420px;
+        margin: 60px auto;
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        background: #fff;
+      }
+
+      .avatar-wrapper {
+        width: 140px;
+        height: 140px;
+        margin: auto;
+        position: relative;
+      }
+
+      .avatar-wrapper img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #fff;
+        background: #e9ecef;
+      }
+
+      .upload-btn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 38px;
+        height: 38px;
+        background: #0d6efd;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        cursor: pointer;
+        border: 2px solid #fff;
+      }
+
+      input[readonly] {
+        background: #f8f9fa;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card account-card p-4">
+      <h4 class="text-center mb-4">My Account</h4>
+
+      <!-- Avatar -->
+      <div class="avatar-wrapper mb-3">
+        <img id="avatarPreview" src="../../img/avatar.png" alt="Avatar" />
+        <div class="upload-btn" onclick="chooseAvatar()">
+          <i class="bi bi-camera"></i>
+        </div>
+      </div>
+
+      <!-- Hidden file input -->
+      <input type="file" id="avatarInput" accept="image/*" hidden />
+
+      <!-- User info -->
+      <div class="mb-3">
+        <label class="form-label">First Name</label>
+        <input type="text" id="firstName" class="form-control" readonly />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Last Name</label>
+        <input type="text" id="lastName" class="form-control" readonly />
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" readonly />
+      </div>
+
+      <button class="btn btn-primary w-100" onclick="uploadAvatar()">
+        Save Avatar
+      </button>
+    </div>
+
+    <script>
+      // ១. ប្រកាសអថេរ Token តែម្តងគត់សម្រាប់ប្រើក្នុង File ទាំងមូល
+      var BASE_URL = "http://blogs.csm.linkpc.net/api/v1";
+      var TOKEN =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwMDEsImlhdCI6MTc2NjQ3NjEzNSwiZXhwIjoxNzY3MDgwOTM1fQ.ezUuK7OqQNxMRfDv3j6KU7pUuSEG0pd8gA3jSo_108A";
+
+      var avatarInput = document.getElementById("avatarInput");
+      var avatarPreview = document.getElementById("avatarPreview");
+
+      function chooseAvatar() {
+        avatarInput.click();
+      }
+
+      avatarInput.addEventListener("change", function () {
+        var file = avatarInput.files[0];
+        if (file) {
+          avatarPreview.src = URL.createObjectURL(file);
+        }
+      });
+
+      // មុខងារទាញទិន្នន័យ Profile មកបង្ហាញ
+      function loadProfile() {
+        fetch(BASE_URL + "/profile", {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + TOKEN,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data && data.data) {
+              document.getElementById("firstName").value =
+                data.data.firstName || "";
+              document.getElementById("lastName").value =
+                data.data.lastName || "";
+              document.getElementById("email").value = data.data.email || "";
+
+              if (data.data.avatar) {
+                // ប្រសិនបើមានរូបភាពក្នុង Server ស្រាប់ ឱ្យវាបង្ហាញ
+                avatarPreview.src = data.data.avatar;
+              }
+            }
+          })
+          .catch((err) => console.error("Error loading profile:", err));
+      }
+
+      // មុខងារ Upload រូបភាព
+      function uploadAvatar() {
+        var file = avatarInput.files[0];
+        if (!file) {
+          alert("Please choose an image first");
+          return;
+        }
+
+        var formData = new FormData();
+        formData.append("avatar", file); // ឈ្មោះ Key "avatar" ត្រូវតែត្រូវគ្នាជាមួយ API Requirement
+
+        fetch(BASE_URL + "/profile/avatar", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + TOKEN, // ប្រើអថេរ TOKEN រួម
+          },
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            alert("Avatar updated successfully!");
+            // បន្ទាប់ពី Upload ជោគជ័យ ត្រូវហៅ loadProfile() ដើម្បី Refresh រូបភាពថ្មីពី Server
+            loadProfile();
+          })
+          .catch((err) => {
+            alert("Upload failed");
+            console.error(err);
+          });
+      }
+
+      // ហៅឱ្យដំណើរការនៅពេលបើក Page ដំបូង
+      loadProfile();
+    </script>
+  </body>
+</html>
