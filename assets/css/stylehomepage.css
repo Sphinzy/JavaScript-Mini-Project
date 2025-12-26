@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f2f5;
+}
+
+/* MAIN ARTICLE FEED */
+#article {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 700px;
+  margin: 0 auto; /* center the feed itself */
+}
+
+.custom-navbar {
+  background-color: #81b2f1; /* Google blue */
+}
+
+.logo {
+  width: 35px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 0%;
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.post-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(3,3,3,0.06);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Header row: avatar left, image right */
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Avatar + Name */
+.post-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Avatar */
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Name */
+.profile-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #7a7a7a;
+}
+
+/* Image on the right */
+.post-image-right {
+  width: 150px;        /* adjust size */
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Content below */
+.post-content {
+  width: 100%;
+}
+
+.post-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+.post-text {
+  font-size: 15px;
+  color: #222;
+  line-height: 1.5;
+}
+.post-image{
+  width: 100% !important;
+  height: 300px !important;
+  object-fit: cover;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .post-header {
+    flex-direction: column;  /* stack avatar and image on mobile */
+    align-items: flex-start;
+  }
+
+  .post-image-right {
+    width: 100%;
+    height: 200px;
+    margin-top: 5px;
+  }
+}
