@@ -1,113 +1,114 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0 ;
+    padding: 0 ;
+    box-sizing: border-box ;
 }
 
 body {
-    font-family: "Poppins";
-    line-height: 1.6;
     font-family: 'Poppins', 'Kantumruy Pro' !important;
+    line-height: 1.6 !important;
 }
 
 .content {
-    width: 200px;
-    height: 200px;
+    width: 200px !important;
+    height: 200px !important;
 }
 
 .bg-main {
-    background-color: rgb(53, 51, 51);
+    background-color: rgb(53, 51, 51) !important;
 }
 
 :root {
-    --bs-main: #7645bf;
-    --bs-main-rgb: 118, 69, 191;
-    --bs-main-hover: #8b5ad6;
-    --bs-main-active: #6a3bb0;
+    --bs-main: #7645bf !important;
+    --bs-main-rgb: 118, 69, 191 !important;
+    --bs-main-hover: #8b5ad6 !important;
+    --bs-main-active: #6a3bb0 !important;
 
-    --bs-sub-main: #d2bfe2;
-    --bs-sub-main-rgb: 210, 191, 226;
-    --bs-sub-main-hover: #c3a8dc;
-    --bs-sub-main-active: #b494d3;
+    --bs-sub-main: #d2bfe2 !important;
+    --bs-sub-main-rgb: 210, 191, 226 !important;
+    --bs-sub-main-hover: #c3a8dc !important;
+    --bs-sub-main-active: #b494d3 !important;
 
-    --bs-color-dark: #040316;
-    --bs-color-light: #ffffff;
+    --bs-color-dark: #040316 !important;
+    --bs-color-light: #ffffff !important;
 
-    --transition-fast: 0.2s ease-in-out;
-    --border-radius-main: 0.5rem;
+    --transition-fast: 0.2s ease-in-out !important;
+    --border-radius-main: 0.5rem !important;
 }
 
 /* =========================
       BUTTONS
-    ========================== */
+   ========================= */
+
 .btn-main {
-    background-color: var(--bs-main);
-    border-color: var(--bs-main);
-    color: var(--bs-color-light);
-    border-radius: var(--border-radius-main);
-    transition: var(--transition-fast);
+    background-color: var(--bs-main) !important;
+    border-color: var(--bs-main) !important;
+    color: var(--bs-color-light) !important;
+    border-radius: var(--border-radius-main) !important;
+    transition: var(--transition-fast) !important;
 }
 
 .btn-main:hover {
-    background-color: var(--bs-main-hover);
-    border-color: var(--bs-main-hover);
+    background-color: var(--bs-main-hover) !important;
+    border-color: var(--bs-main-hover) !important;
 }
 
 .btn-main:focus,
 .btn-main:active {
-    background-color: var(--bs-main-active);
-    border-color: var(--bs-main-active);
-    box-shadow: 0 0 0 0.2rem rgba(var(--bs-main-rgb), 0.25);
+    background-color: var(--bs-main-active) !important;
+    border-color: var(--bs-main-active) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-main-rgb), 0.25) !important;
 }
 
 .btn-outline-main {
-    background-color: transparent;
-    border: 1px solid var(--bs-main);
-    color: var(--bs-main);
-    border-radius: var(--border-radius-main);
-    transition: var(--transition-fast);
+    background-color: transparent !important;
+    border: 1px solid var(--bs-main) !important;
+    color: var(--bs-main) !important;
+    border-radius: var(--border-radius-main) !important;
+    transition: var(--transition-fast) !important;
 }
 
 .btn-outline-main:hover {
-    background-color: var(--bs-main);
-    color: var(--bs-color-light);
+    background-color: var(--bs-main) !important;
+    color: var(--bs-color-light) !important;
 }
 
 .btn-outline-main:focus,
 .btn-outline-main:active {
-    background-color: var(--bs-main-active);
-    border-color: var(--bs-main-active);
-    color: white;
+    background-color: var(--bs-main-active) !important;
+    border-color: var(--bs-main-active) !important;
+    color: #fff !important;
 }
 
 .btn-sub-main {
-    background-color: var(--bs-sub-main);
-    border-color: var(--bs-sub-main);
-    color: var(--bs-color-dark);
-    border-radius: var(--border-radius-main);
-    transition: var(--transition-fast);
+    background-color: var(--bs-sub-main) !important;
+    border-color: var(--bs-sub-main) !important;
+    color: var(--bs-color-dark) !important;
+    border-radius: var(--border-radius-main) !important;
+    transition: var(--transition-fast) !important;
 }
 
 .btn-sub-main:hover {
-    background-color: var(--bs-sub-main-hover);
+    background-color: var(--bs-sub-main-hover) !important;
 }
 
 .btn-sub-main:focus,
 .btn-sub-main:active {
-    background-color: var(--bs-sub-main-active);
-    box-shadow: 0 0 0 0.2rem rgba(var(--bs-sub-main-rgb), 0.25);
+    background-color: var(--bs-sub-main-active) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-sub-main-rgb), 0.25) !important;
 }
 
 /* =========================
       TEXT & BACKGROUND
-    ========================== */
+   ========================= */
+
 .text-main {
     color: var(--bs-main) !important;
 }
 
 .bg-main {
     background-color: var(--bs-main) !important;
-    color: white;
+    color: #fff !important;
 }
 
 .bg-sub-main {
@@ -115,66 +116,56 @@ body {
 }
 
 .link-main {
-    color: var(--bs-primary);
-    text-decoration: none;
-    transition: var(--transition-fast);
+    color: var(--bs-main) !important;
+    text-decoration: none !important;
+    transition: var(--transition-fast) !important;
 }
 
 .link-main:hover {
-    color: var(--bs-primary-hover);
-    text-decoration: underline;
+    color: var(--bs-main-hover) !important;
+    text-decoration: underline !important;
 }
 
-/* line cut  */
+/* =========================
+      LINE CLAMP
+   ========================= */
+
+.clamp-1,
+.clamp-2,
+.clamp-3,
+.clamp-4,
+.clamp-5,
+.clamp-6,
+.clamp-7 {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
 
 .clamp-1 {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    -webkit-line-clamp: 1 !important;
 }
 
 .clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    /* Number of lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    -webkit-line-clamp: 2 !important;
 }
 
 .clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    /* Number of lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    -webkit-line-clamp: 3 !important;
 }
 
 .clamp-4 {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    /* Number of lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    -webkit-line-clamp: 4 !important;
 }
 
 .clamp-5 {
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    -webkit-line-clamp: 5 !important;
 }
 
 .clamp-6 {
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    -webkit-line-clamp: 6 !important;
 }
 
 .clamp-7 {
-    display: -webkit-box;
-    -webkit-line-clamp: 7;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    -webkit-line-clamp: 7 !important;
 }

@@ -10,14 +10,14 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="../../../css/style.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
 
     <style>
       :root {
@@ -32,8 +32,6 @@
         align-items: center;
         color: white;
         padding: 20px 0;
-        font-family: "Poppins";
-        line-height: 1.6;
         font-family: "Poppins", "Kantumruy Pro" !important;
       }
 
@@ -47,7 +45,6 @@
         box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
       }
 
-      /* Left Side: Profile Intro */
       .profile-sidebar {
         background: rgba(255, 255, 255, 0.05);
         padding: 60px 40px;
@@ -74,7 +71,6 @@
         box-shadow: 0 0 25px #7645bf;
       }
 
-      /* Right Side: Details */
       .profile-details {
         padding: 60px 50px;
       }
@@ -101,7 +97,9 @@
         font-size: 1.1rem;
         word-break: break-all;
       }
+
       .btn-action {
+        background: white; /* Matching your original style */
         border: none;
         color: #0f0c29;
         padding: 14px 30px;
@@ -116,7 +114,6 @@
         box-shadow: 0 10px 20px rgba(220, 236, 237, 0.4);
       }
 
-      /* Responsive adjustments */
       @media (max-width: 991px) {
         .profile-sidebar {
           border-right: none;
@@ -129,7 +126,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="bg-main">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -144,7 +141,7 @@
                   />
                 </div>
                 <h2 id="display-name" class="fw-bold mb-1">Loading...</h2>
-                <p class="fs-4 mb-4 text-main">Verified Account</p>
+                <p class="fs-6 mb-4 text-main text-light">Verified Account</p>
                 <button class="btn btn-action btn-main" onclick="editProfile()">
                   <i class="bi bi-pencil-square me-2"></i> Edit Profile
                 </button>
@@ -199,28 +196,27 @@
     </div>
 
     <script>
-      const MOCK_LOGIN_DATA = {
-        firstName: "Barry",
-        lastName: "Allen",
-        email: "barry.allen@starlabs.com",
-        avatar: "../../../img/avatar.png",
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-      };
-      if (!localStorage.getItem("user_info")) {
-        localStorage.setItem("user_info", JSON.stringify(MOCK_LOGIN_DATA));
-      }
-
-      const API_URL = "http://blogs.csm.linkpc.net/api/v1/auth/me";
+      const token = localStorage.getItem("token");
+      const API_URL = "http://blogs.csm.linkpc.net/api/v1/auth/profile";
 
       async function fetchUserData() {
-        const storedData = JSON.parse(localStorage.getItem("user_info"));
-        if (storedData) updateUI(storedData);
+        if (!token) {
+          console.error("No token found.");
+          document.getElementById("display-name").innerText = "Not Logged In";
+          return;
+        }
+
+        // Show cached data immediately if it exists
+        const cachedUser = localStorage.getItem("user_info");
+        if (cachedUser) {
+          updateUI(JSON.parse(cachedUser));
+        }
 
         try {
           const response = await fetch(API_URL, {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${storedData.token}`,
+              Authorization: `Bearer ${token}`,
               Accept: "application/json",
               "Content-Type": "application/json",
             },
@@ -228,34 +224,45 @@
 
           if (response.ok) {
             const result = await response.json();
-            const user = result.data.user || result.data;
+            // Standardizing for different API response structures
+            const user = result.data || result;
+
             updateUI(user);
-            localStorage.setItem(
-              "user_info",
-              JSON.stringify({ ...user, token: storedData.token })
-            );
+            localStorage.setItem("user_info", JSON.stringify(user));
+          } else {
+            console.error("Fetch failed with status:", response.status);
           }
         } catch (error) {
-          console.error("Fetch Error:", error);
+          console.error("Network error:", error);
         }
       }
 
       function updateUI(user) {
-        document.getElementById("first-name").innerText =
-          user.firstName || "N/A";
-        document.getElementById("last-name").innerText = user.lastName || "N/A";
-        document.getElementById("email-address").innerText =
-          user.email || "N/A";
-        document.getElementById("display-name").innerText = `${
-          user.firstName || ""
-        } ${user.lastName || ""}`;
-        if (user.avatar)
-          document.getElementById("profile-img").src = user.avatar;
+        if (!user) return;
+
+        // Support for both camelCase and snake_case API fields
+        const firstName = user.firstName || user.first_name || "N/A";
+        const lastName = user.lastName || user.last_name || "N/A";
+        const email = user.email || "N/A";
+
+        document.getElementById("first-name").innerText = firstName;
+        document.getElementById("last-name").innerText = lastName;
+        document.getElementById("email-address").innerText = email;
+        document.getElementById(
+          "display-name"
+        ).innerText = `${firstName} ${lastName}`;
+
+        if (user.avatar || user.profile_image) {
+          document.getElementById("profile-img").src =
+            user.avatar || user.profile_image;
+        }
       }
+
       function editProfile() {
         window.location.href = "upload_avata.html";
-      }    
+      }
+
       window.onload = fetchUserData;
-    </script> 
+    </script>
   </body>
 </html>
