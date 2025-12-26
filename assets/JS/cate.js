@@ -3,6 +3,7 @@ let pageNumUrl = 1;
 const pageSearch = document.querySelector('#pageSearch');
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjk5OSwiaWF0IjoxNzY2NTk3OTE1LCJleHAiOjE3NjcyMDI3MTV9.6YAyFCIpmIttS1WTp18ljpLdZoRFqLdELJEBn9poG8s';
 let searchValue = '';
+let selectedCateId = null;
 
 // ------------------- Pagination -------------------
 function changePage(page) {
@@ -84,12 +85,12 @@ const renderTable = (items) => {
                 <td class="iconTable">
                     
                     <button class="btn"  data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square text-main pe-1 fs-5" onclick="btnEditCate(${items[i].id})"></i></button>
-                    <button class="btn"  data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash text-danger ps-1 fs-5"></i></button>
+                    <button class="btn"  data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash text-danger ps-1 fs-5" onclick="setDeleteCate(${items[i].id})"></i></button>
                 </td>
             </tr>
+            
         `;
-        const delBtn = document.querySelector('#btnDeleteCate');
-        delBtn.onclick = () => btnDeleteCate(cateId);
+        
     }
 };
 
@@ -129,21 +130,35 @@ const btnCreateCate = () => {
         })
         .catch(err => console.error("Error creating category:", err));
 };
+
+const setDeleteCate = (cateId) => {
+    selectedCateId = cateId;
+};
+
 // ------------------- Delete -------------------
 
-const btnDeleteCate = (cateId) => {
-    fetch(`${baseUrl}/categories/${cateId}`, {
+const btnDeleteCate = () => {
+    if (!selectedCateId) return;
+
+    fetch(`${baseUrl}/categories/${selectedCateId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`
         }
     })
         .then(res => res.json())
-        .then(resDeleteCate => {
-            console.log(resDeleteCate);
+        .then(() => {
+            // close modal
+            const modalEl = document.getElementById("deleteModal");
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal.hide();
+
+            selectedCateId = null;
             getData();
         })
-}
+        .catch(err => console.error(err));
+};
+
 // ------------------- Edit category -------------------
 
 const btnEditCate = (cateId) => {
