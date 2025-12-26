@@ -1,12 +1,19 @@
 * {
+<<<<<<< HEAD
     margin: 0 ;
     padding: 0 ;
     box-sizing: border-box ;
+=======
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+>>>>>>> b0b020c3b8951fa08ae89f6576f2077f1979caee
 }
 
 body {
     font-family: 'Poppins', 'Kantumruy Pro' !important;
     line-height: 1.6 !important;
+    background-color: #eee !important;
 }
 
 .content {
@@ -81,11 +88,12 @@ body {
 }
 
 .btn-sub-main {
-    background-color: var(--bs-sub-main) !important;
-    border-color: var(--bs-sub-main) !important;
-    color: var(--bs-color-dark) !important;
-    border-radius: var(--border-radius-main) !important;
-    transition: var(--transition-fast) !important;
+    background-color:
+    
+    
+    var(--bs-secondary) !important;
+    border-color: var(--bs-secondary) !important;
+    color: white !important;
 }
 
 .btn-sub-main:hover {
@@ -96,6 +104,26 @@ body {
 .btn-sub-main:active {
     background-color: var(--bs-sub-main-active) !important;
     box-shadow: 0 0 0 0.2rem rgba(var(--bs-sub-main-rgb), 0.25) !important;
+}
+
+.nav-link {
+    color: var(--bs-main) !important;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--bs-color-light) !important;
+    background-color: var(--bs-main) !important;
+    border-radius: 5px;
+    margin: 2px 0px !important;
 }
 
 /* =========================
