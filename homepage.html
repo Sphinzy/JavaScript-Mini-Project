@@ -1,0 +1,252 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Articles</title>
+
+ 
+  <link rel="stylesheet" href="../../bootstrap-5.3.7/css/bootstrap.css" />
+
+ 
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/stylehomepage.css" />
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+
+ 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar px-3">
+  <div class="container-fluid">
+
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <img src="../img/logo.png" alt="Logo" class="logo">
+      <span class="brand-name">BlogFy</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#topNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="topNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link active" href="#">
+            <i class="fas fa-chart-line me-1"></i> Dashboard
+          </a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button"
+             data-bs-toggle="dropdown">
+            <i class="fas fa-file-alt me-1"></i> My Articles
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">All Articles</a></li>
+            <li><a class="dropdown-item" href="create.html">Create Article</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-tags me-1"></i> Category
+          </a>
+        </li>
+
+      </ul>
+
+      <div class="d-flex align-items-center gap-3">
+        <input class="form-control form-control-sm" type="search" placeholder="Search">
+
+        <div class="dropdown">
+          <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+             href="#" data-bs-toggle="dropdown">
+            <img src="../img/profile.png" class="rounded-circle me-2" width="32" height="32">
+            <span>Sang</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-4">
+
+  <div id="article"></div>
+
+  <div id="loader" class="text-center my-4" style="display:none;">
+    Loading more articles...
+  </div>
+
+</div>
+
+
+<script src="../../bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+<script src="../../bootstrap-5.3.7/js/homepage.js"></script>
+
+</body>
+</html>
+  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blogify | Home</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="../../bootstrap-5.3.7/css/bootstrap.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/stylehomepage.css" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav class="bg-secondary-subtle py-2">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+
+        <a href="#" class="fs-3 fw-bold text-decoration-none text-main">
+          Blogify
+        </a>
+
+        <input type="text" class="form-control w-50" placeholder="Search...">
+
+        <img src="../img/profile.png" class="rounded-circle" width="45" height="45">
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- MAIN -->
+<main class="container mt-4">
+  <div class="row">
+
+    <!-- LEFT MENU -->
+    <div class="col-lg-3 d-none d-lg-block">
+      <ul class="nav flex-column gap-2">
+        <li class="nav-item">
+          <a class="nav-link bg-main text-white rounded">
+            <i class="fas fa-house me-2"></i> Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-main">
+            <i class="fas fa-newspaper me-2"></i> Feed
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-main">
+            <i class="fas fa-user me-2"></i> Profile
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-main">
+            <i class="fas fa-plus-circle me-2"></i> Create
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CENTER FEED -->
+    <div class="col-lg-6 my-4">
+
+      <div class="row card-insert" id="article">
+
+        <!-- POST -->
+        <div class="col-1 py-3">
+          <img src="https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg"
+               class="rounded-circle"
+               style="width:50px;height:50px;object-fit:cover;">
+        </div>
+
+        <div class="col-11 py-3">
+          <div class="content w-100">
+            <div class="title mb-2">
+              <h6 class="mb-0 ps-3 fw-semibold">Chum Satsya</h6>
+              <small class="ps-3 text-muted">15 minutes ago</small>
+            </div>
+
+            <div class="card border-0">
+              <img src="https://i.pinimg.com/1200x/d1/35/56/d13556ec053cffc2410a682ee33436d6.jpg"
+                   class="card-img-top w-100 object-fit-cover rounded"
+                   style="height:300px;">
+            </div>
+          </div>
+        </div>
+
+        <!-- POST -->
+        <div class="col-1 py-3">
+          <img src="https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg"
+               class="rounded-circle"
+               style="width:50px;height:50px;object-fit:cover;">
+        </div>
+
+        <div class="col-11 py-3">
+          <div class="content w-100">
+            <div class="title mb-2">
+              <h6 class="mb-0 ps-3 fw-semibold">Chum Satsya</h6>
+              <small class="ps-3 text-muted">15 minutes ago</small>
+            </div>
+
+            <div class="card border-0">
+              <img src="https://i.pinimg.com/1200x/d1/35/56/d13556ec053cffc2410a682ee33436d6.jpg"
+                   class="card-img-top w-100 object-fit-cover rounded"
+                   style="height:300px;">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="loader" class="text-center my-4" style="display:none;">
+        Loading more articles...
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="col-lg-3 d-none d-lg-block">
+      <div class="p-3 bg-light rounded">
+        <h6>About</h6>
+        <p class="small text-muted">
+          Welcome to Blogify. Share stories, images, and ideas.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- JS -->
+<script src="../../bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+<script src="../../bootstrap-5.3.7/js/homepage.js"></script>
+
+</body>
+</html>
