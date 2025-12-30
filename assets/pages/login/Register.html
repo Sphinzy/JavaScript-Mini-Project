@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/theme.css">
 
-  <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-
-  <!-- Bootstrap Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-  />
-
-  <!-- Google Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-    rel="stylesheet"
-  />
-
   <style>
     body {
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: #f5f5f5;
     }
 
     form {
       border: 2px solid #ccc;
       border-radius: 15px;
-      background-color: rgba(215, 211, 211, 0.282);
+      background-color: rgba(215, 211, 211, 0.28);
       padding: 30px;
     }
 
@@ -46,120 +38,86 @@
     .error {
       color: red;
       font-size: 14px;
-      margin-left: 5px;
+      margin-top: 5px;
+      display: block;
+    }
+
+    .toggle-password {
+      cursor: pointer;
+    }
+
+    @media (max-width: 992px) {
+      .img-left {
+        display: none;
+      }
     }
   </style>
 </head>
 
-<body  class="bg-main">
-  <section class="mt-5">
+<body class="bg-main">
+  <section>
     <div class="container">
-      <div class="row justify-content-center">
-         <div class="col-12">
-          
-         <div class="row">
-            <div class="col-6">
-                <img style="width: 100%; height: 700px; object-fit: cover;" src="../../img/Authentication-amico.png" alt="">
-            </div>
-            <div class="col-6">
-                        <div class="col-lg-6" style="width: 100%;">
-          <form>
-            <h1>Register</h1>
-            <p>Create your account. It’s free and only takes a minute.</p>
+      <div class="row align-items-center" style="height: 100vh;">
+        <!-- Left Image -->
+        <div class="col-lg-6 d-none d-lg-flex img-left">
+          <img src="../../img/Authentication-amico.png" alt="Authentication" class="img-fluid">
+        </div>
 
-            <!-- First & Last Name -->
-            <div class="row">
+        <!-- Register Form -->
+        <div class="col-12 col-lg-6">
+          <form id="registerForm">
+            <h1 class="mb-3">Register</h1>
+            <p class="mb-4">Create your account. It’s free and only takes a minute.</p>
+
+            <div class="row g-3">
               <div class="col-6">
-                <input
-                  type="text"
-                  id="fname"
-                  class="form-control"
-                  placeholder="First Name"
-                />
+                <input type="text" id="fname" class="form-control" placeholder="First Name">
                 <span id="errfname" class="error"></span>
               </div>
               <div class="col-6">
-                <input
-                  type="text"
-                  id="lname"
-                  class="form-control"
-                  placeholder="Last Name"
-                />
+                <input type="text" id="lname" class="form-control" placeholder="Last Name">
                 <span id="errlname" class="error"></span>
               </div>
             </div>
 
-            <!-- Email -->
-            <div class="mt-4">
-              <input
-                type="email"
-                id="email"
-                class="form-control"
-                placeholder="Email"
-              />
+            <div class="mt-3">
+              <input type="email" id="email" class="form-control" placeholder="Email">
               <span id="erremail" class="error"></span>
             </div>
 
             <!-- Password -->
-            <div class="mt-4 position-relative">
-              <input
-                type="password"
-                id="password"
-                class="form-control"
-                placeholder="Password"
-              />
-              <i
-                class="bi bi-eye-slash position-absolute"
-                style="top: 12px; right: 15px; cursor: pointer;color: black;" 
-                id="eyeIcon"
-                onclick="togglepassword()"
-              ></i>
+            <div class="mt-3 position-relative">
+              <input type="password" id="password" class="form-control" placeholder="Password">
+              <span class="position-absolute text-main top-50 end-0 translate-middle-y me-3 toggle-password">
+                <i class="bi bi-eye-slash" id="eyePassword"></i>
+              </span>
               <span id="errpassword" class="error"></span>
             </div>
 
             <!-- Confirm Password -->
-            <div class="mt-4 position-relative">
-              <input
-                type="password"
-                id="cpassword"
-                class="form-control"
-                placeholder="Confirm Password"
-              />
-              <i
-                class="bi bi-eye-slash position-absolute"
-                style="top: 12px; right: 15px; cursor: pointer; color: black;"
-                id="eyeicon"
-                onclick="togglecpassword()"
-              ></i>
+            <div class="mt-3 position-relative">
+              <input type="password" id="cpassword" class="form-control" placeholder="Confirm Password">
+              <span class="position-absolute text-main top-50 end-0 translate-middle-y me-3 toggle-password">
+                <i class="bi bi-eye-slash" id="eyeCPassword"></i>
+              </span>
               <span id="errcpassword" class="error"></span>
             </div>
 
-            <!-- Checkbox -->
+            <!-- Terms Checkbox -->
             <div class="form-check mt-3">
-              <input class="form-check-input" type="checkbox" checked />
-              <label class="form-check-label">
-                I accept the <strong>Terms</strong> & <strong>Privacy Policy</strong>
+              <input class="form-check-input border-0 bg-main" type="checkbox" checked id="termsCheck">
+              <label class="form-check-label" for="termsCheck">
+                I accept the <span class="fw-bold text-main">Terms & Privacy Policy</span>
               </label>
             </div>
 
-            <!-- Button -->
-            <button
-              type="button"
-              onclick="signup()"
-              class="btn btn-main mt-4 w-100"
-            >
-              Register
-            </button>
+            <button type="button" class="btn btn-main w-100 mt-4" onclick="signup()">Register</button>
 
             <div class="text-center mt-3">
-              Already have an account?
-              <a href="login.html">Login</a>
+              Already have an account? <a href="login.html" class="text-main">Login</a>
             </div>
           </form>
         </div>
-            </div>
-         </div>
-         </div>
       </div>
     </div>
   </section>
@@ -168,42 +126,34 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    let fname = document.getElementById("fname");
-    let lname = document.getElementById("lname");
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
-    let cpassword = document.getElementById("cpassword");
+    const fname = document.getElementById("fname");
+    const lname = document.getElementById("lname");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const cpassword = document.getElementById("cpassword");
 
-    let eyeIcon = document.getElementById("eyeIcon");
-    let eyeicon = document.getElementById("eyeicon");
+    const errfname = document.getElementById("errfname");
+    const errlname = document.getElementById("errlname");
+    const erremail = document.getElementById("erremail");
+    const errpassword = document.getElementById("errpassword");
+    const errcpassword = document.getElementById("errcpassword");
 
-    let errfname = document.getElementById("errfname");
-    let errlname = document.getElementById("errlname");
-    let erremail = document.getElementById("erremail");
-    let errpassword = document.getElementById("errpassword");
-    let errcpassword = document.getElementById("errcpassword");
+    const eyePassword = document.getElementById("eyePassword");
+    const eyeCPassword = document.getElementById("eyeCPassword");
 
     function signup() {
-      errfname.textContent =
-      errlname.textContent =
-      erremail.textContent =
-      errpassword.textContent =
-      errcpassword.textContent = "";
+      // Reset errors
+      [errfname, errlname, erremail, errpassword, errcpassword].forEach(el => el.textContent = "");
 
+      // Validation
       if (!fname.value) errfname.textContent = "Enter first name";
       if (!lname.value) errlname.textContent = "Enter last name";
       if (!email.value) erremail.textContent = "Enter email";
       if (!password.value) errpassword.textContent = "Enter password";
-      if (password.value !== cpassword.value)
-        errcpassword.textContent = "Passwords do not match";
+      if (password.value !== cpassword.value) errcpassword.textContent = "Passwords do not match";
 
-      if (
-        fname.value &&
-        lname.value &&
-        email.value &&
-        password.value &&
-        password.value === cpassword.value
-      ) {
+      // Submit form if valid
+      if (fname.value && lname.value && email.value && password.value && password.value === cpassword.value) {
         fetch("http://blogs.csm.linkpc.net/api/v1/auth/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -212,40 +162,42 @@
             lastName: lname.value,
             email: email.value,
             password: password.value,
-            confirmPassword: cpassword.value,
+            confirmPassword: cpassword.value
           }),
         })
           .then(res => res.json())
           .then(data => {
             if (data.result) {
-              alert("Register successfully");
+              alert("Registered successfully");
               location.href = "login.html";
             } else {
-              alert("Registration failed");
+              alert("Registration failed: " + (data.message || "Unknown error"));
             }
           });
       }
     }
 
-    function togglepassword() {
+    // Toggle password visibility
+    eyePassword.addEventListener("click", () => {
       if (password.type === "password") {
         password.type = "text";
-        eyeIcon.classList.replace("bi-eye-slash", "bi-eye");
+        eyePassword.classList.replace("bi-eye-slash", "bi-eye");
       } else {
         password.type = "password";
-        eyeIcon.classList.replace("bi-eye", "bi-eye-slash");
+        eyePassword.classList.replace("bi-eye", "bi-eye-slash");
       }
-    }
+    });
 
-    function togglecpassword() {
+    eyeCPassword.addEventListener("click", () => {
       if (cpassword.type === "password") {
         cpassword.type = "text";
-        eyeicon.classList.replace("bi-eye-slash", "bi-eye");
+        eyeCPassword.classList.replace("bi-eye-slash", "bi-eye");
       } else {
         cpassword.type = "password";
-        eyeicon.classList.replace("bi-eye", "bi-eye-slash");
+        eyeCPassword.classList.replace("bi-eye", "bi-eye-slash");
       }
-    }
+    });
   </script>
 </body>
+
 </html>

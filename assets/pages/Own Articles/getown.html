@@ -7,6 +7,8 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/theme.css">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
@@ -89,34 +91,217 @@
     </style>
   </head>
   <body>
-    <div class="container py-5">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-          <h2 class="main-title mb-0">My Articles</h2>
-          <small class="text-muted">Manage your content and publications</small>
-        </div>
-        <button class="btn btn-main" onclick="location.href='tcreate.html'">
-          <i class="bi bi-plus-lg me-2"></i> Create Article
-        </button>
-      </div>
+          <header class="sticky-top z-3">
+            <nav class="navbar fixed-top bg-secondary-subtle">
+              <div class="container">
+                <a class="navbar-brand fs-5 fw-bold text-main" href="#">BlogFy</a>
+          
+                <!-- menu icon  -->
+                <button class="navbar-toggler d-flex d-lg-none" type="button" data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+          
+                <!-- side bar  -->
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                  <div class="offcanvas-header">
+                    <h5 class="offcanvas-title fs-5 fw-bold text-main" id="offcanvasNavbarLabel">BlogFy</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body">
+                    <form class="d-flex my-3" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                      <button class="btn btn-outline-main" type="submit">Search</button>
+                    </form>
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                      <li class="nav-item ps-3 rounded-2">
+                        <a href="../homepage/home.html" class="nav-link fs-5 p-2"><i class="bi bi-house-door pe-2"></i>Home</a>
+                      </li>
+                      <li class="nav-item ps-3">
+                        <a href="../" class="nav-link fs-5 text-main p-2"><i
+                            class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a>
+                      </li>
+                      <li class="nav-item ps-3">
+                        <a href="../profile/account.html" class="nav-link fs-5 text-main p-2"><i
+                            class="bi bi-person-circle pe-2"></i>Profile</a>
+                      </li>
+                      <li class="nav-item ps-3">
+                        <a href="../Own Articles/getown.html" class="nav-link fs-5 text-main p-2"><i
+                            class="bi bi-patch-plus pe-2"></i>Create</a>
+                      </li>
+                      <li class="nav-item ps-3">
+                        <a href="../category/cate.html" class="nav-link active fs-5 text-main p-2"><i
+                            class="bi bi-copy pe-2"></i>Category</a>
+                      </li>
+                    </ul>
+          
+                  </div>
+                </div>
+          
+                <!-- input search  -->
+                <div class="d-none d-lg-flex">
+                  <input type="text" name="" id="" class="form-control" style="width: 500px;" placeholder="Search...">
+                </div>
+          
+                <div class="dropdown d-none d-lg-flex">
+                  <a class="nav-link px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div style="border: 2px solid #7645bf; border-radius: 50%; ">
+                      <img src="" class="img-fluid rounded-circle object-fit-cover" id="profile-image"
+                        style="width: 40px; height: 40px; padding: 3px;" alt />
+                    </div>
+                  </a>
+          
+                  <ul class="dropdown-menu border-0 shadow-sm bg-body-theme">
+                    <li><a class='dropdown-item' href='../profile/account.html'><i
+                          class="bi bi-person-circle me-2"></i>Profile</a>
+                    </li>
+                    <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logoutModal"><i
+                          class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                  </ul>
+                </div>
+          
+              </div>
+            </nav>
+          </header>
+          <!-- Logout Modal -->
+          <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+          
+                <div class="modal-body">
+                  <h3 class="text-danger">Logout</h3>
+                  <p>Are you sure you want to logout?</p>
+                  <div class="text-end">
+                    <button type="button" class="btn btn-outline-main" data-bs-dismiss="modal">No</button>
+                    <!-- ផ្លាស់ប្តូរ href ទៅ script logout របស់អ្នក -->
+                    <button type="button" class="btn btn-danger" id="btnLogout">Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <div class="card p-4">
-        <div class="table-responsive">
-          <table class="table align-middle">
-            <thead class="text-secondary small">
-              <tr>
-                <th>IMAGE</th>
-                <th>TITLE</th>
-                <th>CATEGORY</th>
-                <th>DATE</th>
-                <th class="text-center">ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody id="articleTableBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+
+        <main>
+        
+          <!-- modal  -->
+          <section class="">
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+              <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                  <!-- <div class="modal-header">
+                                    <h3 class="modal-title text-main" id="deleteModalLabel">Delete Category</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div> -->
+                  <div class="modal-body">
+                    <h3 class="modal-title text-main" id="delModalLabel">Do you want to delete</h3>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-evenly">
+                    <button type="button" class="btn btn-secondary" style="width:30%" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" style="width:30%" id="btnDeleteCate"
+                      onclick="btnDeleteCate()">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal-create -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title text-main" id="exampleModalLabel">Create Category</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Create a category</p>
+                    <input type="text" class="form-control" id="cateInp">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-main btnCreateCate w-100" onclick="btnCreateCate()">Create</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            <!-- modal save  -->
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+              <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title text-main" id="editModalLabel">Edit Category</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Edit category</p>
+                    <input type="text" class="form-control" id="editInp">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-main w-100" id="btnSaveCate">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        
+          <section class="mt-15">
+            <div class="container">
+              <div class="row">
+                <!-- Left Sidebar -->
+                <div class="col-lg-3 d-none d-lg-block">
+                  <div class="position-sticky shadow-sm rounded-3" style="top: 100px;">
+                    <ul class="navbar-nav text-start">
+                      <li class="nav-item rounded-2"> <a href="../homepage/home.html" class="nav-link fs-5 p-2"><i
+                            class="bi bi-house-door pe-2"></i>Home</a> </li>
+                      <li class="nav-item"> <a href="../" class="nav-link fs-5 text-main p-2"><i
+                            class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a> </li>
+                      <li class="nav-item"> <a href="../profile/account.html" class="nav-link fs-5 text-main p-2"><i
+                            class="bi bi-person-circle pe-2"></i>Profile</a> </li>
+                      <li class="nav-item"> <a href="../Own Articles/getown.html" class="nav-link active fs-5 text-main p-2"><i
+                            class="bi bi-patch-plus pe-2"></i>Create</a> </li>
+                      <li class="nav-item"> <a href="../category/cate.html" class="nav-link fs-5 text-main p-2"><i
+                            class="bi bi-copy pe-2"></i>Category</a> </li>
+                    </ul>
+                  </div>
+                </div>
+        
+                <div class="col-lg-9">
+                  <div class="container py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                      <div>
+                        <h2 class="main-title mb-0">My Articles</h2>
+                        <small class="text-muted">Manage your content and publications</small>
+                      </div>
+                      <button class="btn btn-main" onclick="location.href='create.html'">
+                        <i class="bi bi-plus-lg me-2"></i> Create Article
+                      </button>
+                    </div>
+                  
+                    <div class="card p-4">
+                      <div class="table-responsive">
+                        <table class="table align-middle">
+                          <thead class="text-secondary small">
+                            <tr>
+                              <th>IMAGE</th>
+                              <th>TITLE</th>
+                              <th>CATEGORY</th>
+                              <th>DATE</th>
+                              <th class="text-center">ACTIONS</th>
+                            </tr>
+                          </thead>
+                          <tbody id="articleTableBody"></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        
+        
+        
+        
+        </main>
 
     <script>
       const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
@@ -185,5 +370,29 @@
 
       fetchMyArticles();
     </script>
+    <script>
+      //const token = localStorage.getItem('token');
+      const imageLink = localStorage.getItem('getImage');
+      const getImage = document.querySelector('#profile-image');
+      const btnLogout = document.querySelector('#btnLogout');
+      btnLogout.addEventListener('click', () => {
+        fetch(baseUrl + "/auth/logout", {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then(res => res.json())
+          .then(resData => {
+            localStorage.removeItem('token');
+            return location.href = '../login/login.html'
+            console.log(resData);
+
+          })
+      })
+      //getImage.setAttribute('src', imageLink);
+      getImage.src = imageLink;
+    </script>
+    <script src="../../bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
