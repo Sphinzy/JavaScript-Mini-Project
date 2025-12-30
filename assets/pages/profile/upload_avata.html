@@ -17,7 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-
+    <link rel="stylesheet" href="../../css/style.css" />
     <style>
       :root {
         --primary-accent: #6366f1;
@@ -126,23 +126,9 @@
         padding: 12px;
         border: 1px solid #e2e8f0;
       }
-
       .btn-save {
-        border-radius: 12px;
-        padding: 14px;
-        font-weight: 600;
-        background: var(--primary-accent);
-        color: white;
-        border: none;
-        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-        transition: 0.3s;
+        padding: 10px;
       }
-
-      .btn-save:hover {
-        background: #4f46e5;
-        transform: translateY(-2px);
-      }
-
       @keyframes slideIn {
         from {
           opacity: 0;
@@ -218,7 +204,11 @@
         />
       </div>
 
-      <button class="btn btn-save w-100" id="saveBtn" onclick="saveChanges()">
+      <button
+        class="btn btn-save btn-main w-100"
+        id="saveBtn"
+        onclick="saveChanges()"
+      >
         Save Changes
       </button>
     </div>
@@ -226,7 +216,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
       const BASE_URL = "http://blogs.csm.linkpc.net/api/v1";
-      const token = localStorage.getItem("token");
+      // const token = localStorage.getItem("token");
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwNTYsImlhdCI6MTc2Njc0MTk1NywiZXhwIjoxNzY3MzQ2NzU3fQ.GwlNwexQg-wj5H0WoWoYkRK6OwSROGudP46e2u3eEcE";
 
       const avatarInput = document.getElementById("avatarInput");
       const avatarPreview = document.getElementById("avatarPreview");
