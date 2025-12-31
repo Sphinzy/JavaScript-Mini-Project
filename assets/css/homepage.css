@@ -1,0 +1,10 @@
+    .post-img {
+      max-height: 320px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 576px) {
+      .post-img {
+        max-height: 200px;
+      }
+    }

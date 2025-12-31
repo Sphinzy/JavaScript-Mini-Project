@@ -1,0 +1,14 @@
+body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    form {
+      border: 2px solid #ccc;
+      border-radius: 15px;
+      background-color: rgba(215, 211, 211, 0.28);
+      padding: 20px;
+    }
+
+    .toggle-password {
+      cursor: pointer;
+    }
