@@ -95,10 +95,6 @@ fetch(
                                     <h5 class="px-3 pt-3 clamp-1">
                                         ${article.title}
                                     </h5>
-
-                                    <p class="px-3 pb-3 clamp-3">
-                                        ${article.content}
-                                    </p>
                                 </div>
 
                                 <div class="card-footer bg-white">

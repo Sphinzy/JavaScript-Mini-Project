@@ -1,278 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
 
-    <link rel="stylesheet" href="../../css/style.css" />
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <!-- icon 
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-    <!-- font  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- boostrap  -->
-    <link rel="stylesheet" href="../../bootstrap-5.3.7/css/bootstrap.css" />
-    <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-/>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/theme.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
   <style>
-    form {
-      border: 2px color(rec2020 red green blue);
-      border-radius: 15px;
-
-      background-color: rgba(215, 211, 211, 0.282);
+    body {
+      font-family: 'Poppins', sans-serif;
     }
 
+    form {
+      border: 2px solid #ccc;
+      border-radius: 15px;
+      background-color: rgba(215, 211, 211, 0.28);
+      padding: 20px;
+    }
+
+    .toggle-password {
+      cursor: pointer;
+    }
   </style>
-  <body class="bg-main">
-    <section class="mt-5" >
-      <div class="container m-auto">
-        <div class="row">
-          <div class="col-12 ">
-            <div class="row">
-              <div class="col-6">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="col-12">
-                      <img 
-                        style="width: 100%; height: 662px; object-fit: cover"
-                        src="https://www.kindpng.com/picc/m/273-2738804_php-login-and-authentication-login-hd-png-download.png"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 ps-5 ">
-                <div class="row">
-                  <div class="col-12">
-                    <form id="loginform" class="p-3">
-                      <div class="row">
-                        <div class="col-12">
-                          <h1 class="p-4 ms-5" style="font-weight: 100px; margin-left: 250px;">
-                            Sign in
-                          </h1>
-                          <p class="p-2">
-                            Enter your Credential to access your account
-                          </p>
-                        </div>
-                        <div class="col-12 mt-3 ms-2">
-                          <label for="" style="padding-left: 10px;"
-                            ><i class="bi bi-envelope ps-2 pt-2"></i> Email Address</label
-                          ><br>
-                           <div class="position-relative">
-                            <input
-                            style="margin-left: 10px; width: 95%"
-                            type="password"
-                            class="form-control mt-2 p-2"
-                            id="email"
-                            placeholder=" Enter your Email"
-                          />
-                            <span class="  toggle-email position-absolute" style="top: 8px; left: 90%;"  onclick="toggleemail()">
-                            <i class="bi bi-eye"  id="eyeicon"></i>
-                           </span>
-                           </div>
-                          <span id="erremail" style="margin-left: 10px"></span>
-                          
-                        </div>
-                      </div>
+</head>
 
-                      <div class="row">
-                        <div class="col-12 mt-3 ms-2 ">
-                          <label for="" style="margin-left: 10px" class="mt-1"
-                            ><i class="bi bi-lock p-2 "></i> Password</label
-                          >
+<body class="bg-main">
+  <section>
+    <div class="container">
+      <div class="row" style="height: 100vh; display: flex; align-items: center;">
+        <!-- Left Image -->
+        <div class="col-lg-6 d-none d-lg-flex align-items-center">
+          <img src="../../img/Sign in-amico.png" alt="Sign in" class="img-fluid" >
+        </div>
 
-                          <div class="position-relative">
-                            <input 
-                            
-                            style="margin-left: 10px; width: 95%;"
-                            type="password"
-                            class="form-control mt-2 p-2 position-absolute"
-                            id="password"
-                            placeholder=" Enter your Password"
-                            
-          
-                          />
-                        
-                           <span class="  toggle-password position-absolute" style="top: 17px; left: 90%;"  onclick="togglepassword()">
-                            <i class="bi bi-eye"  id="eyeIcon"></i>
-                           </span>
-                          </div>
+        <!-- Login Form -->
+        <div class="col-12 col-lg-6 ps-lg-5">
+          <form id="loginform" class="p-3">
+            <h1 class="text-center mb-3" style="font-weight: 600;">Sign in</h1>
+            <p class="text-center mb-4">Enter your credentials to access your account</p>
 
-                             <span
-                            id="errpassword"
-                            style="margin-left: 10px; position: relative; top: 50px;"
-                          ></span>
-                       
-                        </div>
-                      </div>
-                      <div class="mt-5 form-check">
-                        <input
-                          type="checkbox"
-                          class="form-check-input mt-3 ms-3"
-                          id="check1"
-                          
-                          checked
-                        />
-                        <label
-                          class="form-check-label ms-2  mt-3"
-                          for="check1 "
-                        
-                          
-                          >I accept the
-                          <span
-                            ><a href="" style="text-decoration: none"
-                              >Term</a
-                            ></span
-                          ></label
-                        >
-                      </div>
-
-                      <!-- <div class="col-12">
-                                ____________________________________________Or with ___________________________________________
-                            </div> -->
-
-                      <center>
-                        <div class="row">
-                          <div class="col-6 mt-4">
-                            <a
-                              href="https://www.google.com"
-                              class="btn btn-main p-2"
-                              style="text-decoration: none"
-                              ><i class="bi bi-google"></i> Sign Up with
-                              Google</a
-                            >
-                          </div>
-                          <div class="col-6 mt-4">
-                            <a
-                              href="https://www.google.com"
-                              class="btn btn-main p-2"
-                              style="text-decoration: none; color: black"
-                              ><i class="bi bi-apple"></i> Sign Up with Apple</a
-                            >
-                          </div>
-                        </div>
-                      </center>
-                      <div class="row">
-                        <div class="col-12 mt-4">
-                          <button type="submit" style="
-                              width: 95%;
-                              height: 50px;
-
-                              /* margin-left: 15px;
-                              height: 50px;
-                              border-radius: 10px; */
-                            " 
-                            class="btn btn-main ms-3"
-                          >
-                            Login
-                          </button>
-
-                          <div
-                            class="d-flex ps-5  ms-5 "
-                            style="margin-left: 200px; margin-top: 10px;"
-                          >
-                            <p class="me-2 ms-5">Don't have an account</p>
-                            <li style="text-decoration: none; list-style: none">
-                              <a href="Register.html" style="color: black;">Register</a>
-                            </li>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label"><i class="bi bi-envelope"></i> Email Address</label>
+              <input type="text" class="form-control" id="email" placeholder="Enter your Email">
+              <span id="erremail" class="text-danger"></span>
             </div>
-          </div>
+
+            <!-- Password -->
+            <div class="mb-3 position-relative">
+              <label for="password" class="form-label"><i class="bi bi-lock"></i> Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Enter your Password">
+              <span class="toggle-password text-main position-absolute translate-middle-y me-3" style="top: 75%; right: 0;"
+                onclick="togglePassword()">
+                <i class="bi bi-eye-slash" id="eyeIcon"></i>
+              </span>
+              <span id="errpassword" class="text-danger d-block mt-2"></span>
+            </div>
+
+            <!-- Terms Checkbox -->
+            <div class="form-check mb-4">
+              <input type="checkbox" class="form-check-input bg-main border-0" id="check1" checked>
+              <label class="form-check-label" for="check1">
+                I accept the <a href="#" style="text-decoration: none;" class="text-main">Terms</a>
+              </label>
+            </div>
+
+            <!-- Social Buttons -->
+            <div class="d-flex justify-content-between mb-4">
+              <a href="https://www.google.com" class="btn btn-main w-100 me-2"><i class="bi bi-google"></i> Google</a>
+              <a href="https://www.apple.com" class="btn btn-main w-100 ms-2"><i class="bi bi-apple"></i> Apple</a>
+            </div>
+
+            <!-- Login Button -->
+            <button type="submit" class="btn btn-main w-100 mb-3">Login</button>
+
+            <!-- Register Link -->
+            <div class="text-center">
+              <p>Don't have an account? <a href="Register.html" class="text-main">Register</a></p>
+            </div>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <script>
+  <!-- Scripts -->
+  <script>
+    const loginform = document.getElementById("loginform");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const erremail = document.getElementById("erremail");
+    const errpassword = document.getElementById("errpassword");
+    const eyeIcon = document.getElementById("eyeIcon");
+    const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
 
-      let loginform = document.getElementById("loginform");
-      let email = document.getElementById("email");
-      let password = document.getElementById("password");
-      let erremail = document.getElementById("erremail");
-      let errpassword = document.getElementById("errpassword");
-      erremail.innerHTML = "";
-      errpassword.innerHTML = ""
-      const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+    loginform.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-      loginform.onsubmit = function () {
-        event.preventDefault();
-        fetch(baseUrl + "/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email.value,
-            password: password.value,
-          }),
-        })
-          .then((data) => data.json())
-          .then((data) => {
-            console.log(data);
-            let res = data;
+      fetch(`${baseUrl}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.value, password: password.value })
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          if (!data.result) {
+            erremail.textContent = "Please enter a valid email";
+            errpassword.textContent = "Please enter a valid password";
+          } else {
+            localStorage.setItem("token", data.data.token);
+            localStorage.setItem("getImage", data.data.user.avatar);
+            window.location.href = "../homepage/home.html";
+          }
+        });
+    });
 
-            if (data.result == false) {
-              erremail.innerHTML = "please enter valid email";
-              erremail.style.color = "red";
-              errpassword.innerHTML = "please enter valid password";
-              errpassword.style.color = "red";
-            } else {
-              localStorage.setItem("token", res.data.token);
-              return (location.href = "homepage.html");
-            }
-          });
-      };
-               function togglepassword(){
-        if(password.type === "password"){
-          password.type ="text";
-          eyeIcon.classList.replace ("bi-eye","bi-eye-slash");
-        
-      } else {
-        password.type ="password";
+    function togglePassword() {
+      if (password.type === "password") {
+        password.type = "text";
         eyeIcon.classList.replace("bi-eye-slash", "bi-eye");
-      }
-      }
-               function toggleemail(){
-        if(email.type === "email"){
-          email.type ="text";
-          eyeicon.classList.replace ("bi-eye-slash", "bi-eye");
-        
       } else {
-        email.type ="email";
-        eyeicon.classList.replace("bi-eye","bi-eye-slash");
+        password.type = "password";
+        eyeIcon.classList.replace("bi-eye", "bi-eye-slash");
       }
-      }
-  
-    </script>
-    <script src="../../assets/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
-  </body>
+    }
+  </script>
+  <script src="../../assets/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
