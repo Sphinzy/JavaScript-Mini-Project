@@ -8,6 +8,8 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/theme.css">
 
     <!-- Quill -->
@@ -74,19 +76,19 @@
                                         class="bi bi-house-door pe-2"></i>Home</a>
                             </li>
                             <li class="nav-item ps-3">
-                                <a href="../" class="nav-link fs-5 text-main p-2"><i
-                                        class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a>
+                                <a href="../homepage/follow.html" class="nav-link fs-5 text-main p-2"><i
+                                        class="bi bi-credit-card-2-back-fill pe-2"></i>Following</a>
                             </li>
                             <li class="nav-item ps-3">
                                 <a href="../profile/account.html" class="nav-link fs-5 text-main p-2"><i
                                         class="bi bi-person-circle pe-2"></i>Profile</a>
                             </li>
                             <li class="nav-item ps-3">
-                                <a href="../Own Articles/getown.html" class="nav-link fs-5 text-main p-2"><i
+                                <a href="../Own Articles/getown.html" class="nav-link active fs-5 text-main p-2"><i
                                         class="bi bi-patch-plus pe-2"></i>Create</a>
                             </li>
                             <li class="nav-item ps-3">
-                                <a href="../category/cate.html" class="nav-link active fs-5 text-main p-2"><i
+                                <a href="../category/cate.html" class="nav-link fs-5 text-main p-2"><i
                                         class="bi bi-copy pe-2"></i>Category</a>
                             </li>
                         </ul>
@@ -151,9 +153,9 @@
                                             class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a> </li>
                                 <li class="nav-item"> <a href="../profile/account.html" class="nav-link fs-5 text-main p-2"><i
                                             class="bi bi-person-circle pe-2"></i>Profile</a> </li>
-                                <li class="nav-item"> <a href="../Own Articles/getown.html" class="nav-link fs-5 text-main p-2"><i
+                                <li class="nav-item"> <a href="../Own Articles/getown.html" class="nav-link active fs-5 text-main p-2"><i
                                             class="bi bi-patch-plus pe-2"></i>Create</a> </li>
-                                <li class="nav-item"> <a href="../category/cate.html" class="nav-link active fs-5 text-main p-2"><i
+                                <li class="nav-item"> <a href="../category/cate.html" class="nav-link fs-5 text-main p-2"><i
                                             class="bi bi-copy pe-2"></i>Category</a> </li>
                             </ul>
                         </div>
@@ -170,7 +172,7 @@
                                 <!-- Title -->
                                 <div class="mb-4">
                                     <label class="form-label fw-semibold">Article Title *</label>
-                                    <input type="text" name="title" class="form-control">
+                                    <input type="text" name="title" class="form-control" placeholder="Title of article">
                                     <div id="titleError" class="text-danger small mt-1 d-none">
                                         Title cannot be empty
                                     </div>
@@ -181,7 +183,7 @@
                                     <!-- Category -->
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Category *</label>
-                                        <select id="category" class="form-select text-muted">
+                                        <select id="category" class="form-select text-muted form-control">
                                             <option value="" selected disabled>Select category</option>
                                         </select>
                                         <div id="categoryError" class="text-danger small mt-1 d-none">
@@ -218,7 +220,7 @@
                                 </div>
             
                                 <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
-                                    <a href="#" class="text-muted text-decoration-none">← Back to Articles</a>
+                                    <a href="#" class="text-main text-decoration-none">← Back to Articles</a>
                                     <button type="submit" class="btn px-4 publish-btn text-light"
                                         style="background-color: #7645bf;">
                                         Publish Article
@@ -236,6 +238,12 @@
     <!-- Scripts -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
+        const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+        //const token = "YOUR_TOKEN_HERE"; // same token you use in getown.html
+
+        // Back to articles link
+        document.querySelector("a.text-decoration-none").href = "getown.html";
+
         // Initialize Quill
         const quill = new Quill('#editor', {
             theme: 'snow',
@@ -253,7 +261,7 @@
             }
         });
 
-        // Form validation
+        // Form validation + submit
         const form = document.getElementById("articleForm");
 
         form.addEventListener("submit", function (e) {
@@ -297,45 +305,64 @@
                 isValid = false;
             }
 
-            if (quill.getLength() <= 1) { // quill is empty if length <= 1
+            if (quill.getLength() <= 1) {
                 editorContainer.classList.add("border-danger");
                 contentError.classList.remove("d-none");
                 isValid = false;
             }
 
-            if (isValid) {
-                console.log("Form is valid!");
-                // You can submit data to API here
-            }
-        });
+            if (!isValid) return;
 
-        // Fetch categories from API
-        const baseUrl = "https://your-api.com";
-        const categorySelect = document.getElementById("category");
-        let pageNumUrl = 1;
-        let searchValue = "";
+            // ===== SUBMIT TO API =====
+            const formData = new FormData();
+            formData.append("title", title.value.trim());
+            formData.append("categoryId", category.value);
+            formData.append("content", quill.root.innerHTML);
+            formData.append("thumbnail", fileInput.files[0]);
 
-        const getCategories = () => {
-            const searchParam = encodeURIComponent(searchValue);
-            fetch(`${baseUrl}/categories?_page=${pageNumUrl}&_per_page=50&sortBy=name&sortDir=ASC&search=${searchParam}`)
+            fetch(`${baseUrl}/articles`, {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + token
+                },
+                body: formData
+            })
                 .then(res => res.json())
-                .then(resData => {
-                    // Clear existing options except placeholder
-                    categorySelect.innerHTML = `<option value="" selected disabled>Select category</option>`;
-                    if (resData.data?.items?.length) {
-                        resData.data.items.forEach(cat => {
-                            const option = document.createElement("option");
-                            option.value = cat.id; // or slug if needed
-                            option.textContent = cat.name;
-                            categorySelect.appendChild(option);
-                        });
+                .then(result => {
+                    if (result.result) {
+                        window.location.href = "getown.html";
+                    } else {
+                        alert(result.message || "Failed to publish article");
                     }
                 })
-                .catch(err => console.error("Error fetching categories:", err));
-        };
+                .catch(err => {
+                    console.error("Publish error:", err);
+                    alert("Something went wrong");
+                });
+        });
+
+        // Fetch categories
+        const categorySelect = document.getElementById("category");
+    
+
+        function getCategories() {
+            fetch(`${baseUrl}/categories?_page=1&_per_page=50&sortBy=name&sortDir=ASC`)
+                .then(res => res.json())
+                .then(resData => {
+                    categorySelect.innerHTML = `<option value="" selected disabled>Select category</option>`;
+                    resData.data.items.forEach(cat => {
+                        const option = document.createElement("option");
+                        option.value = cat.id;
+                        option.textContent = cat.name;
+                        categorySelect.appendChild(option);
+                    });
+                })
+                .catch(err => console.error("Category error:", err));
+        }
 
         document.addEventListener("DOMContentLoaded", getCategories);
     </script>
+
     <script>
         const token = localStorage.getItem('token');
         const imageLink = localStorage.getItem('getImage');

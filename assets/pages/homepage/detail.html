@@ -56,8 +56,8 @@
                   class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a>
             </li>
             <li class="nav-item ps-3">
-              <a href="../profile/account.html" class="nav-link fs-5 text-main p-2"><i
-                  class="bi bi-person-circle pe-2"></i>Profile</a>
+              <a href="../homepage/follow.html" class="nav-link fs-5 text-main p-2"><i
+                  class="bi bi-credit-card-2-back-fill pe-2"></i>Following</a>
             </li>
             <li class="nav-item ps-3">
               <a href="../Own Articles/getown.html" class="nav-link fs-5 text-main p-2"><i
@@ -126,8 +126,8 @@
               <ul class="navbar-nav text-start">
                 <li class="nav-item rounded-2"><a href="../homepage/home.html" class="nav-link active fs-5 p-2"><i
                       class="bi bi-house-door pe-2"></i>Home</a></li>
-                <li class="nav-item"><a href="../" class="nav-link fs-5 text-main p-2"><i
-                      class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a></li>
+                <li class="nav-item"> <a href="../homepage/follow.html" class="nav-link fs-5 text-main p-2"><i
+                                            class="bi bi-person-lines-fill pe-2"></i>Following</a> </li>
                 <li class="nav-item"><a href="../profile/account.html" class="nav-link fs-5 text-main p-2"><i
                       class="bi bi-person-circle pe-2"></i>Profile</a></li>
                 <li class="nav-item"><a href="../Own Articles/getown.html" class="nav-link fs-5 text-main p-2"><i
@@ -142,7 +142,7 @@
           <div class="col-md-12 col-lg-9 my-4">
 
             <a href="../homepage/home.html" class="btn btn-main mb-3">
-              <i class="fas fa-arrow-left"></i> Back
+              <i class="bi bi-arrow-left-short"></i> Back
             </a>
 
             <div id="article-detail" class="card shadow-sm">
@@ -157,13 +157,12 @@
   </main>
 
   <!-- ================= SCRIPT ================= -->
-  <script>
+  <!-- <script>
     const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
 
     // Get article ID
     const params = new URLSearchParams(window.location.search);
     const articleId = params.get("id");
-
     const articleDiv = document.getElementById("article-detail");
 
     if (!articleId) {
@@ -182,14 +181,16 @@
         .then(res => res.json())
         .then(resData => {
           const article = resData.data;
-
+          let userId = localStorage.setItem('userId', resData.data.creator.id);
+          console.log(userId);
+          console.log(resData);
           const creator = {
             id: article.creator?.id || "",
             firstName: article.creator?.firstName || "",
             lastName: article.creator?.lastName || "",
             avatar: article.creator?.avatar || "assets/default-avatar.png"
           };
-
+          
           articleDiv.innerHTML = `
         <div class="card-body">
           <div class="row g-4">
@@ -204,9 +205,11 @@
 
               <a href="UserProfile.html?id=${creator.id}"
                  class="d-flex align-items-center text-decoration-none text-dark mb-2">
-                <img src="${creator.avatar}"
-                     class="rounded-circle me-2"
-                     width="45" height="45 object-fit-cover">
+                 <div style="border: 2px solid #7645bf; border-radius: 50%; padding: 3px;">
+                   <img src="${creator.avatar}"
+                        class="rounded-circle"
+                        width="50px" height="50px object-fit-cover">
+                 </div>
                 <div>
                   <strong>${creator.firstName} ${creator.lastName}</strong><br>
                   <small class="text-muted">
@@ -239,9 +242,99 @@
         </div>`;
         });
     }
+  </script> -->
+
+  <script>
+    const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+    const token = localStorage.getItem("token");
+
+      const params = new URLSearchParams(window.location.search);
+      const articleId = params.get("id");
+
+      const articleDiv = document.getElementById("article-detail");
+
+      if (!articleId) {
+        articleDiv.innerHTML = `
+    <div class="card-body">
+      <p>Article not found.</p>
+    </div>`;
+      } else {
+        fetch(`${baseUrl}/articles/${articleId}`, {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : ""
+          }
+        })
+          .then(res => res.json())
+          .then(resData => {
+            console.log(resData);
+
+            const article = resData.data;
+
+            const creator = {
+              id: article.creator?.id || "",
+              firstName: article.creator?.firstName || "",
+              lastName: article.creator?.lastName || "",
+              avatar: article.creator?.avatar || "assets/default-avatar.png"
+            };
+
+            localStorage.setItem("profileUser", JSON.stringify(creator));
+
+            document.querySelector("#article-detail").innerHTML = `
+        <div class="card-body">
+          <div class="row g-4">
+
+            <div class="col-12 col-lg-6">
+              <img src="${article.thumbnail}"
+                   class="img-fluid rounded w-100"
+                   style="height:450px; object-fit:cover;">
+            </div>
+
+            <div class="col-12 col-lg-6">
+
+              <a href="UserProfile.html?id=${creator.id}"
+                 class="d-flex align-items-center text-decoration-none text-dark mb-2">
+
+                <div style="border:2px solid #7645bf; border-radius:50%; padding:3px;">
+                  <img src="${creator.avatar}"
+                       class="rounded-circle object-fit-cover"
+                       width="50" height="50">
+                </div>
+
+                <div class="ms-2">
+                  <strong>${creator.firstName} ${creator.lastName}</strong><br>
+                  <small class="text-muted">
+                    ${new Date(article.createdAt).toLocaleString()}
+                  </small>
+                </div>
+              </a>
+
+              <span class="badge bg-main mb-2">
+                ${article.category?.name || "Uncategorized"}
+              </span>
+
+              <h3 class="mt-2 clamp-2">${article.title}</h3>
+
+              <p class="mt-3 fs-5 clamp-7">
+                ${article.content || article.description || ""}
+              </p>
+
+            </div>
+          </div>
+        </div>`;
+          })
+          .catch(err => {
+            console.error(err);
+            articleDiv.innerHTML = `
+        <div class="card-body">
+          <p class="text-danger">Failed to load article.</p>
+        </div>`;
+          });
+      }
+
   </script>
+  
 <script>
-  const token = localStorage.getItem('token');
+  //const token = localStorage.getItem('token');
   const imageLink = localStorage.getItem('getImage');
   const getImage = document.querySelector('#profile-image');
   const btnLogout = document.querySelector('#btnLogout');

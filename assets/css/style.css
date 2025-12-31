@@ -270,6 +270,8 @@ input.form-control.error {
     /* Fully visible */
     transform: translateY(0);
     /* Slide into position */
+    position: absolute;
+    top: 100%;
     pointer-events: auto;
     /* Allow clicks */
 }

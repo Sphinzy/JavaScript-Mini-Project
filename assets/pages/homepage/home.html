@@ -67,8 +67,8 @@
                 <a href="../homepage/home.html" class="nav-link fs-5 p-2"><i class="bi bi-house-door pe-2"></i>Home</a>
               </li>
               <li class="nav-item ps-3">
-                <a href="../" class="nav-link fs-5 text-main p-2"><i
-                    class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a>
+                <a href="../homepage/follow.html" class="nav-link fs-5 text-main p-2"><i
+                    class="bi bi-credit-card-2-back-fill pe-2"></i>Following</a>
               </li>
               <li class="nav-item ps-3">
                 <a href="../profile/account.html" class="nav-link fs-5 text-main p-2"><i
@@ -141,8 +141,8 @@
               <ul class="navbar-nav text-start">
                 <li class="nav-item rounded-2"><a href="../homepage/home.html" class="nav-link active fs-5 p-2"><i
                       class="bi bi-house-door pe-2"></i>Home</a></li>
-                <li class="nav-item"><a href="../" class="nav-link fs-5 text-main p-2"><i
-                      class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a></li>
+                <li class="nav-item"> <a href="../homepage/follow.html" class="nav-link fs-5 text-main p-2"><i
+                                            class="bi bi-person-lines-fill pe-2"></i>Following</a> </li>
                 <li class="nav-item"><a href="../profile/account.html" class="nav-link fs-5 text-main p-2"><i
                       class="bi bi-person-circle pe-2"></i>Profile</a></li>
                 <li class="nav-item"><a href="../Own Articles/getown.html" class="nav-link fs-5 text-main p-2"><i
@@ -184,10 +184,10 @@
   <script>
     // ========== POST FUNCTIONS ==========
     function likePost(btn) {
-      btn.classList.toggle("text-primary");
-      btn.innerHTML = btn.classList.contains("text-primary")
-        ? '<i class="fa-solid fa-thumbs-up"></i> Liked'
-        : '<i class="fa-regular fa-thumbs-up"></i> Like';
+      btn.classList.toggle("text-main");
+      btn.innerHTML = btn.classList.contains("text-main")
+        ? '<i class="bi bi-hand-thumbs-up-fill"></i> Liked'
+        : '<i class="bi bi-hand-thumbs-up"></i> Like';
     }
 
     function toggleComment(btn) {
@@ -199,17 +199,25 @@
       alert("Post shared!");
     }
 
-    function timeAgo(dateString) {
-      const now = new Date();
-      const postDate = new Date(dateString);
-      const diff = Math.floor((now - postDate) / 1000);
+    function timeAgo(date) {
+        const d = new Date(date);
 
-      if (diff < 60) return "Just now";
-      if (diff < 3600) return Math.floor(diff / 60) + " minutes ago";
-      if (diff < 86400) return Math.floor(diff / 3600) + " hours ago";
-      if (diff < 604800) return Math.floor(diff / 86400) + " days ago";
-      return postDate.toLocaleDateString();
-    }
+        const day = String(d.getDate()).padStart(2, '0'); // DD
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const month = months[d.getMonth()]; // MMM
+        const year = d.getFullYear(); // YYYY
+
+        let hours = d.getHours();
+        const minutes = String(d.getMinutes()).padStart(2, '0'); // MM
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // hour '0' should be '12'
+
+        return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
+      }
+
+
 
     // ========== LOAD POSTS ==========
     let currentPage = 1;
@@ -226,11 +234,14 @@
         .then(data => {
           const container = document.querySelector(".card-insert");
           data.data.items.forEach(article => {
+            console.log(data);
             container.innerHTML += `
             <div class="post shadow-lg py-3 rounded-1 mt-10">
               <div class="d-flex gap-2 mb-2">
                 <a href="UserProfile.html?id=${article.creator.id}" class="d-flex align-items-center text-decoration-none text-dark">
-                  <img src="${article.creator.avatar || 'assets/default-avatar.png'}" class="rounded-circle" width="45" height="45">
+                  <div style="border: 2px solid #7645bf; border-radius: 50%; overflow: hidden; padding: 3px;">
+                    <img src="${article.creator.avatar || 'assets/default-avatar.png'}" class="rounded-circle" width="45" height="45">
+                  </div>
                   <div class="ms-2">
                     <h6 class="mb-0">${article.creator.firstName} ${article.creator.lastName}</h6>
                     <small class="text-muted">${timeAgo(article.createdAt)}</small>
@@ -243,16 +254,17 @@
               <h5>${article.title}</h5>
               <p>${article.description || ""}</p>
               <div class="post-actions d-flex justify-content-around border-top pt-2">
-                <button class="btn btn-light" onclick="likePost(this)">
-                  <i class="fa-regular fa-thumbs-up"></i> Like
-                </button>
-                <button class="btn btn-light" onclick="toggleComment(this)">
-                  <i class="fa-regular fa-comment"></i> Comment
-                </button>
-                <button class="btn btn-light" onclick="sharePost()">
-                  <i class="fa-solid fa-share"></i> Share
-                </button>
-              </div>
+    <button class="btn btn-light" onclick="likePost(this)">
+        <i class="bi bi-hand-thumbs-up"></i> Like
+    </button>
+    <button class="btn btn-light" onclick="toggleComment(this)">
+        <i class="bi bi-chat"></i> Comment
+    </button>
+    <button class="btn btn-light" onclick="sharePost()">
+        <i class="bi bi-share"></i> Share
+    </button>
+</div>
+
               <div class="comment-box mt-2" style="display:none;">
                 <input class="form-control" placeholder="Write a comment..." />
               </div>
