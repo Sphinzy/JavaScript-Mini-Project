@@ -78,7 +78,7 @@
 
   <script>
     const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
-    
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMxMiwiaWF0IjoxNzY2NzQxNDY3LCJleHAiOjE3NjczNDYyNjd9.sLRJ3Bj6nSXFFu_JiNDHPDXlz1uUEZYv_hlbBqsocWs';
     // Get article ID from URL query, e.g., article.html?id=123
     const params = new URLSearchParams(window.location.search);
     const articleId = params.get("id");
@@ -90,11 +90,12 @@
     } else {
       fetch(`${baseUrl}/articles/${articleId}`, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
+          Authorization: `Bearer ${token}`
         }
       })
       .then(res => res.json())
       .then(resData => {
+        console.log(resData);
         const article = resData.data;
         const creatorObj = {
         id: article.creator?.id || null,
@@ -141,7 +142,7 @@
           </a>
         </div>
 
-        <span class="badge bg-secondary mb-2">
+       <span class="badge bg-secondary mb-2">
           ${article.category?.name || "Uncategorized"}
         </span>
 
