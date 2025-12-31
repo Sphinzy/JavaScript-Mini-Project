@@ -2,31 +2,68 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>My Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Account | Profile</title>
 
-    <!-- Bootstrap 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../../css/style.css" />
 
     <style>
-      body {
-        background: #f4f6f9;
+      :root {
+        --glass: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.12);
+        --accent: #7645bf;
+        --accent-glow: rgba(118, 69, 191, 0.5);
       }
 
-      .account-card {
-        max-width: 420px;
-        margin: 50px auto;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        color: white;
+        padding: 40px 0;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+      }
+
+      .main-container {
+        background: var(--glass);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid var(--glass-border);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Sidebar Style */
+      .profile-sidebar {
+        background: rgba(0, 0, 0, 0.048);
+        padding: 50px 30px;
+        text-align: center;
+        border-right: 1px solid var(--glass-border);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
 
       .avatar-wrapper {
         position: relative;
-        width: 140px;
-        height: 140px;
-        margin: auto;
+        width: 150px;
+        height: 150px;
+        margin-bottom: 25px;
       }
 
       .avatar-wrapper img {
@@ -34,46 +71,215 @@
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
-        border: 4px solid #fff;
-        background: #e9ecef;
+        border: 3px solid var(--accent);
+        box-shadow: 0 0 20px var(--accent-glow);
       }
 
-      input[readonly] {
-        background-color: #f8f9fa;
+      /* Details Style */
+      .profile-details {
+        padding: 50px;
+      }
+
+      .info-card {
+        background: rgba(181, 175, 175, 0.279);
+        padding: 18px 22px;
+        border-radius: 18px;
+        transition: transform 0.2s ease;
+        height: 100%;
+      }
+
+      .info-card:hover {
+        transform: translateY(-3px);
+      }
+
+      .label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: rgba(0, 0, 0, 0.7);
+        margin-bottom: 4px;
+        font-weight: 800;
+      }
+
+      .value {
+        font-size: 1.05rem;
+        font-weight: 500;
+        word-break: break-all;
+        color: rgba(95, 92, 92, 0.722);
+      }
+
+      .badge-active {
+        background: #28a745;
+        padding: 6px 15px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+      }
+      .badge-active1 {
+        background: #0dcaf0;
+        padding: 6px 15px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+      }
+      @media (max-width: 991px) {
+        .profile-sidebar {
+          border-right: none;
+          border-bottom: 1px solid var(--glass-border);
+        }
+        .profile-details {
+          padding: 40px 25px;
+        }
       }
     </style>
   </head>
-
   <body>
-    <div class="card account-card p-4">
-      <h4 class="text-center mb-4">My Account</h4>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-9">
+          <div class="main-container">
+            <div class="row g-0">
+              <div class="col-lg-5 profile-sidebar">
+                <div class="avatar-wrapper">
+                  <img
+                    id="profile-img"
+                    src="https://via.placeholder.com/150"
+                    alt="User Profile"
+                  />
+                </div>
+                <h2 id="display-name" class="fw-bold mb-1 text-dark">...</h2>
+                <p class="small mb-4 text-dark">
+                  <i class="bi bi-patch-check-fill text-info me-1"></i>
+                  Verified Administrator
+                </p>
+                <button class="btn btn-main" onclick="editProfile()">
+                  <i class="fa-regular fa-pen-to-square"></i> Edit profile
+                </button>
+              </div>
 
-      <!-- Avatar -->
-      <div class="avatar-wrapper mb-4 text-center">
-        <img id="avatarPreview" src="../../img/avatar.png" alt="Avatar" />
+              <div class="col-lg-7 profile-details">
+                <div class="d-flex align-items-center mb-4">
+                  <div
+                    class="bg-primary rounded-circle p-2 me-3"
+                    style="--bs-bg-opacity: 0.2"
+                  >
+                    <i class="bi bi-person-vcard fs-4 text-primary"></i>
+                  </div>
+                  <h4 class="mb-0 fw-bold text-dark">Account Settings</h4>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="info-card">
+                      <div class="label">First Name</div>
+                      <div id="first-name" class="value text-color">...</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="info-card">
+                      <div class="label">Last Name</div>
+                      <div id="last-name" class="value text-color">...</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="info-card">
+                      <div class="label">Email Address</div>
+                      <div id="email-address" class="value text-color">...</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div
+                      class="info-card"
+                      style="background: rgba(255, 255, 255, 0.05)"
+                    >
+                      <div class="label" style="color: #28a745">
+                        Current Status
+                      </div>
+                      <div class="value mt-1">
+                        <span class="badge-active">Active</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div
+                      class="info-card"
+                      style="background: rgba(255, 255, 255, 0.05)"
+                    >
+                      <div class="label" style="color: #0dcaf0">
+                        Access Level
+                      </div>
+                      <div class="value mt-1">
+                        <span class="badge-active1">Admin</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <!-- Hidden file input -->
-      <input type="file" id="avatarInput" accept="image/*" hidden />
-      <h3>Barry Allen</h3>
-      <h4>Email: Thasiei@gmail.com</h4>
-      <h4>Password: 1234566</h4>
-
-      <button
-        class="btn btn-primary w-100"
-        id="btnEdit"
-        onclick="editProfile()"
-      >
-        Edit Profile
-      </button>
     </div>
 
-    <script src="script.js"></script>
     <script>
-      let btnEdit = document.getElementById("btnEdit");
+      // const token = localStorage.getItem("token");
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwNTYsImlhdCI6MTc2Njc0MTk1NywiZXhwIjoxNzY3MzQ2NzU3fQ.GwlNwexQg-wj5H0WoWoYkRK6OwSROGudP46e2u3eEcE";
+      const API_URL = "http://blogs.csm.linkpc.net/api/v1/auth/profile";
+
+      async function fetchUserData() {
+        if (!token) {
+          document.getElementById("display-name").innerText = "Not Logged In";
+          return;
+        }
+
+        // Optional: load from cache while fetching
+        const cachedUser = localStorage.getItem("user_info");
+        if (cachedUser) updateUI(JSON.parse(cachedUser));
+
+        try {
+          const response = await fetch(API_URL, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            const user = result.data || result;
+            updateUI(user);
+            localStorage.setItem("user_info", JSON.stringify(user));
+          }
+        } catch (error) {
+          console.error("Network Error:", error);
+        }
+      }
+
+      function updateUI(user) {
+        if (!user) return;
+        const fName = user.firstName || user.first_name || "N/A";
+        const lName = user.lastName || user.last_name || "N/A";
+
+        document.getElementById("first-name").innerText = fName;
+        document.getElementById("last-name").innerText = lName;
+        document.getElementById("email-address").innerText =
+          user.email || "N/A";
+        document.getElementById("display-name").innerText = `${fName} ${lName}`;
+
+        if (user.avatar || user.profile_image) {
+          document.getElementById("profile-img").src =
+            user.avatar || user.profile_image;
+        }
+      }
+
       function editProfile() {
         window.location.href = "upload_avata.html";
       }
+
+      window.onload = fetchUserData;
     </script>
   </body>
 </html>

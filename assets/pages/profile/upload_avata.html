@@ -2,185 +2,384 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>My Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile</title>
 
-    <!-- Bootstrap 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-
-    <!-- Bootstrap Icons -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../css/style.css" />
     <style>
+      :root {
+        --primary-accent: #6366f1;
+        --danger-accent: #f43f5e;
+        --glass-bg: rgba(255, 255, 255, 0.9);
+      }
+
       body {
-        background: linear-gradient(135deg, #eef2f7, #cfd9df);
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
       }
 
       .account-card {
-        max-width: 420px;
-        margin: 60px auto;
-        border-radius: 20px;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-        background: #fff;
+        max-width: 450px;
+        width: 100%;
+        margin: auto;
+        border-radius: 24px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: none;
       }
 
-      .avatar-wrapper {
-        width: 140px;
-        height: 140px;
-        margin: auto;
+      .avatar-container {
         position: relative;
+        width: 130px;
+        height: 130px;
+        margin: -65px auto 20px;
       }
 
       .avatar-wrapper img {
-        width: 100%;
-        height: 100%;
+        width: 130px;
+        height: 130px;
         border-radius: 50%;
         object-fit: cover;
-        border: 4px solid #fff;
-        background: #e9ecef;
+        border: 5px solid #fff;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        background: #eee;
       }
 
-      .upload-btn {
+      .avatar-actions {
         position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 38px;
-        height: 38px;
-        background: #0d6efd;
+        bottom: 5px;
+        right: 5px;
+      }
+
+      .btn-action-main {
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
+        background: var(--primary-accent);
+        color: white;
+        border: 3px solid #fff;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #fff;
         cursor: pointer;
-        border: 2px solid #fff;
+        transition: 0.3s;
       }
 
-      input[readonly] {
-        background: #f8f9fa;
+      .action-menu {
+        display: none;
+        position: absolute;
+        top: 45px;
+        right: 0;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        min-width: 160px;
+        border: 1px solid #eee;
+      }
+
+      .action-menu.show {
+        display: block;
+        animation: slideIn 0.2s ease;
+      }
+
+      .menu-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .menu-item:hover {
+        background: #f8fafc;
+      }
+      .menu-item.delete {
+        color: var(--danger-accent);
+      }
+
+      .form-label {
+        font-weight: 600;
+        color: #475569;
+        font-size: 0.85rem;
+      }
+      .form-control {
+        border-radius: 12px;
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+      }
+      .btn-save {
+        padding: 10px;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
     </style>
   </head>
 
   <body>
     <div class="card account-card p-4">
-      <h4 class="text-center mb-4">My Account</h4>
+      <div class="avatar-container">
+        <div class="avatar-wrapper">
+          <img
+            id="avatarPreview"
+            src="https://via.placeholder.com/130"
+            alt="Avatar"
+          />
+        </div>
 
-      <!-- Avatar -->
-      <div class="avatar-wrapper mb-3">
-        <img id="avatarPreview" src="../../img/avatar.png" alt="Avatar" />
-        <div class="upload-btn" onclick="chooseAvatar()">
-          <i class="bi bi-camera"></i>
+        <div class="avatar-actions">
+          <div class="btn-action-main" onclick="toggleMenu(event)">
+            <i class="bi bi-camera-fill"></i>
+          </div>
+          <div id="actionMenu" class="action-menu">
+            <div class="menu-item" onclick="chooseAvatar()">
+              <i class="bi bi-upload text-primary"></i> Upload New
+            </div>
+            <div class="menu-item delete" onclick="deleteAvatar()">
+              <i class="bi bi-trash3"></i> Delete Photo
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Hidden file input -->
+      <h4 id="displayName" class="text-center mb-4 fw-bold text-dark">
+        My Profile
+      </h4>
+
       <input type="file" id="avatarInput" accept="image/*" hidden />
 
-      <!-- User info -->
       <div class="mb-3">
-        <label class="form-label">First Name</label>
-        <input type="text" id="firstName" class="form-control" readonly />
+        <label class="form-label">FIRST NAME</label>
+        <input
+          type="text"
+          id="firstName"
+          class="form-control"
+          placeholder="Enter first name"
+        />
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Last Name</label>
-        <input type="text" id="lastName" class="form-control" readonly />
+        <label class="form-label">LAST NAME</label>
+        <input
+          type="text"
+          id="lastName"
+          class="form-control"
+          placeholder="Enter last name"
+        />
       </div>
 
       <div class="mb-4">
-        <label class="form-label">Email</label>
-        <input type="email" id="email" class="form-control" readonly />
+        <label class="form-label">EMAIL ADDRESS</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          placeholder="Enter email address"
+        />
       </div>
 
-      <button class="btn btn-primary w-100" onclick="uploadAvatar()">
-        Save Avatar
+      <button
+        class="btn btn-save btn-main w-100"
+        id="saveBtn"
+        onclick="saveChanges()"
+      >
+        Save Changes
       </button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-      // ១. ប្រកាសអថេរ Token តែម្តងគត់សម្រាប់ប្រើក្នុង File ទាំងមូល
-      var BASE_URL = "http://blogs.csm.linkpc.net/api/v1";
-      var TOKEN =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwMDEsImlhdCI6MTc2NjQ3NjEzNSwiZXhwIjoxNzY3MDgwOTM1fQ.ezUuK7OqQNxMRfDv3j6KU7pUuSEG0pd8gA3jSo_108A";
+      const BASE_URL = "http://blogs.csm.linkpc.net/api/v1";
+      // const token = localStorage.getItem("token");
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwNTYsImlhdCI6MTc2Njc0MTk1NywiZXhwIjoxNzY3MzQ2NzU3fQ.GwlNwexQg-wj5H0WoWoYkRK6OwSROGudP46e2u3eEcE";
 
-      var avatarInput = document.getElementById("avatarInput");
-      var avatarPreview = document.getElementById("avatarPreview");
+      const avatarInput = document.getElementById("avatarInput");
+      const avatarPreview = document.getElementById("avatarPreview");
+      const actionMenu = document.getElementById("actionMenu");
+
+      window.onclick = () => actionMenu.classList.remove("show");
+
+      function toggleMenu(e) {
+        e.stopPropagation();
+        actionMenu.classList.toggle("show");
+      }
 
       function chooseAvatar() {
         avatarInput.click();
+        actionMenu.classList.remove("show");
       }
 
       avatarInput.addEventListener("change", function () {
-        var file = avatarInput.files[0];
+        const file = avatarInput.files[0];
         if (file) {
           avatarPreview.src = URL.createObjectURL(file);
         }
       });
 
-      // មុខងារទាញទិន្នន័យ Profile មកបង្ហាញ
       function loadProfile() {
-        fetch(BASE_URL + "/profile", {
+        fetch(`${BASE_URL}/auth/profile`, {
           method: "GET",
-          headers: {
-            Authorization: "Bearer " + TOKEN,
-          },
+          headers: { Authorization: "Bearer " + token },
         })
           .then((res) => res.json())
           .then((data) => {
             if (data && data.data) {
-              document.getElementById("firstName").value =
-                data.data.firstName || "";
-              document.getElementById("lastName").value =
-                data.data.lastName || "";
-              document.getElementById("email").value = data.data.email || "";
-
-              if (data.data.avatar) {
-                // ប្រសិនបើមានរូបភាពក្នុង Server ស្រាប់ ឱ្យវាបង្ហាញ
-                avatarPreview.src = data.data.avatar;
-              }
+              const user = data.data;
+              document.getElementById("firstName").value = user.firstName || "";
+              document.getElementById("lastName").value = user.lastName || "";
+              document.getElementById("email").value = user.email || "";
+              document.getElementById("displayName").innerText = `${
+                user.firstName || "My"
+              } ${user.lastName || "Profile"}`;
+              if (user.avatar) avatarPreview.src = user.avatar;
             }
           })
           .catch((err) => console.error("Error loading profile:", err));
       }
 
-      // មុខងារ Upload រូបភាព
-      function uploadAvatar() {
-        var file = avatarInput.files[0];
-        if (!file) {
-          alert("Please choose an image first");
+      async function saveChanges() {
+        const fName = document.getElementById("firstName").value.trim();
+        const lName = document.getElementById("lastName").value.trim();
+        const emailAddr = document.getElementById("email").value.trim();
+        const file = avatarInput.files[0];
+
+        if (!fName || !lName || !emailAddr) {
+          Swal.fire({
+            icon: "warning",
+            title: "Empty Fields",
+            text: "Please fill in all information before saving.",
+            confirmButtonColor: "#6366f1",
+          });
           return;
         }
 
-        var formData = new FormData();
-        formData.append("avatar", file); // ឈ្មោះ Key "avatar" ត្រូវតែត្រូវគ្នាជាមួយ API Requirement
-
-        fetch(BASE_URL + "/profile/avatar", {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + TOKEN, // ប្រើអថេរ TOKEN រួម
-          },
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            alert("Avatar updated successfully!");
-            // បន្ទាប់ពី Upload ជោគជ័យ ត្រូវហៅ loadProfile() ដើម្បី Refresh រូបភាពថ្មីពី Server
-            loadProfile();
-          })
-          .catch((err) => {
-            alert("Upload failed");
-            console.error(err);
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(emailAddr)) {
+          Swal.fire({
+            icon: "error",
+            title: "Invalid Email",
+            text: "Please enter a valid email address.",
+            confirmButtonColor: "#f43f5e",
           });
+          return;
+        }
+
+        Swal.fire({
+          title: "Saving changes...",
+          didOpen: () => Swal.showLoading(),
+          allowOutsideClick: false,
+        });
+
+        try {
+          // Update Text Information
+          const profileRes = await fetch(`${BASE_URL}/profile`, {
+            method: "PUT",
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              firstName: fName,
+              lastName: lName,
+              email: emailAddr,
+            }),
+          });
+
+          if (!profileRes.ok) throw new Error("Profile update failed");
+
+          // Update Image if selected
+          if (file) {
+            const formData = new FormData();
+            formData.append("avatar", file);
+            const avatarRes = await fetch(`${BASE_URL}/profile/avatar`, {
+              method: "POST",
+              headers: { Authorization: "Bearer " + token },
+              body: formData,
+            });
+            if (!avatarRes.ok) throw new Error("Avatar upload failed");
+            avatarInput.value = "";
+          }
+
+          // Show Success Alert
+          await Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "Profile updated successfully.",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+
+          // REDIRECT AFTER SUCCESS
+          window.location.href = "account.html";
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Failed to update profile. Please check your connection.",
+          });
+        }
       }
 
-      // ហៅឱ្យដំណើរការនៅពេលបើក Page ដំបូង
+      function deleteAvatar() {
+        actionMenu.classList.remove("show");
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Do you want to remove your profile picture?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#f43f5e",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fetch(`${BASE_URL}/profile/avatar`, {
+              method: "DELETE",
+              headers: { Authorization: "Bearer " + token },
+            })
+              .then(() => {
+                Swal.fire(
+                  "Deleted!",
+                  "Your photo has been removed.",
+                  "success"
+                ).then(() => {
+                  // Redirect after deletion too
+                  window.location.href = "account.html";
+                });
+              })
+              .catch(() =>
+                Swal.fire("Error", "Could not delete photo", "error")
+              );
+          }
+        });
+      }
+
       loadProfile();
     </script>
   </body>

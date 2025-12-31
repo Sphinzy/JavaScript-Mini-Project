@@ -74,7 +74,10 @@
   <body>
     <div class="container py-5">
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="fw-bold">My Published Articles</h3>
+        <div>
+          <h2 class="main-title">My Articles</h2>
+          <small class="text-muted">Manage your content and publications</small>
+        </div>
         <a
           href="create.html"
           class="btn btn-primary rounded-pill px-4"
@@ -116,8 +119,7 @@
 
     <script>
       const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwMTgsImlhdCI6MTc2NjYzMDAyOSwiZXhwIjoxNzY3MjM0ODI5fQ.hEyenaeG6GtYrhbLCvHjAAZFeA6WM7YpIw3mqU6zwyY";
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwMTgsImlhdCI6MTc2NzA4MDI5OSwiZXhwIjoxNzY3Njg1MDk5fQ.Ir6f1psgdgXRQ2X2In6Z39JPAuplZnka4nIEAieEjxk";
       let deleteId = null;
 
       function fetchArticles() {
@@ -126,6 +128,8 @@
         })
           .then((res) => res.json())
           .then((data) => {
+          
+            
             let html = "";
             data.data.items.forEach((a) => {
               html += `
