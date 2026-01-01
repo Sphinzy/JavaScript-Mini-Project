@@ -1,513 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Account | Profile</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Account | Profile</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/upload.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
-  <link rel="stylesheet" href="../../css/style.css" />
-  <link rel="stylesheet" href=".././../css/theme.css">
+  <body>
+    <header>
+      <nav class="navbar fixed-top bg-white border-bottom shadow-sm">
+        <div class="container">
+          <a
+            class="navbar-brand fs-4 fw-bold"
+            style="color: var(--main-purple)"
+            href="#"
+            >BlogFy</a
+          >
 
-  <style>
-    :root {
-      --primary-accent: #6366f1;
-      --danger-accent: #f43f5e;
-      --glass-bg: rgba(255, 255, 255, 0.9);
-    }
-
-    .account-card {
-      max-width: 450px;
-      width: 100%;
-      margin: auto;
-      border-radius: 24px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      border: none;
-    }
-
-    .avatar-container {
-      position: relative;
-      width: 130px;
-      height: 130px;
-      margin: -65px auto 20px;
-    }
-
-    .avatar-wrapper img {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid #fff;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      background: #eee;
-    }
-
-    .avatar-actions {
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-    }
-
-    .btn-action-main {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--primary-accent);
-      color: white;
-      border: 3px solid #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .action-menu {
-      display: none;
-      position: absolute;
-      top: 45px;
-      right: 0;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-      z-index: 100;
-      min-width: 160px;
-      border: 1px solid #eee;
-    }
-
-    .action-menu.show {
-      display: block;
-      animation: slideIn 0.2s ease;
-    }
-
-    .menu-item {
-      padding: 10px 15px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu-item:hover {
-      background: #f8fafc;
-    }
-
-    .menu-item.delete {
-      color: var(--danger-accent);
-    }
-
-    .form-label {
-      font-weight: 600;
-      color: #475569;
-      font-size: 0.85rem;
-    }
-
-    .form-control {
-      border-radius: 12px;
-      padding: 12px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .btn-save {
-      padding: 10px;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header class="sticky-top z-3">
-    <nav class="navbar fixed-top bg-secondary-subtle">
-      <div class="container">
-        <a class="navbar-brand fs-5 fw-bold text-main" href="#">BlogFy</a>
-
-        <!-- menu icon  -->
-        <button class="navbar-toggler d-flex d-lg-none" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- side bar  -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title fs-5 fw-bold text-main" id="offcanvasNavbarLabel">BlogFy</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <div class="d-none d-lg-flex flex-grow-1 justify-content-center px-4">
+            <input
+              type="text"
+              class="form-control"
+              style="max-width: 500px"
+              placeholder="Search articles..."
+            />
           </div>
-          <div class="offcanvas-body">
-            <form class="d-flex my-3" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button class="btn btn-outline-main" type="submit">Search</button>
-            </form>
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item ps-3 rounded-2">
-                <a href="../homepage/home.html" class="nav-link fs-5 p-2"><i class="bi bi-house-door pe-2"></i>Home</a>
-              </li>
-              <li class="nav-item ps-3">
-                <a href="../homepage/follow.html" class="nav-link fs-5 text-main p-2"><i
-                    class="bi bi-credit-card-2-back-fill pe-2"></i>Following</a>
-              </li>
-              <li class="nav-item ps-3">
-                <a href="../profile/account.html" class="nav-link active fs-5 text-main p-2"><i
-                    class="bi bi-person-circle pe-2"></i>Profile</a>
-              </li>
-              <li class="nav-item ps-3">
-                <a href="../Own Articles/getown.html" class="nav-link fs-5 text-main p-2"><i
-                    class="bi bi-patch-plus pe-2"></i>Create</a>
-              </li>
-              <li class="nav-item ps-3">
-                <a href="../category/cate.html" class="nav-link fs-5 text-main p-2"><i
-                    class="bi bi-copy pe-2"></i>Category</a>
-              </li>
-            </ul>
 
-          </div>
-        </div>
+          <div class="d-flex align-items-center">
+            <button
+              class="navbar-toggler d-lg-none me-2"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <!-- input search  -->
-        <div class="d-none d-lg-flex">
-          <input type="text" name="" id="" class="form-control" style="width: 500px;" placeholder="Search...">
-        </div>
-
-        <div class="dropdown d-none d-lg-flex">
-          <a class="nav-link px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <div style="border: 2px solid #7645bf; border-radius: 50%; ">
-              <img src="" class="img-fluid rounded-circle object-fit-cover" id="profile-image"
-                style="width: 40px; height: 40px; padding: 3px;" alt />
+            <div class="dropdown d-none d-lg-block">
+              <a class="nav-link" href="#" data-bs-toggle="dropdown">
+                <img
+                  src="https://via.placeholder.com/40"
+                  class="rounded-circle border border-primary p-1"
+                  id="profile-image-nav"
+                  style="width: 40px; height: 40px; object-fit: cover"
+                />
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end border-0 shadow mt-3">
+                <li>
+                  <a class="dropdown-item" href="account.html"
+                    ><i class="bi bi-person me-2"></i>Profile</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item text-danger"
+                    href="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#logoutModal"
+                    ><i class="bi bi-box-arrow-right me-2"></i>Logout</a
+                  >
+                </li>
+              </ul>
             </div>
-          </a>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-          <ul class="dropdown-menu border-0 shadow-sm bg-body-theme">
-            <li><a class='dropdown-item' href='../profile/account.html'><i
-                  class="bi bi-person-circle me-2"></i>Profile</a>
-            </li>
-            <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logoutModal"><i
-                  class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
-          </ul>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold" style="color: var(--main-purple)">
+          BlogFy
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav gap-2">
+          <li class="nav-item">
+            <a href="../homepage/home.html" class="nav-link"
+              ><i class="bi bi-house-door me-2"></i>Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="../homepage/follow.html" class="nav-link"
+              ><i class="bi bi-people me-2"></i>Following</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="account.html" class="nav-link active"
+              ><i class="bi bi-person-circle me-2"></i>Profile</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="../Own Articles/getown.html" class="nav-link"
+              ><i class="bi bi-plus-square me-2"></i>Create</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <main class="container py-5">
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-3 d-none d-lg-block">
+          <div class="sidebar-container position-sticky" style="top: 100px">
+            <div class="position-sticky rounded-3" style="top: 100px">
+              <ul class="navbar-nav text-start">
+                <li class="nav-item rounded-2">
+                  <a href="../homepage/home.html" class="nav-link fs-5 p-2"
+                    ><i class="bi bi-house-door pe-2"></i>Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="../homepage/follow.html"
+                    class="nav-link fs-5 text-main p-2"
+                    ><i class="bi bi-person-lines-fill pe-2"></i>Following</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="../profile/account.html"
+                    class="nav-link active fs-5 text-main p-2"
+                    ><i class="bi bi-person-circle pe-2"></i>Profile</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="../Own Articles/getown.html"
+                    class="nav-link fs-5 text-main p-2"
+                    ><i class="bi bi-patch-plus pe-2"></i>Create</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="../category/cate.html"
+                    class="nav-link fs-5 text-main p-2"
+                    ><i class="bi bi-copy pe-2"></i>Category</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
-      </div>
-    </nav>
-  </header>
-  <!-- Logout Modal -->
-  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+        <div class="col-lg-9 col-xl-7">
+          <div class="card account-card p-4 mt-5">
+            <div class="avatar-container">
+              <div class="avatar-wrapper">
+                <img
+                  id="avatarPreview"
+                  src="https://via.placeholder.com/130"
+                  alt="Avatar"
+                />
+              </div>
+              <div class="avatar-actions">
+                <div class="btn-action-main" onclick="toggleMenu(event)">
+                  <i class="bi bi-camera-fill"></i>
+                </div>
+                <div id="actionMenu" class="action-menu">
+                  <div class="menu-item" onclick="chooseAvatar()">
+                    <i class="bi bi-upload text-primary"></i> Upload New
+                  </div>
+                  <div class="menu-item delete" onclick="deleteAvatar()">
+                    <i class="bi bi-trash3"></i> Delete Photo
+                  </div>
+                </div>
+              </div>
+            </div>
 
-        <div class="modal-body">
-          <h3 class="text-danger">Logout</h3>
-          <p>Are you sure you want to logout?</p>
-          <div class="text-end">
-            <button type="button" class="btn btn-outline-main" data-bs-dismiss="modal">No</button>
-            <!-- ផ្លាស់ប្តូរ href ទៅ script logout របស់អ្នក -->
-            <button type="button" class="btn btn-danger" id="btnLogout">Yes</button>
+            <h4 id="displayName" class="text-center mb-4 fw-bold">
+              My Profile
+            </h4>
+            <input type="file" id="avatarInput" accept="image/*" hidden />
+
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted"
+                >FIRST NAME</label
+              >
+              <input
+                type="text"
+                id="firstName"
+                class="form-control form-control-lg fs-6"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted"
+                >LAST NAME</label
+              >
+              <input
+                type="text"
+                id="lastName"
+                class="form-control form-control-lg fs-6"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-bold small text-muted"
+                >EMAIL ADDRESS</label
+              >
+              <input
+                type="email"
+                id="email"
+                class="form-control form-control-lg fs-6"
+              />
+            </div>
+
+            <div class="d-flex gap-3">
+              <a href="account.html" class="btn btn-outline-secondary w-50 py-2"
+                >Back</a
+              >
+              <button
+                class="btn btn-main w-50 py-2"
+                id="saveBtn"
+                onclick="saveChanges()"
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="modal fade" id="logoutModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-body p-4 text-center">
+            <h3 class="text-danger fw-bold">Logout</h3>
+            <p>Are you sure you want to logout?</p>
+            <div class="mt-4">
+              <button
+                type="button"
+                class="btn btn-light px-4 me-2"
+                data-bs-dismiss="modal"
+              >
+                No
+              </button>
+              <button type="button" class="btn btn-danger px-4" id="btnLogout">
+                Yes, Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <main>
-
-
-    <section class="mt-10">
-      <div class="container">
-        <div class="row">
-
-          <!-- Left Sidebar -->
-          <div class="col-lg-3 d-none d-lg-block">
-            <div class="position-sticky shadow-sm rounded-3" style="top: 100px;">
-              <ul class="navbar-nav text-start">
-                <li class="nav-item rounded-2"> <a href="../homepage/home.html" class="nav-link fs-5 p-2"><i
-                      class="bi bi-house-door pe-2"></i>Home</a> </li>
-                <li class="nav-item"> <a href="../homepage/follow.html" class="nav-link fs-5 text-main p-2"><i
-                      class="bi bi-person-lines-fill pe-2"></i>Following</a> </li>
-                <li class="nav-item"> <a href="../profile/account.html" class="nav-link active   fs-5 text-main p-2"><i
-                      class="bi bi-person-circle pe-2"></i>Profile</a> </li>
-                <li class="nav-item"> <a href="../Own Articles/getown.html" class="nav-link fs-5 text-main p-2"><i
-                      class="bi bi-patch-plus pe-2"></i>Create</a>
-                </li>
-                <li class="nav-item"> <a href="../category/cate.html" class="nav-link fs-5 text-main p-2"><i
-                      class="bi bi-copy pe-2"></i>Category</a> </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Center Content -->
-          <div class="col-12 col-lg-9">
-            <div class="card account-card p-4 mt-10 w-100">
-              <div class="avatar-container">
-                <div class="avatar-wrapper">
-                  <img id="avatarPreview" src="https://via.placeholder.com/130" alt="Avatar" />
-                </div>
-
-                <div class="avatar-actions">
-                  <div class="btn-action-main bg-main" onclick="toggleMenu(event)">
-                    <i class="bi bi-camera-fill "></i>
-                  </div>
-                  <div id="actionMenu" class="action-menu">
-                    <div class="menu-item" onclick="chooseAvatar()">
-                      <i class="bi bi-upload text-primary"></i> Upload New
-                    </div>
-                    <div class="menu-item delete" onclick="deleteAvatar()">
-                      <i class="bi bi-trash3"></i> Delete Photo
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <h4 id="displayName" class="text-center mb-4 fw-bold text-dark">
-                My Profile
-              </h4>
-
-              <input type="file" id="avatarInput" accept="image/*" hidden />
-
-              <div class="mb-3">
-                <label class="form-label">FIRST NAME</label>
-                <input type="text" id="firstName" class="form-control" placeholder="Enter first name" />
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">LAST NAME</label>
-                <input type="text" id="lastName" class="form-control" placeholder="Enter last name" />
-              </div>
-
-              <div class="mb-4">
-                <label class="form-label">EMAIL ADDRESS</label>
-                <input type="email" id="email" class="form-control" placeholder="Enter email address" />
-              </div>
-
-              <div class="d-flex justify-content-between align-items-center w-100 gap-2 mt-3">
-                <a class="btn btn-outline-main" href="account.html">Back</a>
-                <button class="btn btn-save btn-main" id="saveBtn" onclick="saveChanges()">Save Changes</button>
-              </div>
-
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-
-    </section>
-
-
-
-
-  </main>
-
-  <script>
-    // const token = localStorage.getItem("token");
-    const BASE_URL = "http://blogs.csm.linkpc.net/api/v1";
-    // const token = localStorage.getItem("token");
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwNTYsImlhdCI6MTc2Njc0MTk1NywiZXhwIjoxNzY3MzQ2NzU3fQ.GwlNwexQg-wj5H0WoWoYkRK6OwSROGudP46e2u3eEcE";
-
-    const avatarInput = document.getElementById("avatarInput");
-    const avatarPreview = document.getElementById("avatarPreview");
-    const actionMenu = document.getElementById("actionMenu");
-
-    window.onclick = () => actionMenu.classList.remove("show");
-
-    function toggleMenu(e) {
-      e.stopPropagation();
-      actionMenu.classList.toggle("show");
-    }
-
-    function chooseAvatar() {
-      avatarInput.click();
-      actionMenu.classList.remove("show");
-    }
-
-    avatarInput.addEventListener("change", function () {
-      const file = avatarInput.files[0];
-      if (file) {
-        avatarPreview.src = URL.createObjectURL(file);
-      }
-    });
-
-    function loadProfile() {
-      fetch(`${BASE_URL}/auth/profile`, {
-        method: "GET",
-        headers: { Authorization: "Bearer " + token },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data && data.data) {
-            const user = data.data;
-            document.getElementById("firstName").value = user.firstName || "";
-            document.getElementById("lastName").value = user.lastName || "";
-            document.getElementById("email").value = user.email || "";
-            document.getElementById("displayName").innerText = `${user.firstName || "My"
-              } ${user.lastName || "Profile"}`;
-            if (user.avatar) avatarPreview.src = user.avatar;
-          }
-        })
-        .catch((err) => console.error("Error loading profile:", err));
-    }
-
-    async function saveChanges() {
-      const fName = document.getElementById("firstName").value.trim();
-      const lName = document.getElementById("lastName").value.trim();
-      const emailAddr = document.getElementById("email").value.trim();
-      const file = avatarInput.files[0];
-
-      if (!fName || !lName || !emailAddr) {
-        Swal.fire({
-          icon: "warning",
-          title: "Empty Fields",
-          text: "Please fill in all information before saving.",
-          confirmButtonColor: "#6366f1",
-        });
-        return;
-      }
-
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(emailAddr)) {
-        Swal.fire({
-          icon: "error",
-          title: "Invalid Email",
-          text: "Please enter a valid email address.",
-          confirmButtonColor: "#f43f5e",
-        });
-        return;
-      }
-
-      Swal.fire({
-        title: "Saving changes...",
-        didOpen: () => Swal.showLoading(),
-        allowOutsideClick: false,
-      });
-
-      try {
-        // Update Text Information
-        const profileRes = await fetch(`${BASE_URL}/profile`, {
-          method: "PUT",
-          headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            firstName: fName,
-            lastName: lName,
-            email: emailAddr,
-          }),
-        });
-
-        if (!profileRes.ok) throw new Error("Profile update failed");
-
-        // Update Image if selected
-        if (file) {
-          const formData = new FormData();
-          formData.append("avatar", file);
-          const avatarRes = await fetch(`${BASE_URL}/profile/avatar`, {
-            method: "POST",
-            headers: { Authorization: "Bearer " + token },
-            body: formData,
-          });
-          if (!avatarRes.ok) throw new Error("Avatar upload failed");
-          avatarInput.value = "";
-        }
-
-        // Show Success Alert
-        await Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: "Profile updated successfully.",
-          timer: 2000,
-          showConfirmButton: false,
-        });
-
-        // REDIRECT AFTER SUCCESS
-        window.location.href = "account.html";
-      } catch (error) {
-        console.error(error);
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Failed to update profile. Please check your connection.",
-        });
-      }
-    }
-
-    function deleteAvatar() {
-      actionMenu.classList.remove("show");
-      Swal.fire({
-        title: "Are you sure?",
-        text: "Do you want to remove your profile picture?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#f43f5e",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          fetch(`${BASE_URL}/profile/avatar`, {
-            method: "DELETE",
-            headers: { Authorization: "Bearer " + token },
-          })
-            .then(() => {
-              Swal.fire(
-                "Deleted!",
-                "Your photo has been removed.",
-                "success"
-              ).then(() => {
-                // Redirect after deletion too
-                window.location.href = "account.html";
-              });
-            })
-            .catch(() =>
-              Swal.fire("Error", "Could not delete photo", "error")
-            );
-        }
-      });
-    }
-
-    loadProfile();
-  </script>
-  <script>
-    //  const token = localStorage.getItem('token');
-    const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
-    const imageLink = localStorage.getItem('getImage');
-    const getImage = document.querySelector('#profile-image');
-    const btnLogout = document.querySelector('#btnLogout');
-    btnLogout.addEventListener('click', () => {
-      fetch(baseUrl + "/auth/logout", {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(res => res.json())
-        .then(resData => {
-          localStorage.removeItem('token');
-          return location.href = '../login/login.html'
-          console.log(resData);
-
-        })
-    })
-    //getImage.setAttribute('src', imageLink);
-    getImage.src = imageLink;
-  </script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../JS/upload.js"></script>
+  </body>
 </html>
