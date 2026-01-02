@@ -1,13 +1,22 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0 ;
+    padding: 0 ;
+    box-sizing: border-box ;
 }
 
 body {
-    font-family: 'Poppins', 'Kantumruy Pro' !important;
-    line-height: 1.6 !important;
-    background-color: #eee !important;
+    line-height: 2;
+    background-color: #eee;
+}
+
+/* English */
+:lang(en) {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* Khmer */
+:lang(km) {
+    font-family: 'Kantumruy Pro', sans-serif !important;
 }
 
 .content {
@@ -16,11 +25,11 @@ body {
 }
 
 .bg-main {
-    background-color: rgb(53, 51, 51) !important;
+    background-color: #7645bf !important;
 }
 
 :root {
-    --bs-main: #7645bf !important;
+    --bs-main: #7645bf!important;
     --bs-main-rgb: 118, 69, 191 !important;
     --bs-main-hover: #8b5ad6 !important;
     --bs-main-active: #6a3bb0 !important;
@@ -47,6 +56,7 @@ body {
     color: var(--bs-color-light) !important;
     border-radius: var(--border-radius-main) !important;
     transition: var(--transition-fast) !important;
+    
 }
 
 .btn-main:hover {
@@ -82,11 +92,8 @@ body {
 }
 
 .btn-sub-main {
-    background-color:
-    
-    
-    var(--bs-secondary) !important;
-    border-color: var(--bs-secondary) !important;
+    background-color: var(--bs-sub-main) !important;
+    border-color: var(--bs-sub-main) !important;
     color: white !important;
 }
 
@@ -100,24 +107,22 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(var(--bs-sub-main-rgb), 0.25) !important;
 }
 
-.nav-link {
+.nav-item .nav-link {
     color: var(--bs-main) !important;
     text-decoration: none;
     font-weight: 500;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: var(--transition);
     padding: 8px 12px;
-    border-radius: var(--radius-sm);
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
-.nav-link:hover,
+.nav-item .nav-link:hover,
 .nav-link.active {
     color: var(--bs-color-light) !important;
     background-color: var(--bs-main) !important;
-    border-radius: 5px;
-    margin: 2px 0px !important;
 }
 
 /* =========================
@@ -159,35 +164,124 @@ body {
 .clamp-5,
 .clamp-6,
 .clamp-7 {
-    display: -webkit-box !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
+    display: -webkit-box;           /* Needed */
+    -webkit-box-orient: vertical;   /* Needed */
+    overflow: hidden;               /* Needed */
+    text-overflow: ellipsis;        /* Optional: shows ... */
 }
 
-.clamp-1 {
-    -webkit-line-clamp: 1 !important;
+.clamp-1 { -webkit-line-clamp: 1; }
+.clamp-2 { -webkit-line-clamp: 2; }
+.clamp-3 { -webkit-line-clamp: 3; }
+.clamp-4 { -webkit-line-clamp: 4; }
+.clamp-5 { -webkit-line-clamp: 5; }
+.clamp-6 { -webkit-line-clamp: 6; }
+.clamp-7 { -webkit-line-clamp: 7; }
+
+/* Input Fields Styling */
+input.form-control {
+    border: 2px solid var(--bs-sub-main);
+    border-radius: var(--border-radius-main);
+    /* padding: 12px 15px; */
+    font-size: 16px;
+    transition: all var(--transition-fast);
+    background-color: var(--bs-color-light);
+    color: var(--bs-color-dark);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.clamp-2 {
-    -webkit-line-clamp: 2 !important;
+/* On focus */
+input.form-control:focus {
+    border-color: var(--bs-main);
+    box-shadow: 0 0 8px rgba(var(--bs-main-rgb), 0.3);
+    background-color: var(--bs-color-light);
+    outline: none;
 }
 
-.clamp-3 {
-    -webkit-line-clamp: 3 !important;
+/* Placeholder styling */
+input.form-control::placeholder {
+    color: var(--bs-sub-main);
+    opacity: 1;
 }
 
-.clamp-4 {
-    -webkit-line-clamp: 4 !important;
+/* Error state */
+input.form-control.error {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
 }
 
-.clamp-5 {
-    -webkit-line-clamp: 5 !important;
+/* Buttons */
+.btn-main {
+    background-color: var(--bs-main);
+    color: var(--bs-color-light);
+    border-radius: var(--border-radius-main);
+    transition: all var(--transition-fast);
+    border: none;
 }
 
-.clamp-6 {
-    -webkit-line-clamp: 6 !important;
+.btn-main:hover {
+    background-color: var(--bs-main-hover);
+    color: var(--bs-color-light);
 }
 
-.clamp-7 {
-    -webkit-line-clamp: 7 !important;
+/* Toggle password icon */
+.toggle-password {
+    cursor: pointer;
+    color: var(--bs-sub-main);
+    transition: color var(--transition-fast);
+}
+
+.toggle-password:hover {
+    color: var(--bs-main);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    input.form-control {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+}
+
+/* Navbar dropdown hover animation */
+.navbar .dropdown .dropdown-menu {
+    display: block;
+    /* Needed for animation */
+    opacity: 0;
+    /* Start hidden */
+    transform: translateY(-10px);
+    /* Slightly above */
+    transition: all 0.3s ease;
+    /* Smooth transition */
+    pointer-events: none;
+    /* Prevent click when hidden */
+    background-color: var(--bs-color-light);
+    /* Use theme background */
+    border-radius: var(--border-radius-main);
+    /* Rounded corners */
+    border: 1px solid var(--bs-main);
+    /* Optional border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* On hover, show dropdown */
+.navbar .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    /* Fully visible */
+    transform: translateY(0);
+    /* Slide into position */
+    position: absolute;
+    top: 100%;
+    pointer-events: auto;
+    /* Allow clicks */
+}
+
+/* Optional: Smooth fade-in for dropdown items */
+.navbar .dropdown-menu .dropdown-item {
+    transition: all 0.2s ease;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+    background-color: var(--bs-main);
+    color: var(--bs-color-light);
 }
