@@ -20,15 +20,15 @@ const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
           .then(res => res.json())
           .then(resData => {
             console.log(resData);
-
+            console.log(resData);
             const article = resData.data;
-
             const creator = {
               id: article.creator?.id || "",
               firstName: article.creator?.firstName || "",
               lastName: article.creator?.lastName || "",
               avatar: article.creator?.avatar || "assets/default-avatar.png"
             };
+            console.log(creator.id);
 
             localStorage.setItem("profileUser", JSON.stringify(creator));
 
@@ -85,9 +85,18 @@ const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
       }
 
       //const token = localStorage.getItem('token');
-  const imageLink = localStorage.getItem('getImage');
-  const getImage = document.querySelector('#profile-image');
-  const btnLogout = document.querySelector('#btnLogout');
+const btnLogout = document.querySelector('#btnLogout');
+const profileImage = document.querySelector('#profile-image');
+fetch(`${baseUrl}/auth/profile`, {
+  headers: {
+    "Authorization": `Bearer ${token}`
+  }
+})
+  .then(res => res.json())
+  .then(getImage => {
+    console.log(getImage);
+    profileImage.src = getImage.data.avatar
+  })
   btnLogout.addEventListener('click', () => {
     fetch(baseUrl + "/auth/logout", {
       method: 'DELETE',
@@ -103,5 +112,4 @@ const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
 
       })
   })
-  //getImage.setAttribute('src', imageLink);
-  getImage.src = imageLink;
+  //getImage.setAttribute('src', imageLink

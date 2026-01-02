@@ -194,12 +194,12 @@
                                     <!-- Thumbnail -->
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Thumbnail Image *</label>
-                                        <div id="thumbnailContainer" class="input-group border rounded">
-                                            <label class="btn btn-light mb-0">
+                                        <div id="thumbnailContainer" class="input-group border rounded align-items-center">
+                                            <label class="btn btn-main me-1 p-2">
                                                 Choose file
                                                 <input type="file" id="thumbnail" hidden>
                                             </label>
-                                            <div id="fileName" class="form-control text-muted">No file selected</div>
+                                            <div id="fileName" class="form-control text-muted clamp-1">No file selected</div>
                                         </div>
                                         <div id="thumbnailError" class="text-danger small mt-1 d-none">
                                             Thumbnail cannot be empty
@@ -306,7 +306,7 @@
             }
 
             try {
-                /* ========== 1️⃣ CREATE ARTICLE (JSON) ========== */
+                /* ========== 1️ CREATE ARTICLE (JSON) ========== */
                 const createRes = await fetch(`${baseUrl}/articles`, {
                     method: "POST",
                     headers: {
@@ -384,7 +384,7 @@
             });
         }
     </script>
-
+    <script src="../../JS/toast.js"></script>
     <script src="../../bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

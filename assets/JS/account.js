@@ -60,8 +60,17 @@
 
       //const token = localStorage.getItem('token');
       const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
-      const imageLink = localStorage.getItem("getImage");
-      const getImage = document.querySelector("#profile-image");
+const profileImage = document.querySelector('#profile-image');
+fetch(`${baseUrl}/auth/profile`, {
+  headers: {
+    "Authorization": `Bearer ${token}`
+  }
+})
+  .then(res => res.json())
+  .then(getImage => {
+    console.log(getImage);
+    profileImage.src = getImage.data.avatar
+  })
       const btnLogout = document.querySelector("#btnLogout");
       btnLogout.addEventListener("click", () => {
         fetch(baseUrl + "/auth/logout", {
@@ -78,4 +87,3 @@
           });
       });
       //getImage.setAttribute('src', imageLink);
-      getImage.src = imageLink;

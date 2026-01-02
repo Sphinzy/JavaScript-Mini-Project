@@ -23,7 +23,6 @@
         .then(res => res.json())
         .then(res => {
           articlesEl.innerHTML = "";
-          console.log(res);
           res.data.items.forEach(article => {
             articlesEl.innerHTML += `
               <div class="col-md-4 mb-4">
@@ -47,54 +46,94 @@
         });
     }); 
 
-    const params = new URLSearchParams(window.location.search);
-    const userId = params.get("id");
-    const cardPro = document.querySelector('.card-profile');
-    console.log(userId);
-    fetch(`http://blogs.csm.linkpc.net/api/v1/articles?search=&_page=1&_per_page=100`)
-    .then(res => res.json())
-    .then(getProfile =>{
-      console.log(getProfile);
-      console.log(getProfile.data.creator.avatar);
-      const gets = getProfile.data.items;
-      console.log(gets[0]);
-      getProfile.forEach(getPro =>{
-        console.log(getPro);
-      })
-      cardPro.innerHTML = `
-        <div class="card-body d-flex align-items-center gap-3">
-                <div style="border: 2px solid #7645bf; border-radius: 50%; padding: 3px;">
-                  <img id="profileAvatar" src="${getProfile.data.creator.avatar}" class="rounded-circle object-fit-cover" width="80" height="80">
-                </div>
+const params = new URLSearchParams(window.location.search);
+const userId = params.get("id");
 
-                <div class="flex-grow-1">
-                  <h5 id="profileName" class="mb-1 fw-semibold">${getProfile.data.creator.firstName} ${getProfile.data.creator.lastName}</h5>
-                  <small id="profileDatetime" class="text-muted"></small>
-                </div>
-              </div>
-      `
-    })
+const cardPro = document.querySelector('.card-profile');
+const articleList = document.querySelector('.article-list');
 
+fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=1&_per_page=100`)
+  .then(res => res.json())
+  .then(res => {
+    const items = res.data.items;
 
-    const token = localStorage.getItem('token');
-  const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
-  const imageLink = localStorage.getItem('getImage');
-  const getImage = document.querySelector('#profile-image');
-  const btnLogout = document.querySelector('#btnLogout');
-  btnLogout.addEventListener('click', () => {
-    fetch(baseUrl + "/auth/logout", {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(res => res.json())
-      .then(resData => {
-        localStorage.removeItem('token');
-        return location.href = '../login/login.html'
-        console.log(resData);
+    // 1️⃣ Filter articles by userId
+    const userArticles = items.filter(
+      item => item.creator && item.creator.id == userId
+    );
 
-      })
+    if (!userArticles.length) {
+      cardPro.innerHTML = `<p class="text-danger">User not found</p>`;
+      return;
+    }
+
+    // 2️⃣ Get creator info from first article
+    const creator = userArticles[0].creator;
+
+    // 3️⃣ Render profile
+    cardPro.innerHTML = `
+      <div class="card-body d-flex align-items-center gap-3">
+        <div style="border: 2px solid #7645bf; border-radius: 50%; padding: 3px;">
+          <img src="${creator.avatar}"
+               class="rounded-circle object-fit-cover"
+               width="80" height="80">
+        </div>
+
+        <div class="flex-grow-1">
+          <h5 class="mb-1 fw-semibold">
+            ${creator.firstName} ${creator.lastName}
+          </h5>
+          <small class="text-muted">
+            Articles: ${userArticles.length}
+          </small>
+        </div>
+      </div>
+    `;
+
+    // 4️⃣ Render articles
+    articleList.innerHTML = '';
+    userArticles.forEach(article => {
+      articleList.innerHTML += `
+        <div class="card mb-3">
+          <img src="${article.thumbnail}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">${article.title}</h5>
+            <p class="card-text text-truncate">
+              ${article.content.replace(/<[^>]*>/g, '')}
+            </p>
+            <small class="text-muted">
+              ${new Date(article.createdAt).toLocaleDateString()}
+            </small>
+          </div>
+        </div>
+      `;
+    });
   })
-  //getImage.setAttribute('src', imageLink);
-  getImage.src = imageLink;
+  .catch(err => console.error(err));
+
+
+
+const baseUrl = 'http://blogs.csm.linkpc.net/api/v1'
+const token = localStorage.getItem('token');
+const profileImage = document.querySelector('#profile-image');
+fetch(`${baseUrl}/auth/profile`, {
+  headers: {
+    "Authorization": `Bearer ${token}`
+  }
+})
+  .then(res => res.json())
+  .then(getImage => {
+    console.log(getImage);
+    profileImage.src = getImage.data.avatar
+  })
+
+btnLogout.addEventListener('click', () => {
+  fetch(`${baseUrl}/auth/logout`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` }
+  })
+    .then(() => {
+      localStorage.removeItem('token');
+      location.href = '../login/login.html';
+    });
+});

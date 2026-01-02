@@ -113,9 +113,21 @@
 
         loadMoreArticles();
 
-        // ========== PROFILE IMAGE & LOGOUT ==========
-        const getImage = document.querySelector('#profile-image');
-        getImage.src = localStorage.getItem('getImage') || 'assets/default-avatar.png';
+        // ========== PROFILE IMAGE & LOGOUT ==========ets/default-avatar.png';
+const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
+const token = localStorage.getItem('token');
+        console.log(localStorage.getItem('getImageet'));
+        const profileImage = document.querySelector('#profile-image');
+        fetch(`${baseUrl}/auth/profile`, {
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        })
+          .then(res => res.json())
+          .then(getImage => {
+            console.log(getImage);
+            profileImage.src = getImage.data.avatar
+          })
 
         const btnLogout = document.querySelector('#btnLogout');
         btnLogout.addEventListener('click', () => {

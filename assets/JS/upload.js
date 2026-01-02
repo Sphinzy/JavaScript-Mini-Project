@@ -140,3 +140,16 @@ document.getElementById("btnLogout").addEventListener("click", () => {
 });
 
 loadProfile();
+
+const profileImage = document.querySelector('#profile-image');
+const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
+fetch(`${baseUrl}/auth/profile`, {
+  headers: {
+    "Authorization": `Bearer ${token}`
+  }
+})
+  .then(res => res.json())
+  .then(getImage => {
+    console.log(getImage);
+    profileImage.src = getImage.data.avatar
+  })

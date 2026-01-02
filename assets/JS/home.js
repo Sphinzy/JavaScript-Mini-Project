@@ -50,7 +50,8 @@
         .then(data => {
           const container = document.querySelector(".card-insert");
           data.data.items.forEach(article => {
-            console.log(data);
+            //console.log(data);
+            console.log(article.creator.id);
             container.innerHTML += `
             <div class="post shadow-lg py-3 rounded-1 mt-10">
               <div class="d-flex gap-2 mb-2">
@@ -107,8 +108,19 @@
     loadMoreArticles();
 
     // ========== PROFILE IMAGE & LOGOUT ==========
-    const getImage = document.querySelector('#profile-image');
-    getImage.src = localStorage.getItem('getImage') || 'assets/default-avatar.png';
+const profileImage = document.querySelector('#profile-image');
+const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
+const token = localStorage.getItem("token");
+fetch(`${baseUrl}/auth/profile`, {
+  headers: {
+    "Authorization": `Bearer ${token}`
+  }
+})
+  .then(res => res.json())
+  .then(getImage => {
+    console.log(getImage);
+    profileImage.src = getImage.data.avatar
+  })
 
     const btnLogout = document.querySelector('#btnLogout');
     btnLogout.addEventListener('click', () => {

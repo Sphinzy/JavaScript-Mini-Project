@@ -31,7 +31,7 @@ function fetchMyArticles() {
                   art.createdAt
                 ).toLocaleDateString()}</td>
                 <td class="text-center">
-                    <i class="bi bi-pencil-square text-main action-icon icon-edit mx-2"></i>
+                    <i class="bi bi-pencil-square text-main action-icon icon-edit mx-2" data-bs-toggle="modal" data-bs-target="#editModal"></i>
                     <i class="bi bi-trash text-danger action-icon icon-delete mx-2" onclick="deleteArticle(${
                       art.id
                     })"></i>
@@ -86,4 +86,14 @@ btnLogout.addEventListener("click", () => {
     });
 });
 //getImage.setAttribute('src', imageLink);
-getImage.src = imageLink;
+const profileImage = document.querySelector('#profile-image');
+fetch(`${baseUrl}/auth/profile`, {
+  headers: {
+    "Authorization": `Bearer ${token}`
+  }
+})
+  .then(res => res.json())
+  .then(getImage => {
+    console.log(getImage);
+    profileImage.src = getImage.data.avatar
+  })
