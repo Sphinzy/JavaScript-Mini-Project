@@ -6,7 +6,7 @@
 
 body {
     line-height: 2;
-    background-color: #eee;
+    background-color: #ededed !important;
 }
 
 /* English */
@@ -44,6 +44,11 @@ body {
 
     --transition-fast: 0.2s ease-in-out !important;
     --border-radius-main: 0.5rem !important;
+
+    --bs-cus-success : #bbf0bb !important;
+    --bs-bor-success: #05a300 !important;
+    --bs-cus-danger: #f5d0d0 !important;
+    --bs-bor-danger: #e41414 !important;
 }
 
 /* =========================
@@ -56,6 +61,7 @@ body {
     color: var(--bs-color-light) !important;
     border-radius: var(--border-radius-main) !important;
     transition: var(--transition-fast) !important;
+    /* background-color: #90ee90; */
     
 }
 
@@ -210,6 +216,80 @@ input.form-control.error {
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
 }
 
+
+/* Select Fields Styling */
+select.form-select {
+    border: 2px solid var(--bs-sub-main);
+    border-radius: var(--border-radius-main);
+    font-size: 16px;
+    transition: all var(--transition-fast);
+    background-color: var(--bs-color-light);
+    color: var(--bs-color-dark);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 8px 12px;
+    /* adjust vertical & horizontal padding */
+}
+
+/* On focus */
+select.form-select:focus {
+    border-color: var(--bs-main);
+    box-shadow: 0 0 8px rgba(var(--bs-main-rgb), 0.3);
+    background-color: var(--bs-color-light);
+    outline: none;
+}
+/* Works in some browsers */
+select.form-select option:hover {
+    background-color: var(--bs-main);
+    /* light cyan on hover */
+    color: #000;
+}
+
+select.form-select option:checked {
+    background-color: var(--bs-sub-main);
+    /* light blue for selected option */
+    color: #000;
+}
+/* Placeholder styling (for <select>, use first option as placeholder) */
+select.form-select option[disabled][selected] {
+    color: var(--bs-sub-main);
+}
+
+/* Error state */
+select.form-select.error {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+/* Default styling */
+#fileName {
+    border: 2px solid var(--bs-sub-main);
+    /* your default border */
+    border-radius: 0.5rem;
+    padding: 8px 12px;
+    transition: border-color 0.2s ease-in-out;
+    color: #6c757d;
+    /* muted text */
+    background-color: #f8f9fa;
+}
+
+/* Hover effect */
+#fileName:hover {
+    border-color: #7645bf;
+    /* change to your main color */
+    cursor: pointer;
+}
+
+/* When file selected */
+#fileName.selected {
+    border-color: #28a745;
+    /* green for selected */
+    color: #000;
+}
+
+/* Error state */
+#fileName.error {
+    border-color: red;
+    color: red;
+}
 /* Buttons */
 .btn-main {
     background-color: var(--bs-main);
@@ -285,3 +365,23 @@ input.form-control.error {
     background-color: var(--bs-main);
     color: var(--bs-color-light);
 }
+
+
+.bg-cus-success {
+    background-color: var(--bs-cus-success) !important;
+    border: 1px solid var(--bs-bor-success) !important;
+    border-radius: 5px !important;
+    color: var(--bs-bor-success) !important;
+}
+
+.bg-cus-danger {
+    background-color: var(--bs-cus-danger) !important;
+    border: 1px solid var(--bs-bor-danger) !important;
+    border-radius: 5px !important;
+    color: #a12a2a !important;
+}
+
+/* toast  */
+ #toastMsg {
+     width: auto;
+ }

@@ -4,8 +4,23 @@ let pageNumUrl = 1;
 let searchValue = '';
 let selectedCateId = null;
 const token = localStorage.getItem('token');
+console.log(token);
 
 const pageSearch = document.querySelector('#pageSearch');
+// // ------------------- Toast Helper -------------------
+// function showToast(message, type = 'success') {
+//     const toastEl = document.getElementById('toastMsg');
+//     toastEl.querySelector('.toast-body').textContent = message;
+
+//     // Set color based on type
+//     toastEl.classList.remove('bg-cus-success', 'bg-cus-danger', 'bg-warning',);
+//     if (type === 'success') toastEl.classList.add('bg-cus-success',);
+//     else if (type === 'error') toastEl.classList.add('bg-cus-danger',);
+//     else if (type === 'warning') toastEl.classList.add('bg-warning');
+
+//     const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+//     toast.show();
+// }
 
 // ------------------- Fetch Data -------------------
 const getData = () => {
@@ -104,7 +119,7 @@ pageSearch.addEventListener('input', () => {
 // ------------------- Create -------------------
 const btnCreateCate = () => {
     const cateInp = document.querySelector('#cateInp');
-    if (!cateInp.value.trim()) return alert("Category name is required");
+    if (!cateInp.value.trim()) return showToast("Category name is required", "error");
 
     fetch(`${baseUrl}/categories`, {
         method: "POST",
@@ -113,12 +128,16 @@ const btnCreateCate = () => {
     })
         .then(res => res.json())
         .then(data => {
-            if (!data.result) return alert(data.message);
+            if (!data.result) return showToast(data.message || "Create failed", "error");
+
             cateInp.value = '';
             bootstrap.Modal.getOrCreateInstance(document.querySelector('#exampleModal')).hide();
+            showToast("Category created successfully!");
             getData();
-        });
+        })
+        .catch(err => showToast(err.message, "error"));
 };
+
 
 // ------------------- Delete -------------------
 const setDeleteCate = (cateId) => selectedCateId = cateId;
@@ -133,6 +152,7 @@ const btnDeleteCate = () => {
         .then(() => {
             bootstrap.Modal.getOrCreateInstance(document.querySelector('#deleteModal')).hide();
             selectedCateId = null;
+            showToast("Category created successfully!");
             getData();
         });
 };
@@ -163,15 +183,27 @@ const btnSaveCate = (cateId) => {
         .then(res => res.json())
         .then(() => {
             bootstrap.Modal.getOrCreateInstance(document.querySelector('#editModal')).hide();
+            showToast("Category updated successfully!");
             getData();
         });
 };
 
 // ------------------- Logout & Profile -------------------
 const btnLogout = document.querySelector('#btnLogout');
+// const imageLink = localStorage.getItem('getImage');
+// if (profileImage && imageLink) profileImage.src = imageLink;
+// console.log(imageLink);
 const profileImage = document.querySelector('#profile-image');
-const imageLink = localStorage.getItem('getImage');
-if (profileImage && imageLink) profileImage.src = imageLink;
+fetch(`${baseUrl}/auth/profile`, {
+    headers: {
+        "Authorization": `Bearer ${token}`
+    }
+})
+.then(res => res.json())
+    .then(getImage => {
+        console.log(getImage);
+        profileImage.src = getImage.data.avatar
+})
 
 btnLogout.addEventListener('click', () => {
     fetch(`${baseUrl}/auth/logout`, {
