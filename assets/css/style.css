@@ -176,7 +176,7 @@ body {
     text-overflow: ellipsis;        /* Optional: shows ... */
 }
 
-.clamp-1 { -webkit-line-clamp: 1; }
+.clamp-1 { -webkit-line-clamp: 1;}
 .clamp-2 { -webkit-line-clamp: 2; }
 .clamp-3 { -webkit-line-clamp: 3; }
 .clamp-4 { -webkit-line-clamp: 4; }
@@ -264,7 +264,8 @@ select.form-select.error {
     border: 2px solid var(--bs-sub-main);
     /* your default border */
     border-radius: 0.5rem;
-    padding: 8px 12px;
+    /* padding: 8px 12px; */
+    line-height: 2.3 !important;
     transition: border-color 0.2s ease-in-out;
     color: #6c757d;
     /* muted text */

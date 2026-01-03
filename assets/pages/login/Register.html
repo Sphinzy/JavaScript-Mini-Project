@@ -80,9 +80,19 @@
             <button type="button" class="btn btn-main w-100 mt-4" onclick="signup()">Register</button>
 
             <div class="text-center mt-3">
-              Already have an account? <a href="login.html" class="text-main">Login</a>
+              Already have an account? <a href="./../../../index.html" class="text-white">Login</a>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <!-- Toast Container -->
+    <div class="toast-container top-0 start-50 translate-middle-x p-3">
+      <div id="toastMsg" class="toast align-items-center" role="alert">
+        <div class="toast-body text-center">
+          Toast message here
         </div>
       </div>
     </div>
@@ -91,79 +101,7 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-    const fname = document.getElementById("fname");
-    const lname = document.getElementById("lname");
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-    const cpassword = document.getElementById("cpassword");
-
-    const errfname = document.getElementById("errfname");
-    const errlname = document.getElementById("errlname");
-    const erremail = document.getElementById("erremail");
-    const errpassword = document.getElementById("errpassword");
-    const errcpassword = document.getElementById("errcpassword");
-
-    const eyePassword = document.getElementById("eyePassword");
-    const eyeCPassword = document.getElementById("eyeCPassword");
-
-    function signup() {
-      // Reset errors
-      [errfname, errlname, erremail, errpassword, errcpassword].forEach(el => el.textContent = "");
-
-      // Validation
-      if (!fname.value) errfname.textContent = "Enter first name";
-      if (!lname.value) errlname.textContent = "Enter last name";
-      if (!email.value) erremail.textContent = "Enter email";
-      if (!password.value) errpassword.textContent = "Enter password";
-      if (password.value !== cpassword.value) errcpassword.textContent = "Passwords do not match";
-
-      // Submit form if valid
-      if (fname.value && lname.value && email.value && password.value && password.value === cpassword.value) {
-        fetch("http://blogs.csm.linkpc.net/api/v1/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            firstName: fname.value,
-            lastName: lname.value,
-            email: email.value,
-            password: password.value,
-            confirmPassword: cpassword.value
-          }),
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (data.result) {
-              alert("Registered successfully");
-              location.href = "login.html";
-            } else {
-              alert("Registration failed: " + (data.message || "Unknown error"));
-            }
-          });
-      }
-    }
-
-    // Toggle password visibility
-    eyePassword.addEventListener("click", () => {
-      if (password.type === "password") {
-        password.type = "text";
-        eyePassword.classList.replace("bi-eye-slash", "bi-eye");
-      } else {
-        password.type = "password";
-        eyePassword.classList.replace("bi-eye", "bi-eye-slash");
-      }
-    });
-
-    eyeCPassword.addEventListener("click", () => {
-      if (cpassword.type === "password") {
-        cpassword.type = "text";
-        eyeCPassword.classList.replace("bi-eye-slash", "bi-eye");
-      } else {
-        cpassword.type = "password";
-        eyeCPassword.classList.replace("bi-eye", "bi-eye-slash");
-      }
-    });
-  </script>
+  <script src="../../JS/register.js"></script>
 </body>
 
 </html>

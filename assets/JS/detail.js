@@ -1,6 +1,9 @@
 const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
     const token = localStorage.getItem("token");
-
+if (!token) {
+  // No token found → redirect to login
+  window.location.href = "../../../index.html"; // adjust path if needed
+}
       const params = new URLSearchParams(window.location.search);
       const articleId = params.get("id");
 

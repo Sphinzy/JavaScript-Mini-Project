@@ -1,3 +1,4 @@
+
  // ========== POST FUNCTIONS ==========
     function likePost(btn) {
       btn.classList.toggle("text-main");
@@ -33,6 +34,14 @@
         return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
       }
 
+//
+const copyUrl = (articleId) => {
+  const url = `${window.location.origin}/assets/pages/homepage/detail.html?id=${articleId}`;
+  console.log(url); 
+  navigator.clipboard.writeText(url)
+    .then(() => showToast("Article link copied!", "success"));
+};
+
 
 
     // ========== LOAD POSTS ==========
@@ -48,12 +57,12 @@
       fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=${currentPage}&_per_page=10`)
         .then(res => res.json())
         .then(data => {
+          console.log(data);
           const container = document.querySelector(".card-insert");
           data.data.items.forEach(article => {
             //console.log(data);
-            console.log(article.creator.id);
             container.innerHTML += `
-            <div class="post shadow-lg py-3 rounded-1 mt-10">
+            <div class="post shadow-lg py-3 rounded-1 mt-10 bg-white">
               <div class="d-flex gap-2 mb-2">
                 <a href="UserProfile.html?id=${article.creator.id}" class="d-flex align-items-center text-decoration-none text-dark">
                   <div style="border: 2px solid #7645bf; border-radius: 50%; overflow: hidden; padding: 3px;">
@@ -77,7 +86,7 @@
     <button class="btn btn-light" onclick="toggleComment(this)">
         <i class="bi bi-chat"></i> Comment
     </button>
-    <button class="btn btn-light" onclick="sharePost()">
+    <button class="btn btn-light"  onclick="copyUrl(${article.id})">
         <i class="bi bi-share"></i> Share
     </button>
 </div>
@@ -111,6 +120,10 @@
 const profileImage = document.querySelector('#profile-image');
 const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
 const token = localStorage.getItem("token");
+if (!token) {
+  // No token found → redirect to login
+  window.location.href = "../../../index.html"; // adjust path if needed
+}
 fetch(`${baseUrl}/auth/profile`, {
   headers: {
     "Authorization": `Bearer ${token}`
@@ -135,3 +148,4 @@ fetch(`${baseUrl}/auth/profile`, {
           location.href = '../login/login.html';
         });
     });
+    

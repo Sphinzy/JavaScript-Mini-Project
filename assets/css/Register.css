@@ -32,3 +32,11 @@
         display: none;
       }
     }
+.input-error {
+  border: 1px solid red !important;
+}
+
+.input-normal {
+  border: 1px solid #ced4da;
+  /* bootstrap default */
+}

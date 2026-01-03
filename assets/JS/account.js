@@ -2,6 +2,10 @@
       const token = localStorage.getItem("token");
       // const token =
       //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwNTYsImlhdCI6MTc2Njc0MTk1NywiZXhwIjoxNzY3MzQ2NzU3fQ.GwlNwexQg-wj5H0WoWoYkRK6OwSROGudP46e2u3eEcE";
+    if (!token) {
+      // No token found → redirect to login
+      window.location.href = "../../../index.html"; // adjust path if needed
+    }
       const API_URL = "http://blogs.csm.linkpc.net/api/v1/auth/profile";
 
       async function fetchUserData() {

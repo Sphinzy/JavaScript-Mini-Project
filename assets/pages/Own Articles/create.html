@@ -51,13 +51,13 @@
         <nav class="navbar fixed-top bg-secondary-subtle">
             <div class="container">
                 <a class="navbar-brand fs-5 fw-bold text-main" href="#">BlogFy</a>
-
+    
                 <!-- menu icon  -->
                 <button class="navbar-toggler d-flex d-lg-none" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+    
                 <!-- side bar  -->
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel">
@@ -92,15 +92,15 @@
                                         class="bi bi-copy pe-2"></i>Category</a>
                             </li>
                         </ul>
-
+    
                     </div>
                 </div>
-
+    
                 <!-- input search  -->
                 <div class="d-none d-lg-flex">
                     <input type="text" name="" id="" class="form-control" style="width: 500px;" placeholder="Search...">
                 </div>
-
+    
                 <div class="dropdown d-none d-lg-flex">
                     <a class="nav-link px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <div style="border: 2px solid #7645bf; border-radius: 50%; ">
@@ -108,7 +108,7 @@
                                 style="width: 40px; height: 40px; padding: 3px;" alt />
                         </div>
                     </a>
-
+    
                     <ul class="dropdown-menu border-0 shadow-sm bg-body-theme">
                         <li><a class='dropdown-item' href='../profile/account.html'><i
                                     class="bi bi-person-circle me-2"></i>Profile</a>
@@ -117,7 +117,7 @@
                                     class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                     </ul>
                 </div>
-
+    
             </div>
         </nav>
     </header>
@@ -125,7 +125,7 @@
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-
+    
                 <div class="modal-body">
                     <h3 class="text-danger">Logout</h3>
                     <p>Are you sure you want to logout?</p>
@@ -147,19 +147,16 @@
                     <div class="col-lg-3 d-none d-lg-block">
                         <div class="position-sticky shadow-sm rounded-3" style="top: 100px;">
                             <ul class="navbar-nav text-start">
-                                <li class="nav-item rounded-2"> <a href="../homepage/home.html"
-                                        class="nav-link fs-5 p-2"><i class="bi bi-house-door pe-2"></i>Home</a> </li>
+                                <li class="nav-item rounded-2"> <a href="../homepage/home.html" class="nav-link fs-5 p-2"><i
+                                            class="bi bi-house-door pe-2"></i>Home</a> </li>
                                 <li class="nav-item"> <a href="../" class="nav-link fs-5 text-main p-2"><i
                                             class="bi bi-credit-card-2-back-fill pe-2"></i>Feed</a> </li>
-                                <li class="nav-item"> <a href="../profile/account.html"
-                                        class="nav-link fs-5 text-main p-2"><i
+                                <li class="nav-item"> <a href="../profile/account.html" class="nav-link fs-5 text-main p-2"><i
                                             class="bi bi-person-circle pe-2"></i>Profile</a> </li>
-                                <li class="nav-item"> <a href="../Own Articles/getown.html"
-                                        class="nav-link active fs-5 text-main p-2"><i
+                                <li class="nav-item"> <a href="../Own Articles/getown.html" class="nav-link active fs-5 text-main p-2"><i
                                             class="bi bi-patch-plus pe-2"></i>Create</a> </li>
-                                <li class="nav-item"> <a href="../category/cate.html"
-                                        class="nav-link fs-5 text-main p-2"><i class="bi bi-copy pe-2"></i>Category</a>
-                                </li>
+                                <li class="nav-item"> <a href="../category/cate.html" class="nav-link fs-5 text-main p-2"><i
+                                            class="bi bi-copy pe-2"></i>Category</a> </li>
                             </ul>
                         </div>
                     </div>
@@ -168,10 +165,10 @@
                             <h1 class="fw-bold" style="color: #7645bf;">Create Article</h1>
                             <p class="text-muted">Fill in the details below to publish a new story.</p>
                         </header>
-
+            
                         <main class="card shadow-sm border">
                             <form id="articleForm" class="card-body p-4">
-
+            
                                 <!-- Title -->
                                 <div class="mb-4">
                                     <label class="form-label fw-semibold">Article Title *</label>
@@ -180,9 +177,9 @@
                                         Title cannot be empty
                                     </div>
                                 </div>
-
+            
                                 <div class="row g-3">
-
+            
                                     <!-- Category -->
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Category *</label>
@@ -193,7 +190,7 @@
                                             Please select a category
                                         </div>
                                     </div>
-
+            
                                     <!-- Thumbnail -->
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Thumbnail Image *</label>
@@ -208,9 +205,9 @@
                                             Thumbnail cannot be empty
                                         </div>
                                     </div>
-
+            
                                 </div>
-
+            
                                 <!-- Content -->
                                 <div class="mt-4">
                                     <label class="form-label fw-semibold">Content *</label>
@@ -221,7 +218,7 @@
                                         Content cannot be empty
                                     </div>
                                 </div>
-
+            
                                 <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
                                     <a href="#" class="text-main text-decoration-none">← Back to Articles</a>
                                     <button type="submit" class="btn px-4 publish-btn text-light"
@@ -229,7 +226,7 @@
                                         Publish Article
                                     </button>
                                 </div>
-
+            
                             </form>
                         </main>
                     </div>
@@ -240,166 +237,9 @@
 
     <!-- Scripts -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script>
-        /* ================= CONFIG ================= */
-        const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
-        const token = localStorage.getItem("token");
-
-        /* ================= AUTH GUARD ================= */
-        if (!token) {
-            location.href = "../login/login.html";
-        }
-
-        /* ================= BACK LINK ================= */
-        const backLink = document.querySelector("a.text-decoration-none");
-        if (backLink) backLink.href = "getown.html";
-
-        /* ================= QUILL ================= */
-        const quill = new Quill("#editor", {
-            theme: "snow",
-            placeholder: "Write Content here ..."
-        });
-
-        // File input logic
-        const fileInput = document.getElementById("thumbnail");
-        const fileNameDisplay = document.getElementById("fileName");
-
-        fileInput.addEventListener("change", function () {
-            if (this.files.length > 0) {
-                fileNameDisplay.textContent = this.files[0].name;
-                fileNameDisplay.classList.remove("text-muted");
-            }
-        });
-
-        // Form validation + submit
-        const form = document.getElementById("articleForm");
-
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            let isValid = true;
-
-            const title = document.querySelector("[name='title']");
-            const category = document.getElementById("category");
-            const thumbnailContainer = document.getElementById("thumbnailContainer");
-            const editorContainer = document.getElementById("editorContainer");
-
-            const titleError = document.getElementById("titleError");
-            const categoryError = document.getElementById("categoryError");
-            const thumbnailError = document.getElementById("thumbnailError");
-            const contentError = document.getElementById("contentError");
-
-            // RESET
-            [title, category, thumbnailContainer, editorContainer].forEach(el => {
-                el.classList.remove("border-danger");
-                el.classList.add("border");
-            });
-
-            [titleError, categoryError, thumbnailError, contentError].forEach(el => el.classList.add("d-none"));
-
-            // VALIDATE
-            if (title.value.trim() === "") {
-                title.classList.add("border-danger");
-                titleError.classList.remove("d-none");
-                isValid = false;
-            }
-
-            if (!category.value) {
-                category.classList.add("border-danger");
-                categoryError.classList.remove("d-none");
-                isValid = false;
-            }
-
-            if (fileInput.files.length === 0) {
-                thumbnailContainer.classList.add("border-danger");
-                thumbnailError.classList.remove("d-none");
-                isValid = false;
-            }
-
-            if (quill.getLength() <= 1) {
-                editorContainer.classList.add("border-danger");
-                contentError.classList.remove("d-none");
-                isValid = false;
-            }
-
-            if (!isValid) return;
-
-            // ===== SUBMIT TO API =====
-            const formData = new FormData();
-            formData.append("title", title.value.trim());
-            formData.append("categoryId", category.value);
-            formData.append("content", quill.root.innerHTML);
-            formData.append("thumbnail", fileInput.files[0]);
-
-            fetch(`${baseUrl}/articles`, {
-                method: "POST",
-                headers: {
-                    Authorization: "Bearer " + token
-                },
-                body: formData
-            })
-                .then(res => res.json())
-                .then(result => {
-                    if (result.result) {
-                        showToast("Category updated successfully!");
-                        window.location.href = "getown.html";
-                    } else {
-                        showToast("Category updated successfully!");
-                        alert(result.message || "Failed to publish article");
-                    }
-                })
-                .catch(err => {
-                    console.error("Publish error:", err);
-                    // alert("Something went wrong");
-                });
-        });
-
-        // Fetch categories
-        const categorySelect = document.getElementById("category");
-    
-
-        function getCategories() {
-            fetch(`${baseUrl}/categories?_page=1&_per_page=50&sortBy=name&sortDir=ASC`)
-                .then(res => res.json())
-                .then(resData => {
-                    categorySelect.innerHTML = `<option value="" selected disabled>Select category</option>`;
-                    resData.data.items.forEach(cat => {
-                        const option = document.createElement("option");
-                        option.value = cat.id;
-                        option.textContent = cat.name;
-                        categorySelect.appendChild(option);
-                    });
-                })
-                .catch(err => console.error("Category error:", err));
-        }
-
-        document.addEventListener("DOMContentLoaded", getCategories);
-    </script>
+    <script src="../../JS/create.js"> </script>
 
 
-    <script src="../../JS/toast.js"></script>
-    <script>
-        const imageLink = localStorage.getItem('getImage');
-        const getImage = document.querySelector('#profile-image');
-        const btnLogout = document.querySelector('#btnLogout');
-        btnLogout.addEventListener('click', () => {
-            fetch(baseUrl + "/auth/logout", {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then(res => res.json())
-                .then(resData => {
-                    localStorage.removeItem('token');
-                    return location.href = '../login/login.html'
-                    console.log(resData);
-
-                })
-        })
-        //getImage.setAttribute('src', imageLink);
-        getImage.src = imageLink;
-    </script>
     <script src="../../bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

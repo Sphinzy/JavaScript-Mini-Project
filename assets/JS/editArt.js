@@ -1,6 +1,9 @@
 const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
 const token = localStorage.getItem("token");
-
+if (!token) {
+    // No token found → redirect to login
+    window.location.href = "../../../index.html"; // adjust path if needed
+}
 // DOM elements
 const articleTableBody = document.getElementById("articleTableBody");
 const titleInput = document.querySelector("#inpTitle");
@@ -95,6 +98,7 @@ document
                 headers: { Authorization: "Bearer " + token },
             });
             if (res.ok) {
+                showToast("Article updated successfully!", "success");  
                 bootstrap.Modal.getInstance(
                     document.getElementById("deleteModal")
                 ).hide();
@@ -169,7 +173,7 @@ function getCategories(selectedId = null) {
 
 /// ======================= EDIT ARTICLE =======================
 const btnEditCate = (articleId) => {
-    editArticleId = articleId;
+    editArticleId = Number(articleId);
     console.log("Editing article:", editArticleId);
 
     fetch(`${baseUrl}/articles/${articleId}`, {
@@ -179,6 +183,7 @@ const btnEditCate = (articleId) => {
     })
         .then(res => res.json())
         .then(resData => {
+            console.log(resData);
             const article = resData.data;
 
             initQuill();
@@ -189,6 +194,12 @@ const btnEditCate = (articleId) => {
 
             getCategories(article.category?.id);
 
+            nThumb = article.thumbnail.split('/')
+            console.log(nThumb);
+            //thumb
+            fileNameDisplay.textContent = nThumb[7];
+            console.log(fileInput);
+
             // Show modal
             new bootstrap.Modal(editModalEl).show();
             //paramter
@@ -198,13 +209,25 @@ const btnEditCate = (articleId) => {
             document.querySelector('#btnSaveCate').onclick = btnSaveCate;
         })
         .catch(err => console.error("Edit article error:", err));
+    
+
 };
 
+// file input
+const fileInput = document.getElementById("thumbnail");
+const fileNameDisplay = document.getElementById("fileName");
 
+fileInput.addEventListener("change", () => {
+    if (fileInput.files.length > 0) {
+        fileNameDisplay.textContent = fileInput.files[0].name;
+        fileNameDisplay.classList.remove("text-muted");
+    }
+});
 
 // ======================= SAVE ARTICLE =======================
 const btnSaveCate = (editModalEl) => {
     // const editModal = new bootstrap.Modal(editModalEl);
+    
     if (!titleInput.value.trim()) {
         alert("Title is required");
         return;
@@ -234,10 +257,10 @@ const btnSaveCate = (editModalEl) => {
             return res.json();
         })
         .then(saveData => {
-
+            showToast("Article updated successfully!", "success");
             // Close modal
             bootstrap.Modal.getOrCreateInstance(document.querySelector('#editModal')).hide();
-
+            showToast("Category created successfully!");
             console.log(saveData);
             // Refresh list
             fetchMyArticles();
@@ -246,6 +269,30 @@ const btnSaveCate = (editModalEl) => {
         .catch(err => {
             console.error(err);
             alert(err.message);
+        });
+    
+    console.log(editArticleId);
+    const form = new FormData();
+    form.append("thumbnail", fileInput.files[0]);
+
+    fetch(`${baseUrl}/articles/${editArticleId}/thumbnail`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        body: form
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Thumbnail upload failed");
+            return res.json();
+        })
+        .then(getThumb => {
+            console.log(getThumb);
+            showToast("Thumbnail uploaded successfully!", "success");
+        })
+        .catch(err => {
+            console.error(err);
+            showToast(err.message, "error");
         });
 };
 

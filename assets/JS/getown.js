@@ -2,6 +2,10 @@ const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
 const token = localStorage.getItem("token");
 // const token =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwMTgsImlhdCI6MTc2NzA4MDI5OSwiZXhwIjoxNzY3Njg1MDk5fQ.Ir6f1psgdgXRQ2X2In6Z39JPAuplZnka4nIEAieEjxk";
+if (!token) {
+  // No token found → redirect to login
+  window.location.href = "../../../index.html"; // adjust path if needed
+}
 
 function fetchMyArticles() {
   fetch(baseUrl + "/articles/own?_page=1&_per_page=10", {

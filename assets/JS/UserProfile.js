@@ -8,7 +8,10 @@
       const nameEl = document.getElementById("profileName");
       const datetimeEl = document.getElementById("profileDatetime");
       const articlesEl = document.getElementById("profileArticles");
-
+      if (!token) {
+        // No token found → redirect to login
+        window.location.href = "../../../index.html"; // adjust path if needed
+      }
       const storedUser = localStorage.getItem("profileUser");
       if (!storedUser) return;
 

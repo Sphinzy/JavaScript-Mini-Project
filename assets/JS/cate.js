@@ -5,22 +5,26 @@ let searchValue = '';
 let selectedCateId = null;
 const token = localStorage.getItem('token');
 console.log(token);
+if (!token) {
+    // No token found → redirect to login
+    window.location.href = "../../../index.html"; // adjust path if needed
+}
 
 const pageSearch = document.querySelector('#pageSearch');
-// // ------------------- Toast Helper -------------------
-// function showToast(message, type = 'success') {
-//     const toastEl = document.getElementById('toastMsg');
-//     toastEl.querySelector('.toast-body').textContent = message;
+// ------------------- Toast Helper -------------------
+function showToast(message, type = 'success') {
+    const toastEl = document.getElementById('toastMsg');
+    toastEl.querySelector('.toast-body').textContent = message;
 
-//     // Set color based on type
-//     toastEl.classList.remove('bg-cus-success', 'bg-cus-danger', 'bg-warning',);
-//     if (type === 'success') toastEl.classList.add('bg-cus-success',);
-//     else if (type === 'error') toastEl.classList.add('bg-cus-danger',);
-//     else if (type === 'warning') toastEl.classList.add('bg-warning');
+    // Set color based on type
+    toastEl.classList.remove('bg-cus-success', 'bg-cus-danger', 'bg-warning',);
+    if (type === 'success') toastEl.classList.add('bg-cus-success',);
+    else if (type === 'error') toastEl.classList.add('bg-cus-danger',);
+    else if (type === 'warning') toastEl.classList.add('bg-warning');
 
-//     const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
-//     toast.show();
-// }
+    const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+    toast.show();
+}
 
 // ------------------- Fetch Data -------------------
 const getData = () => {

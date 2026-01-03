@@ -139,6 +139,14 @@
             </div>
           </div>
         </div>
+        <!-- Toast Container -->
+        <div class="toast-container top-0 start-50 translate-middle-x p-3">
+          <div id="toastMsg" class="toast align-items-center" role="alert">
+            <div class="toast-body text-center">
+              Toast message here
+            </div>
+          </div>
+        </div>
         <!-- <d  iv class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog  modal-dialog-centered">
                   <div class="modal-content">
@@ -214,12 +222,12 @@
                         <!-- Thumbnail -->
                         <div class="col-md-6">
                           <label class="form-label fw-semibold">Thumbnail Image *</label>
-                          <div id="thumbnailContainer" class="input-group border rounded align-items-center">
+                          <div id="thumbnailContainer" class="input-group border rounded align-items-center w-100">
                             <label class="btn btn-main me-1 p-2">
                               Choose file
                               <input type="file" id="thumbnail" hidden>
                             </label>
-                            <div id="fileName" class="form-control text-muted clamp-1">No file selected</div>
+                            <div id="fileName" class=" form-control text-muted clamp-1" >No file selected</div>
                           </div>
                           <div id="thumbnailError" class="text-danger small mt-1 d-none">
                             Thumbnail cannot be empty
@@ -231,7 +239,7 @@
                       <div class="mb-3">
                         <label class="form-label fw-semibold">Content *</label>
                         <div id="editor" class="border rounded"></div>
-                        <div id="contentError" class="text-danger small mt-1 d-none">
+                        <div id="contentError " class="text-danger small mt-1 d-none">
                           Content cannot be empty
                         </div>
                       </div>

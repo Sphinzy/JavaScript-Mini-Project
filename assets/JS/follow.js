@@ -116,6 +116,10 @@
         // ========== PROFILE IMAGE & LOGOUT ==========ets/default-avatar.png';
 const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
 const token = localStorage.getItem('token');
+if (!token) {
+  // No token found → redirect to login
+  window.location.href = "../../../index.html"; // adjust path if needed
+}
         console.log(localStorage.getItem('getImageet'));
         const profileImage = document.querySelector('#profile-image');
         fetch(`${baseUrl}/auth/profile`, {
