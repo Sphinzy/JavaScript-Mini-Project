@@ -138,7 +138,7 @@ if (btnLogout) {
             }
         }).finally(() => {
             localStorage.removeItem("token");
-            location.href = "../login/login.html";
+            location.href = "../../../index.html";
         });
     });
 }

@@ -28,7 +28,7 @@ avatarInput.addEventListener("change", function () {
 
 function loadProfile() {
   if (!token) {
-    window.location.href = "../login/login.html";
+    window.location.href = "../../../index.html";
     return;
   }
   fetch(`${BASE_URL}/auth/profile`, {
@@ -138,7 +138,7 @@ document.getElementById("btnLogout").addEventListener("click", () => {
     headers: { Authorization: `Bearer ${token}` },
   }).finally(() => {
     localStorage.removeItem("token");
-    location.href = "../login/login.html";
+    location.href = "../../../index.html";
   });
 });
 

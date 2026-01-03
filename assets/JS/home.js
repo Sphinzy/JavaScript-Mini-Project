@@ -34,7 +34,7 @@
         return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
       }
 
-//
+//copy link
 const copyUrl = (articleId) => {
   const url = `${window.location.origin}/assets/pages/homepage/detail.html?id=${articleId}`;
   console.log(url); 
@@ -62,7 +62,7 @@ const copyUrl = (articleId) => {
           data.data.items.forEach(article => {
             //console.log(data);
             container.innerHTML += `
-            <div class="post shadow-lg py-3 rounded-1 mt-10 bg-white">
+            <div class="post shadow-sm py-3 rounded-1 mt-10 bg-white">
               <div class="d-flex gap-2 mb-2">
                 <a href="UserProfile.html?id=${article.creator.id}" class="d-flex align-items-center text-decoration-none text-dark">
                   <div style="border: 2px solid #7645bf; border-radius: 50%; overflow: hidden; padding: 3px;">
@@ -145,7 +145,7 @@ fetch(`${baseUrl}/auth/profile`, {
         .then(res => res.json())
         .then(() => {
           localStorage.removeItem('token');
-          location.href = '../login/login.html';
+          location.href = '../../../index.html';
         });
     });
     

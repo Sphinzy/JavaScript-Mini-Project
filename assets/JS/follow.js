@@ -33,7 +33,13 @@
                 return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
             }
 
-
+//copy link
+const copyUrl = (articleId) => {
+  const url = `${window.location.origin}/assets/pages/homepage/detail.html?id=${articleId}`;
+  console.log(url);
+  navigator.clipboard.writeText(url)
+    .then(() => showToast("Article link copied!", "success"));
+};
         // ========== LOAD POSTS ==========
         let currentPage = 1;
         let loading = false;
@@ -50,7 +56,7 @@
                     const container = document.querySelector(".card-insert");
                     data.data.items.forEach(article => {
                         container.innerHTML += `
-<div class="post shadow-lg py-3 rounded-1 mt-4">
+<div class="post shadow-sm py-3 rounded-1 mt-4">
   <div class="d-flex gap-2 mb-2 align-items-center">
     <a href="UserProfile.html?id=${article.creator.id}" class="d-flex align-items-center text-decoration-none text-dark">
       <div style="border: 2px solid #7645bf; border-radius: 50%; overflow: hidden; padding: 3px;">
@@ -81,7 +87,7 @@
     <button class="btn btn-light" onclick="toggleComment(this)">
         <i class="bi bi-chat"></i> Comment
     </button>
-    <button class="btn btn-light" onclick="sharePost()">
+    <button class="btn btn-light" onclick="copyUrl(${article.id})">
         <i class="bi bi-share"></i> Share
     </button>
 </div>
@@ -143,6 +149,6 @@ if (!token) {
                 .then(res => res.json())
                 .then(() => {
                     localStorage.removeItem('token');
-                    location.href = '../login/login.html';
+                    location.href = '../../../index.html';
                 });
         });

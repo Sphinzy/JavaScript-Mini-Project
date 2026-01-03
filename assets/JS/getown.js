@@ -85,7 +85,7 @@ btnLogout.addEventListener("click", () => {
     .then((res) => res.json())
     .then((resData) => {
       localStorage.removeItem("token");
-      return (location.href = "../login/login.html");
+      return (location.href = "../../../index.html");
       console.log(resData);
     });
 });

@@ -71,6 +71,27 @@ const renderPagination = (totalPages, currentPage) => {
     const pagination = document.querySelector('#pagination');
     pagination.innerHTML = '';
 
+    const maxButtons = 5;
+    let startPage, endPage;
+
+    if (totalPages <= maxButtons) {
+        startPage = 1;
+        endPage = totalPages;
+    } else {
+        const half = Math.floor(maxButtons / 2);
+
+        if (currentPage <= half + 1) {
+            startPage = 1;
+            endPage = maxButtons;
+        } else if (currentPage + half >= totalPages) {
+            startPage = totalPages - maxButtons + 1;
+            endPage = totalPages;
+        } else {
+            startPage = currentPage - half;
+            endPage = currentPage + half;
+        }
+    }
+
     // Prev button
     pagination.innerHTML += `
         <button 
@@ -81,15 +102,14 @@ const renderPagination = (totalPages, currentPage) => {
         </button>
     `;
 
-    // Page numbers
-    for (let i = 1; i <= totalPages; i++) {
+    // Page numbers (only 5)
+    for (let i = startPage; i <= endPage; i++) {
         const isActive = i === currentPage;
 
         pagination.innerHTML += `
             <button 
                 class="btn btn-main mx-1 ${isActive ? 'active' : ''}"
-                ${isActive ? 'disabled' : ''}
-                ${!isActive ? `onclick="changePage(${i})"` : ''}>
+                ${isActive ? 'disabled' : `onclick="changePage(${i})"`}>
                 ${i}
             </button>
         `;
@@ -105,6 +125,7 @@ const renderPagination = (totalPages, currentPage) => {
         </button>
     `;
 };
+
 
 
 function changePage(page) {
@@ -216,7 +237,7 @@ btnLogout.addEventListener('click', () => {
     })
         .then(() => {
             localStorage.removeItem('token');
-            location.href = '../login/login.html';
+            location.href = '../../../index.html';
         });
 });
 

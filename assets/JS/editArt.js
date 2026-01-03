@@ -121,7 +121,7 @@ btnLogout.addEventListener("click", () => {
         .then((res) => res.json())
         .then(() => {
             localStorage.removeItem("token");
-            location.href = "../login/login.html";
+            location.href = "../../../index.html";
         });
 });
 

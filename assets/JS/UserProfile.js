@@ -60,7 +60,7 @@ fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=1&_per_page=100`)
   .then(res => {
     const items = res.data.items;
 
-    // 1️⃣ Filter articles by userId
+    //  Filter articles by userId
     const userArticles = items.filter(
       item => item.creator && item.creator.id == userId
     );
@@ -70,10 +70,10 @@ fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=1&_per_page=100`)
       return;
     }
 
-    // 2️⃣ Get creator info from first article
+    //  Get creator info from first article
     const creator = userArticles[0].creator;
 
-    // 3️⃣ Render profile
+    // Render profile
     cardPro.innerHTML = `
       <div class="card-body d-flex align-items-center gap-3">
         <div style="border: 2px solid #7645bf; border-radius: 50%; padding: 3px;">
@@ -93,7 +93,8 @@ fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=1&_per_page=100`)
       </div>
     `;
 
-    // 4️⃣ Render articles
+    console.log(userArticles);
+    //  Render articles
     articleList.innerHTML = '';
     userArticles.forEach(article => {
       articleList.innerHTML += `
@@ -137,6 +138,6 @@ btnLogout.addEventListener('click', () => {
   })
     .then(() => {
       localStorage.removeItem('token');
-      location.href = '../login/login.html';
+      location.href = '../../../index.html';
     });
 });

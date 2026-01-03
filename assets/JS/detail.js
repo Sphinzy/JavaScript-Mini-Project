@@ -9,6 +9,24 @@ if (!token) {
 
       const articleDiv = document.getElementById("article-detail");
 
+function timeAgo(date) {
+  const d = new Date(date);
+
+  const day = String(d.getDate()).padStart(2, '0'); // DD
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const month = months[d.getMonth()]; // MMM
+  const year = d.getFullYear(); // YYYY
+
+  let hours = d.getHours();
+  const minutes = String(d.getMinutes()).padStart(2, '0'); // MM
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // hour '0' should be '12'
+
+  return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
+}
+
       if (!articleId) {
         articleDiv.innerHTML = `
     <div class="card-body">
@@ -59,7 +77,7 @@ if (!token) {
                 <div class="ms-2">
                   <strong>${creator.firstName} ${creator.lastName}</strong><br>
                   <small class="text-muted">
-                    ${new Date(article.createdAt).toLocaleString()}
+                    ${timeAgo(article.createdAt)}
                   </small>
                 </div>
               </a>
@@ -110,7 +128,7 @@ fetch(`${baseUrl}/auth/profile`, {
       .then(res => res.json())
       .then(resData => {
         localStorage.removeItem('token');
-        return location.href = '../login/login.html'
+        return location.href = '../../../index.html'
         console.log(resData);
 
       })

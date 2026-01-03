@@ -54,7 +54,7 @@ function signup() {
     if (!fname.value.trim()) { showError(fname); return showToast("First Name is required", "error"); }
     if (!lname.value.trim()) { showError(lname); return showToast("Last Name is required", "error"); }
     if (!email.value.trim()) { showError(email); return showToast("Email is required", "error"); }
-    if (!/^\S+@\S+\.\S+$/.test(email.value)) { showError(email); return showToast("Invalid email format", "error"); }
+    if (!/^\S+@\S+\.\S+$/.test(email.value)) { showError(email); return showToast("Invalid email example@gmail.com", "error"); }
     if (!password.value) { showError(password); return showToast("Password is required", "error"); }
     if (password.value.length < 6) { showError(password); return showToast("Password must be at least 6 characters", "error"); }
     if (password.value !== cpassword.value) { showError(cpassword); return showToast("Passwords do not match", "error"); }
