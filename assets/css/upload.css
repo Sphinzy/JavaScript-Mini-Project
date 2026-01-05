@@ -2,7 +2,7 @@
   --primary-accent: #6366f1;
   --danger-accent: #f43f5e;
   --glass-bg: rgba(255, 255, 255, 0.9);
-  --main-purple: #7645bf;
+  --main-purple: #9f28e3;
   --sidebar-text: #64748b;
 }
 
@@ -75,7 +75,7 @@ body {
   height: 130px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #7645bf;
+  border: 3px solid #9f28e3;
   padding: 1px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   background: #eee;

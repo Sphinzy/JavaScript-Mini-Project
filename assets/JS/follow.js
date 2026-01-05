@@ -65,7 +65,7 @@ console.log(random);
 <div class="post shadow-sm py-3 rounded-1 mt-4">
   <div class="d-flex gap-2 mb-2 align-items-center">
     <a href="UserProfile.html?id=${article.creator.id}" class="d-flex align-items-center text-decoration-none text-dark">
-      <div style="border: 2px solid #7645bf; border-radius: 50%; overflow: hidden; padding: 3px;">
+      <div style="border: 2px solid #9f28e3; border-radius: 50%; overflow: hidden; padding: 3px;">
         <img src="${article.creator.avatar || 'assets/default-avatar.png'}" class="rounded-circle" width="45" height="45">
       </div>
       <div class="ms-2">

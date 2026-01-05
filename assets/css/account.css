@@ -2,7 +2,7 @@
       :root {
         --glass: rgba(255, 255, 255, 0.08);
         --glass-border: rgba(255, 255, 255, 0.12);
-        --accent: #7645bf;
+        --accent: #9f28e3;
         --accent-glow: rgba(118, 69, 191, 0.5);
       }
 
@@ -10,7 +10,7 @@
         background: var(--glass);
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(30px);
-        border: 1px solid #7645bf;
+        border: 1px solid #9f28e3;
         border-radius: 30px;
         overflow: hidden;
         box-shadow: 0 25px 50px rgba(158, 158, 158, 0.3);

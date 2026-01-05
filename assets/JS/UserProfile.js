@@ -76,7 +76,7 @@ fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=1&_per_page=100`)
     // Render profile
     cardPro.innerHTML = `
       <div class="card-body d-flex align-items-center gap-3">
-        <div style="border: 2px solid #7645bf; border-radius: 50%; padding: 3px;">
+        <div style="border: 2px solid #9f28e3; border-radius: 50%; padding: 3px;">
           <img src="${creator.avatar}"
                class="rounded-circle object-fit-cover"
                width="80" height="80">
