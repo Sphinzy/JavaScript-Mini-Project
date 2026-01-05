@@ -37,24 +37,41 @@
 //copy link
 const copyUrl = (articleId) => {
   const url = `${window.location.origin}/assets/pages/homepage/detail.html?id=${articleId}`;
-  console.log(url); 
+  console.log(url);
+
+  // Try copying to clipboard
   navigator.clipboard.writeText(url)
-    .then(() => showToast("Article link copied!", "success"));
+    .then(() => {
+      // Success toast
+      showToast("Article link copied!", "success");
+    })
+    .catch(() => {
+      // Fallback toast if copying fails
+      showToast("Failed to copy link. Try manually.", "danger");
+    })
+    .finally(() => {
+      // Always runs after success or fail
+      console.log("Copy attempted"); // optional debug
+    });
 };
+
 
 
 
     // ========== LOAD POSTS ==========
     let currentPage = 1;
     let loading = false;
-    const loader = document.getElementById("loader");
+const loader = document.getElementById("loader");
+const random = Math.floor(Math.random() * 90) + 1;
+console.log(random);
+
 
     function loadMoreArticles() {
       if (loading) return;
       loading = true;
       loader.style.display = "block";
 
-      fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=${currentPage}&_per_page=10`)
+      fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=${random}&_per_page=10`)
         .then(res => res.json())
         .then(data => {
           console.log(data);
@@ -114,7 +131,7 @@ const copyUrl = (articleId) => {
       }
     });
 
-    loadMoreArticles();
+loadMoreArticles();
 
     // ========== PROFILE IMAGE & LOGOUT ==========
 const profileImage = document.querySelector('#profile-image');

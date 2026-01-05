@@ -68,4 +68,17 @@
       .icon-edit:hover {
         color: var(--bs-primary) !important;
       }
-  
+/* ================= RESPONSIVE TABLE ================= */
+@media (max-width: 768px) {
+
+  table th,
+  table td {
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  table img {
+    max-width: 60px;
+    height: auto;
+  }
+}

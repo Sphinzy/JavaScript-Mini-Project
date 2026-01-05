@@ -27,7 +27,9 @@ body {
 .bg-main {
     background-color: #7645bf !important;
 }
-
+#logoImage{
+    width: 50px;
+}
 :root {
     --bs-main: #7645bf!important;
     --bs-main-rgb: 118, 69, 191 !important;

@@ -215,9 +215,6 @@ const btnSaveCate = (cateId) => {
 
 // ------------------- Logout & Profile -------------------
 const btnLogout = document.querySelector('#btnLogout');
-// const imageLink = localStorage.getItem('getImage');
-// if (profileImage && imageLink) profileImage.src = imageLink;
-// console.log(imageLink);
 const profileImage = document.querySelector('#profile-image');
 fetch(`${baseUrl}/auth/profile`, {
     headers: {

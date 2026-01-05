@@ -87,7 +87,6 @@ fetch(`${baseUrl}/auth/profile`, {
           .then((resData) => {
             localStorage.removeItem("token");
             return (location.href = "../../../index.html");
-            console.log(resData);
           });
       });
       //getImage.setAttribute('src', imageLink);

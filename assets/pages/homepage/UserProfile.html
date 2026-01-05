@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blogify</title>
+  <!-- Light mode favicon -->
+  <link rel="icon" type="image/png" href="../../img/logo-team.png" media="(prefers-color-scheme: light)">
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="../../bootstrap-5.3.7/css/bootstrap.css" />
@@ -27,7 +29,10 @@
   <header class="sticky-top z-3">
     <nav class="navbar fixed-top bg-secondary-subtle">
       <div class="container">
-        <a class="navbar-brand fs-5 fw-bold text-main" href="../homepage/home.html">BlogFy</a>
+        <div>
+          <img src="../../img/logo-team.png" id="logoImage" alt="">
+          <a class="navbar-brand fs-5 fw-bold text-main" href="../homepage/home.html">BlogFy</a>
+        </div>
 
         <button class="navbar-toggler d-flex d-lg-none" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar">
@@ -36,7 +41,10 @@
 
         <div class="offcanvas offcanvas-start" id="offcanvasNavbar">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title fw-bold text-main">BlogFy</h5>
+            <div>
+              <img src="../../img/logo-team.png" id="logoImage" alt="">
+              <a class="navbar-brand fs-5 fw-bold text-main" href="../homepage/home.html">BlogFy</a>
+            </div>
             <button class="btn-close" data-bs-dismiss="offcanvas"></button>
           </div>
           <div class="offcanvas-body">

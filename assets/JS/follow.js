@@ -1,3 +1,5 @@
+
+
  // ========== POST FUNCTIONS ==========
         function likePost(btn) {
                 btn.classList.toggle("text-main");
@@ -43,14 +45,18 @@ const copyUrl = (articleId) => {
         // ========== LOAD POSTS ==========
         let currentPage = 1;
         let loading = false;
-        const loader = document.getElementById("loader");
+const loader = document.getElementById("loader");
+const random = Math.floor(Math.random() * 90) + 1;
+console.log(random);
+
 
         function loadMoreArticles() {
             if (loading) return;
             loading = true;
-            loader.style.display = "block";
+          loader.style.display = "block";
+          
 
-            fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=${currentPage}&_per_page=10`)
+            fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=${random}&_per_page=10`)
                 .then(res => res.json())
                 .then(data => {
                     const container = document.querySelector(".card-insert");
@@ -152,3 +158,13 @@ if (!token) {
                     location.href = '../../../index.html';
                 });
         });
+
+
+// ------------------- Search -------------------
+const pageSearch = document.querySelector('#pageSearch');
+
+pageSearch.addEventListener('input', () => {
+  searchValue = pageSearch.value.trim();
+  pageNumUrl = 1;
+  getData();
+});

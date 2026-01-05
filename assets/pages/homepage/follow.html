@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blogify</title>
+    <title>Follow</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../../bootstrap-5.3.7/css/bootstrap.css" />
@@ -43,7 +43,10 @@
     <header class="sticky-top z-3">
         <nav class="navbar fixed-top bg-secondary-subtle">
             <div class="container">
-                <a class="navbar-brand fs-5 fw-bold text-main" href="../homepage/home.html">BlogFy</a>
+                <div>
+                    <img src="../../img/logo-team.png" id="logoImage" alt="">
+                    <a class="navbar-brand fs-5 fw-bold text-main" href="../homepage/home.html">BlogFy</a>
+                </div>
 
                 <!-- menu icon  -->
                 <button class="navbar-toggler d-flex d-lg-none" type="button" data-bs-toggle="offcanvas"
@@ -55,12 +58,15 @@
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title fs-5 fw-bold text-main" id="offcanvasNavbarLabel">BlogFy</h5>
+                        <div>
+                            <img src="../../img/logo-team.png" id="logoImage" alt="">
+                            <a class="navbar-brand fs-5 fw-bold text-main" href="../homepage/home.html">BlogFy</a>
+                        </div>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
                         <form class="d-flex my-3" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <input class="form-control me-2" type="search" placeholder="Search" id="pageSearch" aria-label="Search" />
                             <button class="btn btn-outline-main" type="submit">Search</button>
                         </form>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -133,6 +139,16 @@
 
     <!-- ================= MAIN ================= -->
     <main>
+        <section>
+            <!-- Toast Container -->
+            <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+                <div id="toastMsg" class="toast align-items-center" role="alert" data-bs-delay="2000">
+                    <div class="toast-body text-center">
+                        Toast message here
+                    </div>
+                </div>
+            </div>
+        </section>
         <section>
             <div class="container">
                 <div class="row">

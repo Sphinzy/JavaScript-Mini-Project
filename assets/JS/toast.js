@@ -12,3 +12,10 @@ function showToast(message, type = 'success') {
     const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
     toast.show();
 }
+// Create light mode favicon
+const lightFavicon = document.createElement("link");
+lightFavicon.rel = "icon";
+lightFavicon.type = "image/png";
+lightFavicon.href = "../../img/logo-team.png";
+lightFavicon.media = "(prefers-color-scheme: light)";
+document.head.appendChild(lightFavicon);
