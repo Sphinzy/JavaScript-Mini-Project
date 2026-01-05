@@ -25,13 +25,13 @@ body {
 }
 
 .bg-main {
-    background-color: #7645bf !important;
+    background-color: #9f28e3 !important;
 }
 #logoImage{
     width: 50px;
 }
 :root {
-    --bs-main: #7645bf!important;
+    --bs-main: #9f28e3!important;
     --bs-main-rgb: 118, 69, 191 !important;
     --bs-main-hover: #8b5ad6 !important;
     --bs-main-active: #6a3bb0 !important;
@@ -276,7 +276,7 @@ select.form-select.error {
 
 /* Hover effect */
 #fileName:hover {
-    border-color: #7645bf;
+    border-color: #9f28e3;
     /* change to your main color */
     cursor: pointer;
 }

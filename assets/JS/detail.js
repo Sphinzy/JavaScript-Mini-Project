@@ -68,7 +68,7 @@ function timeAgo(date) {
               <a href="UserProfile.html?id=${creator.id}"
                  class="d-flex align-items-center text-decoration-none text-dark mb-2">
 
-                <div style="border:2px solid #7645bf; border-radius:50%; padding:3px;">
+                <div style="border:2px solid #9f28e3; border-radius:50%; padding:3px;">
                   <img src="${creator.avatar}"
                        class="rounded-circle object-fit-cover"
                        width="50" height="50">
