@@ -75,7 +75,9 @@ function signup() {
         .then(data => {
             if (data.result) {
                 showToast("Registered successfully!", "success");
-                setTimeout(() => location.href = "login.html", 1500);
+                setTimeout(() => {
+                    window.location.replace("/index.html");
+                }, 1000);
             } else {
                 showToast("Registration failed: " + (data.message || "Unknown error"), "error");
             }
