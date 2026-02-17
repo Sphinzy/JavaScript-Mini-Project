@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+  const baseUrl = "https://blogs.csm.linkpc.net/api/v1";
   const perPage = 5;
   let page = 1;
   let loading = false;

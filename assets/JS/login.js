@@ -4,7 +4,7 @@ const password = document.getElementById("password");
 const erremail = document.getElementById("erremail");
 const errpassword = document.getElementById("errpassword");
 const eyeIcon = document.getElementById("eyeIcon");
-const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+const baseUrl = "https://blogs.csm.linkpc.net/api/v1";
 // ------------------- Toast Helper -------------------
 function showToast(message, type = 'success') {
     const toastEl = document.getElementById('toastMsg');
@@ -19,7 +19,7 @@ function showToast(message, type = 'success') {
     const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
     toast.show();
 }
-// ------------------- INPUT HELPERS -------------------
+// ------------------- INPUT HELPERS -------------------a
 const showError = (input) => {
     input.classList.add("input-error");
     input.classList.remove("input-normal");

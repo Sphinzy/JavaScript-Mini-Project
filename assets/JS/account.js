@@ -6,7 +6,7 @@
       // No token found → redirect to login
       window.location.href = "../../../index.html"; // adjust path if needed
     }
-      const API_URL = "http://blogs.csm.linkpc.net/api/v1/auth/profile";
+      const API_URL = "https://blogs.csm.linkpc.net/api/v1/auth/profile";
 
       async function fetchUserData() {
         if (!token) {
@@ -63,7 +63,7 @@
       window.onload = fetchUserData;
 
       //const token = localStorage.getItem('token');
-      const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+      const baseUrl = "https://blogs.csm.linkpc.net/api/v1";
 const profileImage = document.querySelector('#profile-image');
 fetch(`${baseUrl}/auth/profile`, {
   headers: {

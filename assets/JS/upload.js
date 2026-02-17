@@ -1,4 +1,4 @@
-const BASE_URL = "http://blogs.csm.linkpc.net/api/v1";
+const BASE_URL = "https://blogs.csm.linkpc.net/api/v1";
 const token = localStorage.getItem("token");
 if (!token) {
   // No token found → redirect to login
@@ -145,7 +145,7 @@ document.getElementById("btnLogout").addEventListener("click", () => {
 loadProfile();
 
 const profileImage = document.querySelector('#profile-image');
-const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
+const baseUrl = 'https://blogs.csm.linkpc.net/api/v1';
 fetch(`${baseUrl}/auth/profile`, {
   headers: {
     "Authorization": `Bearer ${token}`

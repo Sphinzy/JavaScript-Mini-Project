@@ -1,5 +1,5 @@
  document.addEventListener("DOMContentLoaded", () => {
-      const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+      const baseUrl = "https://blogs.csm.linkpc.net/api/v1";
       const token = localStorage.getItem("token");
       const params = new URLSearchParams(window.location.search);
       const userId = params.get("id");
@@ -55,7 +55,7 @@ const userId = params.get("id");
 const cardPro = document.querySelector('.card-profile');
 const articleList = document.querySelector('.article-list');
 
-fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=1&_per_page=100`)
+fetch(`https://blogs.csm.linkpc.net/api/v1/articles?_page=1&_per_page=100`)
   .then(res => res.json())
   .then(res => {
     const items = res.data.items;
@@ -117,7 +117,7 @@ fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=1&_per_page=100`)
 
 
 
-const baseUrl = 'http://blogs.csm.linkpc.net/api/v1'
+const baseUrl = 'https://blogs.csm.linkpc.net/api/v1'
 const token = localStorage.getItem('token');
 const profileImage = document.querySelector('#profile-image');
 fetch(`${baseUrl}/auth/profile`, {
