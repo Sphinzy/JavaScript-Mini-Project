@@ -71,7 +71,7 @@ console.log(random);
       loading = true;
       loader.style.display = "block";
 
-      fetch(`http://blogs.csm.linkpc.net/api/v1/articles?_page=${random}&_per_page=10`)
+      fetch(`https://blogs.csm.linkpc.net/api/v1/articles?_page=${random}&_per_page=10`)
         .then(res => res.json())
         .then(data => {
           console.log(data);
@@ -135,7 +135,7 @@ loadMoreArticles();
 
     // ========== PROFILE IMAGE & LOGOUT ==========
 const profileImage = document.querySelector('#profile-image');
-const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
+const baseUrl = 'https://blogs.csm.linkpc.net/api/v1';
 const token = localStorage.getItem("token");
 if (!token) {
   // No token found → redirect to login
@@ -155,7 +155,7 @@ fetch(`${baseUrl}/auth/profile`, {
     const btnLogout = document.querySelector('#btnLogout');
     btnLogout.addEventListener('click', () => {
       const token = localStorage.getItem('token');
-      fetch('http://blogs.csm.linkpc.net/api/v1/auth/logout', {
+      fetch('https://blogs.csm.linkpc.net/api/v1/auth/logout', {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })

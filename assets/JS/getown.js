@@ -1,4 +1,4 @@
-const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+const baseUrl = "https://blogs.csm.linkpc.net/api/v1";
 const token = localStorage.getItem("token");
 // const token =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwMTgsImlhdCI6MTc2NzA4MDI5OSwiZXhwIjoxNzY3Njg1MDk5fQ.Ir6f1psgdgXRQ2X2In6Z39JPAuplZnka4nIEAieEjxk";
@@ -22,7 +22,7 @@ function fetchMyArticles() {
       articles.forEach((art) => {
         let thumb = art.thumbnail
           ? art.thumbnail
-          : "https://via.placeholder.com/55x40?text=No+Img";
+          : "httpss://via.placeholder.com/55x40?text=No+Img";
 
         let catName = art.category ? art.category.name : "Uncategorized";
 
@@ -35,7 +35,7 @@ function fetchMyArticles() {
                   art.createdAt
                 ).toLocaleDateString()}</td>
                 <td class="text-center">
-                    <i class="bi bi-pencil-square text-main action-icon icon-edit mx-2" data-bs-toggle="modal" data-bs-target="#editModal"></i>
+                    <i class="bi bi-pencil-square text-main action-icon icon-edit mx-2"   ></i>
                     <i class="bi bi-trash text-danger action-icon icon-delete mx-2" onclick="deleteArticle(${
                       art.id
                     })"></i>

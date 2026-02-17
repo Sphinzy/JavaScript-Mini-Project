@@ -1,5 +1,5 @@
 
-const baseUrl = 'http://blogs.csm.linkpc.net/api/v1';
+const baseUrl = 'https://blogs.csm.linkpc.net/api/v1';
 let pageNumUrl = 1;
 let searchValue = '';
 let selectedCateId = null;

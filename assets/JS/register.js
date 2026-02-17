@@ -60,7 +60,7 @@ function signup() {
     if (password.value !== cpassword.value) { showError(cpassword); return showToast("Passwords do not match", "error"); }
 
     // Submit form
-    fetch("http://blogs.csm.linkpc.net/api/v1/auth/register", {
+    fetch("https://blogs.csm.linkpc.net/api/v1/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

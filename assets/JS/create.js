@@ -1,5 +1,5 @@
 /* ================= CONFIG ================= */
-const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+const baseUrl = "https://blogs.csm.linkpc.net/api/v1";
 const token = localStorage.getItem("token");
 if (!token) {
     // No token found → redirect to login

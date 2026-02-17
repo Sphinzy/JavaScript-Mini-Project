@@ -1,4 +1,4 @@
-const baseUrl = "http://blogs.csm.linkpc.net/api/v1";
+const baseUrl = "https://blogs.csm.linkpc.net/api/v1";
 const token = localStorage.getItem("token");
 if (!token) {
     // No token found → redirect to login
@@ -59,7 +59,7 @@ function fetchMyArticles() {
                 console.log(art);
                 const thumb = art.thumbnail
                     ? art.thumbnail
-                    : "https://via.placeholder.com/55x40?text=No+Img";
+                    : "httpss://via.placeholder.com/55x40?text=No+Img";
                 const catName = art.category ? art.category.name : "Uncategorized";
 
                 const tr = document.createElement("tr");
@@ -131,7 +131,7 @@ fetch(`${baseUrl}/auth/profile`, {
 })
     .then((res) => res.json())
     .then((data) => {
-        profileImage.src = data.data.avatar || "https://via.placeholder.com/40";
+        profileImage.src = data.data.avatar || "httpss://via.placeholder.com/40";
     });
 
 // ======================= QUILL INIT =======================
